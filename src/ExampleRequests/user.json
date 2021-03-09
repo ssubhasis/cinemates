@@ -1,0 +1,19 @@
+{
+    "users":[
+        {
+            "userId":101,
+            "userName":"Lily Green",
+            "userPassword":"password",
+            "userEmail":"lily@gmail.com",
+            "birthYear":1998,
+            "userLiking":[
+                {
+                    "titleId":2,
+                    "userRating":4
+                }
+            ]
+
+        }
+
+    ]
+} 
