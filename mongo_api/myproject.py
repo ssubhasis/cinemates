@@ -1,0 +1,83 @@
+from flask import Flask
+from db import getMongoDbDetails
+from get_external_api import getExternalAPI
+from bson.json_util import dumps
+from flask_cors import CORS,cross_origin
+from flask import make_response, jsonify
+from http import HTTPStatus
+
+
+app = Flask(__name__)
+# cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
+
+
+@app.route("/")
+@cross_origin()
+def hello():
+    return "<h1 style='color:blue'>Hello There!..</h1>"
+
+
+@app.route("/getCusts")
+@cross_origin()
+def getCusts():
+    try:
+        mydoc = getMongoDbDetails().getCustomers()
+
+        mydocList = list(mydoc)
+        json_data = dumps(mydocList)
+        res =  make_response(json_data,HTTPStatus.OK)
+    except Exception as e:
+        res = "Could not get the movies - " + str(e)
+
+    return res
+
+
+@app.route("/movie/<movieId>",methods=['GET'])
+@cross_origin()
+def getMovieByID(movieId):
+
+    try:
+        mydoc = getMongoDbDetails().getMovie(movieId)
+        res =  make_response(mydoc,HTTPStatus.OK)
+    except Exception as e:
+        res = "Could not get the movies - " + str(e)
+
+    return res
+
+
+@app.route("/movie/<movieId>/image",methods=['GET'])
+@cross_origin()
+def getMovieImageByID(movieId):
+
+    try:
+        mydoc = getMongoDbDetails().getMovieImage(movieId)
+        img = mydoc['image']
+        decode=img.decode()
+        img_tag = '<img alt="sample" src="data:image/png;base64,{0}">'.format(decode)
+        res =  make_response(img_tag,HTTPStatus.OK)
+    except Exception as e:
+        res = "Could not get the movies - " + str(e)
+
+    return res
+
+
+@app.route("/movies/highestrated",methods=['GET'])
+@cross_origin()
+def getHighestRatedMovies():
+    
+    try:
+        titles = getExternalAPI().getHighestVotedTopMovies()
+        mydoc = getMongoDbDetails().getMovies(titles)
+
+        mydocList = list(mydoc)
+        json_data = dumps(mydocList)
+        res =  make_response(json_data,HTTPStatus.OK)
+    except Exception as e:
+        res = "Could not get the movies - " + str(e)
+
+    return res
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0')
