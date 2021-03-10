@@ -5,6 +5,7 @@ from bson.json_util import dumps
 from flask_cors import CORS,cross_origin
 from flask import make_response, jsonify
 from http import HTTPStatus
+from imdb import IMDb
 
 
 app = Flask(__name__)
@@ -63,6 +64,19 @@ def getMovieImageByID(movieId):
     return res
 
 
+@app.route("/movie/<movieId>/external-image",methods=['GET'])
+@cross_origin()
+def getMovieExternalImageByID(movieId):
+    try:
+        ia = IMDb()
+        movie = ia.get_movie(str.replace(movieId,'tt',''))
+        res = movie['full-size cover url']
+    except Exception as e:
+        res = "Could not get the movies cover url - " + str(e)
+
+    return res
+
+
 @app.route("/movies/highestrated",methods=['GET'])
 @cross_origin()
 def getHighestRatedMovies():
@@ -78,6 +92,20 @@ def getHighestRatedMovies():
         res = "Could not get the movies - " + str(e)
 
     return res
+
+
+@app.route("/person/<nameId>/external-image",methods=['GET'])
+@cross_origin()
+def getPersonsExternalImageByID(nameId):
+    try:
+        ia = IMDb()
+        person = ia.get_person(str.replace(nameId,'nm',''))
+        res = person['full-size headshot']
+    except Exception as e:
+        res = "Could not get the movies cover url - " + str(e)
+
+    return res
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
