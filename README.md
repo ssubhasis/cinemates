@@ -7,19 +7,22 @@ https://teampolaris.web.illinois.edu/index
 
 ## get movie details from MongoDB for top movies
 
-http://18.206.168.148:5000/movie/%3CtitleId%3C
+http://18.206.168.148:5000/movie/<titleId>
+
 http://18.206.168.148:5000/movie/tt0120737
 
 
 ## get movie image from MongoDB for top movies (small pic)
 
 http://18.206.168.148:5000/movie/<titleId>/image
+
 http://18.206.168.148:5000/movie/tt0120737/image
 
 
 ## get movie image url from external (full size images)
 
 http://18.206.168.148:5000/movie/<titleId>/external-image
+
 http://18.206.168.148:5000/movie/tt0120737/external-image
 
 
@@ -36,4 +39,5 @@ https://teampolaris.web.illinois.edu/highest-voted-top-movies
 ## get Persons image url from external (full size images)
 
 http://18.206.168.148:5000/person/<nconst>/external-image
+
 http://18.206.168.148:5000/person/nm0001392/external-image
