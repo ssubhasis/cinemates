@@ -7,7 +7,7 @@ https://teampolaris.web.illinois.edu/index
 
 ## get movie details from MongoDB for top movies
 
-http://18.206.168.148:5000/movie/<<titleId>>
+http://18.206.168.148:5000/movie/<titleId>
 http://18.206.168.148:5000/movie/tt0120737
 
 
