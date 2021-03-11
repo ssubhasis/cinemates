@@ -31,9 +31,19 @@ http://18.206.168.148:5000/movie/tt0120737/external-image
 http://18.206.168.148:5000/movies/highestrated
 
 
+## get highest rated trending movies details from MongoDB
+
+http://18.206.168.148:5000/movies/trending
+
+
 ## get highest rated movies name from MySQL
 
 https://teampolaris.web.illinois.edu/highest-voted-top-movies
+
+
+## get highest rated trending movies name from MySQL
+
+https://teampolaris.web.illinois.edu/highest-voted-trending-movies
 
 
 ## get Persons image url from external (full size images)

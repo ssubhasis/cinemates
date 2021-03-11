@@ -94,6 +94,23 @@ def getHighestRatedMovies():
     return res
 
 
+@app.route("/movies/trending",methods=['GET'])
+@cross_origin()
+def getTrendingMovies():
+    
+    try:
+        titles = getExternalAPI().getTrendingMovies()
+        mydoc = getMongoDbDetails().getMovies(titles)
+
+        mydocList = list(mydoc)
+        json_data = dumps(mydocList)
+        res =  make_response(json_data,HTTPStatus.OK)
+    except Exception as e:
+        res = "Could not get the movies - " + str(e)
+
+    return res
+
+
 @app.route("/person/<nameId>/external-image",methods=['GET'])
 @cross_origin()
 def getPersonsExternalImageByID(nameId):
@@ -105,7 +122,6 @@ def getPersonsExternalImageByID(nameId):
         res = "Could not get the movies cover url - " + str(e)
 
     return res
-
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')

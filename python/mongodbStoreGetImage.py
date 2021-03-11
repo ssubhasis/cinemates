@@ -6,6 +6,8 @@ import base64
 
 
 response = requests.get("https://teampolaris.web.illinois.edu/highest-voted-top-movies")
+response = requests.get("https://teampolaris.web.illinois.edu/highest-voted-trending-movies")
+
 print(response)
 response.json()
 
