@@ -9,29 +9,12 @@ class App extends Component {
     super(props);
     this.state = {
       highestrated: [],
-      names: [],
-      loading: true
+   
+      trending:[] 
     };
 
-    this.handleChange = this.handleChange.bind(this);
-   // this.handleSubmit = this.handleSubmit.bind(this);
+    
   }
-
-  handleChange(event) {
-    this.setState({ name: event.target.value });
-  }
-
-  // async handleSubmit(event) {
-  //   event.preventDefault();
-  //   this.setState({
-  //     loading: true,
-  //   })
-  //   await fetch('/getnames/' + this.state.name, {
-  //     method: 'POST'
-  //   });
-  //   this.getNames()
-  // }
-
 
   getNames() {
     fetch('http://18.206.168.148:5000/movies/highestrated ')
@@ -44,8 +27,23 @@ class App extends Component {
       })
   }
 
+
+  getTrending() {
+    fetch('http://18.206.168.148:5000/movies/trending ')
+      .then(response => response.json())
+      .then(response => {
+        this.setState({
+          trending: response
+        })
+        console.log(this.state)
+      })
+  }
+
+
+
   componentDidMount() {
     this.getNames();
+    this.getTrending(); 
   }
 
   render() {
@@ -53,14 +51,22 @@ class App extends Component {
       <div className="App">
         <div>
         <Header></Header>
-        <Homepage></Homepage>
-        </div>
-        {this.state.highestrated.map((movie, index) => (
-        <div key={movie._id}>
+       
+        {/* {this.state.trending.map((movie, index) => (
+        <div key={movie.titleId}>
           <h1>{movie.primaryTitle}!</h1>
           <p>Rated {movie.avgRating} by {movie.numOfVotes} viewers.</p>
         </div>
-    ))}
+    ))} */}
+
+        <Homepage></Homepage>
+        </div>
+        {/* {this.state.highestrated.map((movie, index) => (
+        <div key={movie._id}>
+          <h1>{movie.primaryTitle}</h1>
+          <p>Rated {movie.avgRating} by {movie.numOfVotes} viewers.</p>
+        </div>
+    ))} */}
       </div>
     );
   }
