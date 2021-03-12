@@ -17,38 +17,39 @@ cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 
-@app.route("/")
+@app.route("/",methods=['GET'])
 @cross_origin()
 def hello():
     return "<h1 style='color:blue'>Hello There!..</h1>"
 
 
-@app.route("/health")
+@app.route("/health",methods=['GET'])
 @cross_origin()
 def healthCheck():
     return 'Healthy : Cinemates ....'
 
 
-@app.route("/about")
+@app.route("/about",methods=['GET'])
 @cross_origin()
 def aboutHandler():
     return 'This is Cinemates...!'
 
 
-@app.route("/movies")
+@app.route("/search-movies/<movieName>",methods=['GET'])
 @cross_origin()
-def getMovies():
+def getMovies(movieName):
     try:
-        result = getDbDetails().getMovies()
+        movieName = str.replace(movieName,'%20',' ')
+        result = getDbDetails().getMovies(movieName)
         # res = dumps(result)
-        result = modelConverter().toMovies(result)
+        result = modelConverter().toMoviesName(result)
         res =  make_response(result,HTTPStatus.OK)
     except Exception as e:
         res = "Could not get the movies - " + str(e)
     return res
 
 
-@app.route("/highest-voted-top-movies")
+@app.route("/highest-voted-top-movies",methods=['GET'])
 @cross_origin()
 def getHighestVotedTopMovies():
     try:
@@ -60,7 +61,7 @@ def getHighestVotedTopMovies():
     return res
 
 
-@app.route("/highest-voted-trending-movies")
+@app.route("/highest-voted-trending-movies",methods=['GET'])
 @cross_origin()
 def getHighestVotedTrendingMovies():
     try:

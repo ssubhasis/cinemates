@@ -25,3 +25,16 @@ class modelConverter():
         self.json_object = json.dumps(self.objects_list)
 
         return self.json_object
+
+
+    def toMoviesName(self,rows):
+        for row in rows:
+            d = collections.OrderedDict()
+            d["_id"] = row[0]
+            d["titleId"] = row[0]
+            d["primaryTitle"] = row[1]
+            self.objects_list.append(d)
+        
+        self.json_object = json.dumps(self.objects_list)
+
+        return self.json_object

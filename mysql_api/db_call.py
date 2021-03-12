@@ -21,18 +21,15 @@ class getDbDetails():
         self.cursor = self.connection.cursor()
 
 
-
     def __disconnect__(self):
 
         self.connection.close()
 
-    def getMovies(self):
+
+    def getMovies(self,movieName):
 
         self.__connect__()
-        query = """select   title_id ,primary_title ,original_title ,release_year
-                            ,case runtime when '' then 0 when null  then 0 ELSE runtime end as runtime ,avg_rating
-                            ,case num_of_votes when '' then 0 when null then 0 ELSE num_of_votes end as num_of_votes ,is_adult 
-                    from movies limit 20;"""
+        query = "select title_id ,primary_title from movies where primary_title like '" + movieName + "%' limit 20;"""
 
         self.cursor.execute(query)
         result = self.cursor.fetchall()
@@ -120,5 +117,5 @@ class getDbDetails():
         return result
 
 
-#getDbDetail().getMoviesWithNM('Carmencita')
+# getDbDetails().getHighestVotedTrendingMovies()
 
