@@ -38,7 +38,7 @@ http://18.206.168.148:5000/movies/trending
 
 ## get Movie names from MySQL
 
-https://teampolaris.web.illinois.edu/search-movies/`<movie name>`
+https://teampolaris.web.illinois.edu/search-movies/`<movie name`>
 
 https://teampolaris.web.illinois.edu/search-movies/The%20Rev
 
