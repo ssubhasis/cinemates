@@ -116,6 +116,19 @@ class getDbDetails():
 
         return result
 
+    def getInfoById(self,titleID):
+
+        self.__connect__()
+        query = "select * from movie_deatils_v a where a.title_id ='%s';" %titleID
+
+        self.cursor.execute(query)
+        result = self.cursor.fetchall()
+
+        self.cursor.close()
+        self.__disconnect__()
+
+        return result
+
 
 # getDbDetails().getHighestVotedTrendingMovies()
 
