@@ -73,6 +73,7 @@ def getHighestVotedTrendingMovies():
         res = "Could not get the movies - " + str(e)
     return res
 
+<<<<<<< HEAD
 
 @app.route("/search-movie-by-id/<title_id>", methods=['GET'])
 @cross_origin()
@@ -105,4 +106,13 @@ def setUserLiking():
         res =  make_response(str(result),HTTPStatus.OK)
     except Exception as e:
         res = "Could not update the movie - " + str(e)
-    return res
+
+@app.route("/search-by-id/<title_id>", methods=['GET'])
+@cross_origin()
+def getInfoById():
+    try:
+        result = getDbDetails().getInfoById(title_id)
+        result = modelConverter().toInfoById(result)
+        res =  make_response(result,HTTPStatus.OK)
+    except Exception as e:
+        res = "Could not get the movies - " + str(e)

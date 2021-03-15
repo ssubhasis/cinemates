@@ -8,6 +8,7 @@ class modelConverter():
     def __init__(self):
         self.objects_list = []
         self.info = {}
+        self.info_list = []
 
 
     def toMovies(self,rows):
@@ -78,3 +79,28 @@ class modelConverter():
             self.json_object = res
 
         return self.json_object
+        
+
+    def toInfoById(self,row):
+        d=collections.OrderedDict()
+        d["_id"] = row[0]
+        d["titleId"]=row[0]
+        d["primaryTitle"]=row[1]
+        d["orginalTitle"] = row[2]
+        d["releaseYear"] = row[3]
+        d["runtime"] = int(row[4])
+        d["avgRating"] = double(row[5])
+        d["numOfVotes"] = int(row[6])
+        d["IsAdult"]=row[7]
+        tup=re.split(",",row[9])
+        d["Actors"]=tup
+        tup=re.split(",",row[10])
+        d["Actress"]=tup
+        d["Director"]=row[11]
+        d["Writer"]=row[12]
+        d["composer"]=row[13]
+        tup=re.split(",",row[14])
+        d["Producer"]=tup
+        self.info_list.append(d)
+
+        self.json_object = json.dumps(self.info_list)
