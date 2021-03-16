@@ -71,3 +71,15 @@ def getHighestVotedTrendingMovies():
     except Exception as e:
         res = "Could not get the movies - " + str(e)
     return res
+
+
+@app.route("/search-movie-by-id/<title_id>", methods=['GET'])
+@cross_origin()
+def getMovieInfoById(title_id):
+    try:
+        result = getDbDetails().getMovieInfoById(title_id)
+        result = modelConverter().toMovieInfo(result)
+        res =  make_response(result,HTTPStatus.OK)
+    except Exception as e:
+        res = "Could not get the movie - " + str(e)
+    return res
