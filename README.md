@@ -42,6 +42,12 @@ https://teampolaris.web.illinois.edu/search-movies/`<movie name`>
 
 https://teampolaris.web.illinois.edu/search-movies/The%20Rev
 
+## get movie details
+
+https://teampolaris.web.illinois.edu/search-movie-by-id/`<titleId`>
+
+https://teampolaris.web.illinois.edu/search-movie-by-id/tt0468569
+
 
 ## get highest rated movies name from MySQL
 
