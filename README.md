@@ -64,3 +64,15 @@ https://teampolaris.web.illinois.edu/highest-voted-trending-movies
 http://18.206.168.148:5000/person/`<nconst`>/external-image
 
 http://18.206.168.148:5000/person/nm0001392/external-image
+
+
+## post/set User Liking
+
+https://teampolaris.web.illinois.edu/modify-user-liking
+
+Request Body:
+
+{"titleId":"tt0035423",
+"userId":"ui00001",
+"rating":4}
+

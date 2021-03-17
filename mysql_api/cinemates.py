@@ -8,6 +8,7 @@ from flask import Flask
 from flask_cors import CORS,cross_origin
 from flask import make_response, jsonify
 from http import HTTPStatus
+from flask import request, abort
 
 
 sys.path.insert(0, os.path.dirname(__file__))
@@ -82,4 +83,26 @@ def getMovieInfoById(title_id):
         res =  make_response(result,HTTPStatus.OK)
     except Exception as e:
         res = "Could not get the movie - " + str(e)
+    return res
+
+
+@app.route("/modify-user-liking", methods=['POST'])
+@cross_origin()
+def setUserLiking():
+
+    try:
+        if not request.json or not 'titleId' in request.json or not 'userId' in request.json or not 'rating' in request.json:
+            abort(400)
+        titleId = request.json['titleId']
+        userId = request.json['userId']
+        rating = request.json['rating']
+
+        db = getDbDetails()
+        result = db.setUserLiking(titleId, userId, rating)
+
+        result = db.getMovieInfoById(titleId)
+        result = modelConverter().toMovieInfo(result)
+        res =  make_response(str(result),HTTPStatus.OK)
+    except Exception as e:
+        res = "Could not update the movie - " + str(e)
     return res

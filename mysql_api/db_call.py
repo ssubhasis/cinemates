@@ -129,6 +129,20 @@ class getDbDetails():
         self.__disconnect__()
 
         return result
+    
+
+    def setUserLiking(self, titleId, userId, rating):
+
+        self.__connect__()
+
+        args = [titleId, userId, rating]
+        result = self.cursor.callproc('p_handle_user_rating', args)
+        self.connection.commit()
+
+        self.cursor.close()
+        self.__disconnect__()
+
+        return result
 
 
 # getDbDetails().getHighestVotedTrendingMovies()
