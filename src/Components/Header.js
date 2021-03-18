@@ -1,6 +1,9 @@
 import React from "react";
-import { Link, Box, Flex, Text, Button, Stack } from "@chakra-ui/react";
-import Logo from '../Components/Logo';  
+import { Link as CUILink, Box, Flex, Text, Button, Stack } from "@chakra-ui/react";
+import Logo from '../Components/Logo'; 
+import {Link} from'react-router-dom'; 
+
+
 const NavBar = (props) => {
   const [isOpen, setIsOpen] = React.useState(false);
 
@@ -50,11 +53,11 @@ const MenuToggle = ({ toggle, isOpen }) => {
 
 const MenuItem = ({ children, isLast, to = "/", ...rest }) => {
   return (
-    <Link href={to}>
+    <CUILink href={to}>
       <Text display="block" {...rest}>
         {children}
       </Text>
-    </Link>
+    </CUILink>
   );
 };
 
@@ -71,11 +74,41 @@ const MenuLinks = ({ isOpen }) => {
         direction={["column", "row", "row", "row"]}
         pt={[4, 4, 0, 0]}
       >
-        <MenuItem to="/">Home</MenuItem>
-        <MenuItem to="/search">Search </MenuItem>
-        <MenuItem to="/charts">Top Charts </MenuItem>
-        <MenuItem to="/review">Review </MenuItem>
-        <MenuItem to="/profile" isLast>
+
+
+        <MenuItem >
+        <Link to ="/">
+        Home
+        </Link>
+        </MenuItem>
+
+       
+        <MenuItem >
+        <Link to= "search"> 
+        Search 
+        </Link>
+        </MenuItem>
+       
+
+        
+        <MenuItem >
+        <Link to= "topcharts"> 
+        Top Charts
+        </Link>
+         </MenuItem>
+     
+
+      
+        <MenuItem >
+        <Link to= "review"> 
+        Review
+        </Link> 
+         </MenuItem>
+     
+    
+        
+        <MenuItem  isLast>
+        <Link to= "profile"> 
           <Button
             size="sm"
             rounded="md"
@@ -87,7 +120,11 @@ const MenuLinks = ({ isOpen }) => {
           >
             My Profile
           </Button>
+          </Link>
         </MenuItem>
+       
+
+
       </Stack>
     </Box>
   );
