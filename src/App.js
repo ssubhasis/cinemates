@@ -4,8 +4,10 @@ import Homepage from './Pages/Homepage';
 import Header from "./Components/Header";
 import TopChartsPage from './Pages/TopChartsPage';
 import ReviewPage from './Pages/ReviewPage';
-import ProfilePage from './Pages/ProfilePage';
 import SearchPage from './Pages/SearchPage'; 
+import MyHubPage from './Pages/MyHubPage'; 
+import ActorPage from './Pages/ActorPage'; 
+import MoviePage from './Pages/MoviePage'; 
 import {HashRouter as Router, Switch, Route } from 'react-router-dom'; 
 
 
@@ -30,8 +32,12 @@ class App extends Component {
                         component={TopChartsPage}/>
                     <Route path="/review"
                         component={ReviewPage}/>
-                    <Route path="/profile"
-                        component={ProfilePage}/>
+                    <Route path="/myhub"
+                        component={MyHubPage}/>
+                    <Route path="/actor"
+                        component={ActorPage}/>
+                    <Route path="/movie"
+                        component={MoviePage}/>
 
                 </Switch>
 
