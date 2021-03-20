@@ -118,7 +118,7 @@ const MenuLinks = ({ isOpen }) => {
               bg: ["primary.500", "primary.500", "primary.500", "primary.500"]
             }}
           >
-            My Profile
+            My Hub
           </Button>
           </Link>
         </MenuItem>

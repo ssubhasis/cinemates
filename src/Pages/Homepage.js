@@ -10,6 +10,7 @@ import {
 import {Button, ButtonGroup} from "@chakra-ui/react"
 import TrendingMovies from '../Components/TrendingMovie';
 import HighestRatedMovies from '../Components/HighestRatedMovies';
+import {Link} from'react-router-dom'; 
 
 export default function Homepage() {
 
@@ -35,12 +36,18 @@ export default function Homepage() {
                         <Button colorScheme="orange" variant="outline">
                             Genre
                         </Button>
+
+                        <Link to="search">
                         <Button colorScheme="orange" variant="outline">
                             Advance Search
                         </Button>
+                        </Link>
+
+                        <Link to ="myhub">
                         <Button colorScheme="orange" variant="outline">
                             My Hub
                         </Button>
+                        </Link>
 
                     </Stack>
                     <Input style={
