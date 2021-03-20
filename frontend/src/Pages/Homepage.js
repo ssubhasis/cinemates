@@ -10,6 +10,7 @@ import {
 import {Button, ButtonGroup} from "@chakra-ui/react"
 import TrendingMovies from '../Components/TrendingMovie';
 import HighestRatedMovies from '../Components/HighestRatedMovies';
+import Search from '../Components/Search';
 
 
 export default function Homepage() {
@@ -18,7 +19,7 @@ export default function Homepage() {
     return (
         <div>
 
-            <Grid h="1900px" templateRows="auto 1fr 1fr" templateColumns="repeat(1, 1fr)"
+            <Grid h="2650px" templateRows="auto 1fr 1fr" templateColumns="repeat(1, 1fr)"
                 gap={4}
                 backgroundColor="primary.100">
                 {/* 1st section of page, this holds the search bar and the top menu buttons  */}
@@ -44,15 +45,7 @@ export default function Homepage() {
                         </Button>
 
                     </Stack>
-                    <Input style={
-                            {
-                                marginTop: "10px",
-                                width: "88%"
-                            }
-                        }
-                        placeholder="Search"
-                        size="lg"
-                        bg="white"/>
+                    <Search></Search>
                 </GridItem>
 
                 <GridItem colSpan={6}  >
