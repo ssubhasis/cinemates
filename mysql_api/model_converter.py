@@ -104,3 +104,20 @@ class modelConverter():
         self.info_list.append(d)
 
         self.json_object = json.dumps(self.info_list)
+
+    def toUserMovieRecommendationById(self,row):
+        d=collections.OrderedDict()
+        d["_id"] = row[0]
+        d["titleId"]=row[0]
+        d["primaryTitle"]=row[1]
+        d["orginalTitle"] = row[2]
+        d["releaseYear"] = row[3]
+        d["runtime"] = int(row[4])
+        d["avgRating"] = double(row[5])
+        d["numOfVotes"] = int(row[6])
+        d["IsAdult"]=row[7]
+        d["UserId"]=row[8]
+        tup=re.split(",",row[9])
+        d["Genre"]=tup
+        self.info_list.append(d)
+
