@@ -118,7 +118,6 @@ def getInfoById():
         res =  make_response(result,HTTPStatus.OK)
     except Exception as e:
         res = "Could not get the movies - " + str(e)
-<<<<<<< HEAD
     return res
 
 app.route("/user-login", methods=['POST'])
@@ -141,7 +140,7 @@ def setUserLogin():
 
 app.route("/user-registration", methods=['POST'])
 @cross_origin()
-def setUserLogin():
+def setUserRegistration():
 
     try:
         if not request.json or not 'userId' in request.json or not 'password' in request.json:
@@ -159,4 +158,14 @@ def setUserLogin():
     except Exception as e:
         res = "Could not update user registration " + str(e)
 
+@app.route("/user-movie-recommendation-by-id/<title_id>", methods=['GET'])
+@cross_origin()
+def getInfoById():
+    try:
+        result = getDbDetails().getUserMovieRecommendationById(title_id)
+        result = modelConverter().toUserMovieRecommendationById(result)
+        res =  make_response(result,HTTPStatus.OK)
+    except Exception as e:
+        res = "Could not get the movies - " + str(e)
+    return res
 

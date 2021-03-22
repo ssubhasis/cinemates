@@ -169,5 +169,29 @@ class getDbDetails():
 
         return result
 
+    def setUserRegistration(self,userId,userName,password,email,birthyear):
+        self.__connect__()
+        
+        query="INSERT into  users(user_Id,user_name,user_pwd,user_email,birth_year)  VALUES (%s, %s,%s,%s,%s)"
+        userVal=(userId,userName,password,email,birthyear)
+        cursor.execute(query,userVal)
+
+        self.cursor.close()
+        self.__disconnect__()
+
+    def getUserMovieRecommendationById(self,titleID):
+
+        self.__connect__()
+        query = "select * from user_movie_recommend_v a where a.title_id ='%s';" %titleID
+
+        self.cursor.execute(query)
+        result = self.cursor.fetchone()
+
+        self.cursor.close()
+        self.__disconnect__()
+
+        return result 
+
+
 # getDbDetails().getHighestVotedTrendingMovies()
 
