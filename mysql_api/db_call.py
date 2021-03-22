@@ -157,6 +157,18 @@ class getDbDetails():
 
         return result
 
+    def setUserLogin(self,userId,password):
+        self.__connect__()
+        query ="select * from users a where a.user_name ='%s' AND a.user_pwd='%s';" %usedId,%password
+
+        self.cursor.execute(query)
+        result=self.cursor.fetchone()
+
+        self.cursor.close()
+        self.__disconnect__()
+
+        return result
+
 
 # getDbDetails().getHighestVotedTrendingMovies()
 

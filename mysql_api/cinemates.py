@@ -107,6 +107,7 @@ def setUserLiking():
     except Exception as e:
         res = "Could not update the movie - " + str(e)
 
+
 @app.route("/search-by-id/<title_id>", methods=['GET'])
 @cross_origin()
 def getInfoById():
@@ -116,3 +117,45 @@ def getInfoById():
         res =  make_response(result,HTTPStatus.OK)
     except Exception as e:
         res = "Could not get the movies - " + str(e)
+    return res
+
+app.route("/user-login", methods=['POST'])
+@cross_origin()
+def setUserLogin():
+
+    try:
+        if not request.json or not 'userId' in request.json or not 'password' in request.json:
+            abort(400)
+        userId = request.json['userId']
+        password = request.json['password']
+
+        db = getDbDetails()
+        result = db.setUserLogin(userId, password)
+
+        if len(result)==0:
+            abort(400)
+    except Exception as e:
+        res = "Could not set user login - " + str(e)
+
+app.route("/user-registration", methods=['POST'])
+@cross_origin()
+def setUserLogin():
+
+    try:
+        if not request.json or not 'userId' in request.json or not 'password' in request.json:
+            abort(400)
+        userId = request.json['userId']
+        userName = request.json['userName']
+        password = request.json['password']
+        email = request.json['emailId']
+        birthyear=request.json['birthyear']
+
+
+        db = getDbDetails()
+        result = db.setUserRegistration(userId,userName,password,email,birthyear)
+
+    except Exception as e:
+        res = "Could not update user registration " + str(e)
+
+
+
