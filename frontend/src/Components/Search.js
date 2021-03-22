@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {Button, ButtonGroup} from "@chakra-ui/react"
 import axios from 'axios'
 import Suggestions from '../Components/Suggestions'
 
@@ -8,7 +9,8 @@ const API_URL = 'https://teampolaris.web.illinois.edu/search-movies'
 class Search extends Component {
   state = {
     query: '',
-    results: []
+    results: [],
+    queryTitleId: ''
   }
 
   getInfo = () => {
@@ -33,10 +35,20 @@ class Search extends Component {
     })
   }
 
+  onSubmitHandler = (e) => {
+    e.preventDefault();
+    this.state.results.map(r => {
+        if (r.primaryTitle == this.state.query){
+          this.state.queryTitleId= r.titleId
+      };
+    });
+    window.location.href = "https://www.google.com/search?q="+this.state.queryTitleId;
+  }
+
 
   render() {
     return (
-      <form>
+      <form onSubmit={this.onSubmitHandler}>
         <input list="browsers" name="browser" id="browser"
             style={
                 {
@@ -51,7 +63,8 @@ class Search extends Component {
             onChange={this.handleInputChange}
         />
         <Suggestions results={this.state.results} /><br/>
-        <input type="submit"></input>
+        <Button colorScheme="orange" variant="solid" type="submit" onClick={this.onSubmitHandler}>Submit</Button>
+
       </form>
     )
 
