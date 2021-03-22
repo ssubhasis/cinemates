@@ -7,7 +7,10 @@ class modelConverter():
 
     def __init__(self):
         self.objects_list = []
+<<<<<<< HEAD
         self.info = {}
+=======
+>>>>>>> c4d49c8cb08a54acaa033665b0bfd4796e479937
         self.info_list = []
 
 
@@ -41,6 +44,7 @@ class modelConverter():
         self.json_object = json.dumps(self.objects_list)
 
         return self.json_object
+<<<<<<< HEAD
 
 
     def toMovieInfo(self,row):

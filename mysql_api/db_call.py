@@ -169,6 +169,5 @@ class getDbDetails():
 
         return result
 
-
 # getDbDetails().getHighestVotedTrendingMovies()
 
