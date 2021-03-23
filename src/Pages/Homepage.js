@@ -11,6 +11,7 @@ import {Button, ButtonGroup} from "@chakra-ui/react"
 import TrendingMovies from '../Components/TrendingMovie';
 import HighestRatedMovies from '../Components/HighestRatedMovies';
 import {Link} from'react-router-dom'; 
+import Search from '../Components/Search';
 
 export default function Homepage() {
 
@@ -50,15 +51,7 @@ export default function Homepage() {
                         </Link>
 
                     </Stack>
-                    <Input style={
-                            {
-                                marginTop: "10px",
-                                width: "88%"
-                            }
-                        }
-                        placeholder="Search"
-                        size="lg"
-                        bg="white"/>
+                    <Search></Search>
                 </GridItem>
 
                 <GridItem colSpan={6}  >
