@@ -19,7 +19,7 @@ export default function Homepage() {
     return (
         <div>
 
-            <Grid h="2650px" templateRows="auto 1fr 1fr" templateColumns="repeat(1, 1fr)"
+            <Grid h="2670px" templateRows="auto 1fr 1fr" templateColumns="repeat(1, 1fr)"
                 gap={4}
                 backgroundColor="primary.100">
                 {/* 1st section of page, this holds the search bar and the top menu buttons  */}
