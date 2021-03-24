@@ -6,6 +6,7 @@ from flask_cors import CORS,cross_origin
 from flask import make_response, jsonify
 from http import HTTPStatus
 from imdb import IMDb
+from flask import request, abort
 
 
 app = Flask(__name__)
@@ -31,6 +32,7 @@ def getCusts():
         res =  make_response(json_data,HTTPStatus.OK)
     except Exception as e:
         res = "Could not get the movies - " + str(e)
+        res =  make_response(str(res),HTTPStatus.INTERNAL_SERVER_ERROR) 
 
     return res
 
@@ -44,6 +46,7 @@ def getMovieByID(movieId):
         res =  make_response(mydoc,HTTPStatus.OK)
     except Exception as e:
         res = "Could not get the movies - " + str(e)
+        res =  make_response(str(res),HTTPStatus.INTERNAL_SERVER_ERROR) 
 
     return res
 
@@ -60,6 +63,7 @@ def getMovieImageByID(movieId):
         res =  make_response(img_tag,HTTPStatus.OK)
     except Exception as e:
         res = "Could not get the movies - " + str(e)
+        res =  make_response(str(res),HTTPStatus.INTERNAL_SERVER_ERROR) 
 
     return res
 
@@ -73,6 +77,7 @@ def getMovieExternalImageByID(movieId):
         res = movie['full-size cover url']
     except Exception as e:
         res = "Could not get the movies cover url - " + str(e)
+        res =  make_response(str(res),HTTPStatus.INTERNAL_SERVER_ERROR) 
 
     return res
 
@@ -90,6 +95,7 @@ def getHighestRatedMovies():
         res =  make_response(json_data,HTTPStatus.OK)
     except Exception as e:
         res = "Could not get the movies - " + str(e)
+        res =  make_response(str(res),HTTPStatus.INTERNAL_SERVER_ERROR) 
 
     return res
 
@@ -99,6 +105,7 @@ def getHighestRatedMovies():
 def getTrendingMovies():
     
     try:
+        titles = ".."
         titles = getExternalAPI().getTrendingMovies()
         mydoc = getMongoDbDetails().getMovies(titles)
 
@@ -106,7 +113,27 @@ def getTrendingMovies():
         json_data = dumps(mydocList)
         res =  make_response(json_data,HTTPStatus.OK)
     except Exception as e:
-        res = "Could not get the movies - " + str(e)
+        res = "Could not get the movies - " + str(e) + str(titles)
+        res =  make_response(str(res),HTTPStatus.INTERNAL_SERVER_ERROR) 
+
+    return res
+
+
+@app.route("/user/user-movie-recommendation-by-id/<user_id>",methods=['GET'])
+@cross_origin()
+def getUserMovieRecommendationById(user_id):
+    
+    try:
+        titles = ".."
+        titles = getExternalAPI().getUserMovieRecommendationById(user_id)
+        mydoc = getMongoDbDetails().getMovies(titles)
+
+        mydocList = list(mydoc)
+        json_data = dumps(mydocList)
+        res =  make_response(json_data,HTTPStatus.OK)
+    except Exception as e:
+        res = "Could not get the movies - " + str(e) + str(titles)
+        res =  make_response(str(res),HTTPStatus.INTERNAL_SERVER_ERROR) 
 
     return res
 
@@ -120,6 +147,7 @@ def getPersonsExternalImageByID(nameId):
         res = person['full-size headshot']
     except Exception as e:
         res = "Could not get the movies cover url - " + str(e)
+        res =  make_response(str(res),HTTPStatus.INTERNAL_SERVER_ERROR) 
 
     return res
 

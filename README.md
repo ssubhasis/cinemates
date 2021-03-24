@@ -113,9 +113,16 @@ Request Body:
 }
 
 
-## get users movie recomendation by user id from MySQL
+## get users movie recomendation by user id from MySQL (Internal)
 
 http://teampolaris.web.illinois.edu/user-movie-recommendation-by-id/`<user id>`
 
 http://teampolaris.web.illinois.edu/user-movie-recommendation-by-id/ui00001
+
+
+## get users movie recomendation by user id from MongoDB
+
+http://18.206.168.148:5000/user/user-movie-recommendation-by-id/`<user id>`
+
+http://18.206.168.148:5000/user/user-movie-recommendation-by-id/ui00001
 

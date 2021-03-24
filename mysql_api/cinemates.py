@@ -132,7 +132,7 @@ def setUserLiking():
 def getUserMovieRecommendationById(user_id):
     try:
         result = getDbDetails().getUserMovieRecommendationById(user_id)
-        result = modelConverter().toMoviesBasic(result,True)            
+        result = modelConverter().toMoviesBasic(result)            
         res =  make_response(result,HTTPStatus.OK)
     except Exception as e:
         res = "Could not get the movies - " + str(e)
