@@ -8,6 +8,7 @@ import SearchPage from './Pages/SearchPage';
 import MyHubPage from './Pages/MyHubPage'; 
 import ActorPage from './Pages/ActorPage'; 
 import MoviePage from './Pages/MoviePage'; 
+import Settings from './Pages/Settings'; 
 import {HashRouter as Router, Switch, Route } from 'react-router-dom'; 
 
 
@@ -21,7 +22,7 @@ class App extends Component {
 
                 <Header></Header>
 
-
+ 
                 <Switch>
 
                     <Route path="/" exact
@@ -38,6 +39,8 @@ class App extends Component {
                         component={ActorPage}/>
                     <Route path="/movie"
                         component={MoviePage}/>
+                    <Route path="/setting"
+                        component={Settings}/>
 
                 </Switch>
 

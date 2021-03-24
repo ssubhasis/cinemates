@@ -65,8 +65,10 @@ class Search extends Component {
             ref={input => this.search = input}
             onChange={this.handleInputChange}
         />
+
         <Suggestions results={this.state.results} /><br/>
-        <Button colorScheme="orange" variant="solid" type="submit" onClick={this.onSubmitHandler}>Submit</Button>
+        <Button  colorScheme="orange" variant="solid" type="submit" onClick={this.onSubmitHandler}>Submit</Button>
+     
 
       </form>
     )
