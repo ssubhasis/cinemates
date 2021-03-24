@@ -12,6 +12,16 @@ import TrendingMovies from '../Components/TrendingMovie';
 import HighestRatedMovies from '../Components/HighestRatedMovies';
 import {Link} from'react-router-dom'; 
 import Search from '../Components/Search';
+import { createBreakpoints } from "@chakra-ui/theme-tools"
+
+
+const breakpoints = createBreakpoints({
+    sm: "30em",
+    md: "48em",
+    lg: "62em",
+    xl: "80em",
+    "2xl": "96em",
+  })
 
 export default function Homepage() {
 
@@ -24,10 +34,12 @@ export default function Homepage() {
                 backgroundColor="primary.100">
                 {/* 1st section of page, this holds the search bar and the top menu buttons  */}
                 <GridItem colSpan={6}>
-
+                <Search></Search>
                     <Stack direction="row"
                         spacing={5}
                         align="center">
+                        
+                        <Text style={{color:"white", paddingLeft:"6%"}}>Search By</Text>
                         <Button colorScheme="orange" variant="solid">
                             Movie
                         </Button>
@@ -38,7 +50,7 @@ export default function Homepage() {
                             Genre
                         </Button>
 
-                        <Link to="search">
+                        {/* <Link to="search">
                         <Button colorScheme="orange" variant="outline">
                             Advance Search
                         </Button>
@@ -48,10 +60,10 @@ export default function Homepage() {
                         <Button colorScheme="orange" variant="outline">
                             My Hub
                         </Button>
-                        </Link>
+                        </Link> */}
 
                     </Stack>
-                    <Search></Search>
+                 
                 </GridItem>
 
                 <GridItem colSpan={6}  >

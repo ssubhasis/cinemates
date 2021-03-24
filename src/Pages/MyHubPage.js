@@ -1,6 +1,4 @@
 import React from 'react';
-import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
-import { Swiper, SwiperSlide } from 'swiper/react';
 import {
     Grid,
     GridItem,
@@ -9,42 +7,47 @@ import {
     Center,
     Text
 } from "@chakra-ui/react"
-// Import Swiper styles
-import 'swiper/swiper.scss';
-import 'swiper/components/navigation/navigation.scss';
-import 'swiper/components/pagination/pagination.scss';
-import 'swiper/components/scrollbar/scrollbar.scss';
-import UserRecommendation from '../Components/UserRecommendation';
-import User from '../Components/User.js';
-//import TrendingMovies from '../Components/TrendingMovie';
-
-SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
-
-
+import {Button, ButtonGroup} from "@chakra-ui/react"
+import UserDetails from '../Components/UserDetails';
+import SavedDisplay from '../Components/SavedDisplay'; 
+import UserRecommendation from '../Components/UserRecommendation'; 
 
 
 export default function MyHubPage() {
 
 
     return (
-        <div>
-            <h1>MyHub Page</h1>
-            <Grid h="auto" templateRows="auto 1fr 1fr" templateColumns="repeat(1, 1fr)"
+        <div> {/* 
+            <Grid h="auto" templateRows="auto 1fr" templateColumns="repeat(1, 2fr)"
                 gap={4}
                 backgroundColor="primary.100">
-                                   <GridItem colSpan={6}  >
-                    <Center>
-                        <User></User>
-                    </Center>
-                     <Text fontSize="4xl" color="white" >
-                        My Recommendation</Text>
-                    <Center>
-                        <UserRecommendation></UserRecommendation>
-                    </Center> 
+
+                </Grid> */}
+                 
+            <Grid h="1000px" templateRows="repeat(auto, 1fr)" templateColumns="repeat(auto, 1fr)"
+                gap={4} backgroundColor="pink" paddingTop="40px" >
+               
+                <GridItem colSpan={2} 
+                    bg="primary.100">
+                    <h1 style={{color:"white", textAlign:"left", paddingLeft:"10px", fontWeight:"700", fontSize:"30px"}}>My Hub </h1>
+                    <UserDetails></UserDetails>
                 </GridItem>
 
-    </Grid>
+                <GridItem colSpan={2}
+                    bg="primary.100">
+                        <SavedDisplay/> 
+                    </GridItem>
+
+                <GridItem colSpan={4}
+                    bg="primary.100">
+                    <Center>
+                     <Text fontSize="4xl" color="white" >
+                        My Recommendation</Text>
+                    </Center>
+                        <UserRecommendation></UserRecommendation>
+                </GridItem>
+            </Grid>
+
         </div>
     );
 }
-

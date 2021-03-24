@@ -4,7 +4,9 @@ import {
     GridItem,
     Box,
     Text,
-    Center
+    Center,
+    Wrap,
+    WrapItem
 } from "@chakra-ui/react";
 
 
@@ -38,7 +40,7 @@ class TrendingMovies extends React.Component {
             <div>
 
 
-                <Grid borderRadius="lg" bg="primary.500" templateColumns="repeat(4, 1fr)"
+                <Wrap borderRadius="lg" bg="primary.500"
                     gap={6}
                     p="30px"
                     width="100%">
@@ -46,18 +48,26 @@ class TrendingMovies extends React.Component {
 
                     {
                     this.state.trending.map((movie, index) => (
-                        <Box bg="white" p="5px" borderRadius="md">
+                        <Box w="15rem" bg="white" p="5px" borderRadius="md">
                             <div key={
                                 movie.titleId
                             }>
                                 <img src={
                                         movie.cover_url
                                     }
-                                    width="101"
-                                    height="150"/>
-                                <h1>{
+                                    style={
+                                        {
+
+                                            width: "100%",
+                                            height: "auto"
+
+                                        }
+
+                                    }/>
+                                <Text >{
                                     movie.primaryTitle
-                                }</h1>
+                                }</Text>
+
                                 <p>Rated {
                                     movie.avgRating
                                 }
@@ -68,7 +78,7 @@ class TrendingMovies extends React.Component {
                             </div>
                         </Box>
                     ))
-                } </Grid>
+                } </Wrap>
 
 
             </div>
@@ -79,3 +89,4 @@ class TrendingMovies extends React.Component {
 }
 
 export default TrendingMovies;
+
