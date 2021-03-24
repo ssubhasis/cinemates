@@ -8,9 +8,9 @@ import {
     Text
 } from "@chakra-ui/react"
 import {Button, ButtonGroup} from "@chakra-ui/react"
-import BasicSetting from '../Components/BasicSetting';
+import UserDetails from '../Components/UserDetails';
 import SavedDisplay from '../Components/SavedDisplay'; 
-import Recco from '../Components/Recco'; 
+import UserRecommendation from '../Components/UserRecommendation'; 
 
 
 export default function MyHubPage() {
@@ -30,7 +30,7 @@ export default function MyHubPage() {
                 <GridItem colSpan={2} 
                     bg="primary.100">
                     <h1 style={{color:"white", textAlign:"left", paddingLeft:"10px", fontWeight:"700", fontSize:"30px"}}>My Hub </h1>
-                    <BasicSetting/>
+                    <UserDetails></UserDetails>
                 </GridItem>
 
                 <GridItem colSpan={2}
@@ -40,7 +40,11 @@ export default function MyHubPage() {
 
                 <GridItem colSpan={4}
                     bg="primary.100">
-                        <Recco></Recco>
+                    <Center>
+                     <Text fontSize="4xl" color="white" >
+                        My Recommendation</Text>
+                    </Center>
+                        <UserRecommendation></UserRecommendation>
                 </GridItem>
             </Grid>
 
