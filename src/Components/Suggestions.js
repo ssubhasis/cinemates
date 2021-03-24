@@ -22,7 +22,7 @@ import {
     const options = props.results.map(r => (
       <option id={r.titleId}  value={r.primaryTitle}/>
      ))
-    return  <datalist id="browsers"><Text color="white" >{options}</Text></datalist> 
+    return <datalist id="browsers"><Text color="white" >{options}</Text></datalist>
 
 }
 

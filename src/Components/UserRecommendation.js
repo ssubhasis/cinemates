@@ -28,7 +28,7 @@ export default class UserRecommendation extends React.Component {
 
 
     getRecommend() {
-        fetch('http://18.206.168.148:5000/movies/trending ').then(response => response.json()).then(response => {
+        fetch('http://18.206.168.148:5000/user/user-movie-recommendation-by-id/ui00001').then(response => response.json()).then(response => {
             this.setState({recommend: response})
             console.log(this.state)
         })
@@ -106,5 +106,4 @@ export default class UserRecommendation extends React.Component {
 
 
 }
-
 
