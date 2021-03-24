@@ -26,10 +26,24 @@ class getDbDetails():
         self.connection.close()
 
 
-    def getMovies(self,movieName):
+    def getMoviesBasicByName(self,movieName):
 
         self.__connect__()
-        query = "select title_id ,primary_title from movies where primary_title like '" + movieName + "%' limit 20;"""
+        query = "select title_id ,primary_title, avg_rating, num_of_votes from movies where primary_title like '" + movieName + "%' limit 20;"""
+
+        self.cursor.execute(query)
+        result = self.cursor.fetchall()
+
+        self.cursor.close()
+        self.__disconnect__()
+
+        return result
+
+
+    def getAllMoviesBasic(self):
+
+        self.__connect__()
+        query = "select title_id ,primary_title, avg_rating, num_of_votes from movies ;"
 
         self.cursor.execute(query)
         result = self.cursor.fetchall()
@@ -74,47 +88,33 @@ class getDbDetails():
         self.__disconnect__()
 
         return result
+    
+    
+    # def getMoviesWithNM(self,titleNM):
 
+    #     self.__connect__()
+    #     query = "SELECT * FROM movies where primary_title ='%s';" %titleNM 
+    #     print("In db_call")
+    #     self.cursor.execute(query)
+    #     result = self.cursor.fetchall()
 
-    def getMoviesWithID(self,titleID):
+    #     self.cursor.close()
+    #     self.__disconnect__()
 
-        self.__connect__()
-        query = "select * from movies where title_id ='%s';" %titleID
-
-        self.cursor.execute(query)
-        result = self.cursor.fetchall()
-
-        self.cursor.close()
-        self.__disconnect__()
-
-        return result
-
-
-    def getMoviesWithNM(self,titleNM):
-
-        self.__connect__()
-        query = "SELECT * FROM movies where primary_title ='%s';" %titleNM 
-        print("In db_call")
-        self.cursor.execute(query)
-        result = self.cursor.fetchall()
-
-        self.cursor.close()
-        self.__disconnect__()
-
-        return result
+    #     return result
    
-    def getMoviesByActor(self,titleNM):
+    # def getMoviesByActor(self,titleNM):
 
-        self.__connect__()
-        query = "SELECT * FROM name_basics  where primaryName ='%s';" %titleNM
-        print("In db_call")
-        self.cursor.execute(query)
-        result = self.cursor.fetchall()
+    #     self.__connect__()
+    #     query = "SELECT * FROM name_basics  where primaryName ='%s';" %titleNM
+    #     print("In db_call")
+    #     self.cursor.execute(query)
+    #     result = self.cursor.fetchall()
         
-        self.cursor.close()
-        self.__disconnect__()
+    #     self.cursor.close()
+    #     self.__disconnect__()
 
-        return result
+    #     return result
 
 
     def getMovieInfoById(self,titleID):
@@ -143,7 +143,67 @@ class getDbDetails():
         self.__disconnect__()
 
         return result
+    
+
+    def getUserMovieRecommendationById(self,userID):
+
+        self.__connect__()
+        query = """select u.title_id, u.primary_title, u.avg_rating, u.num_of_votes 
+                    from user_movie_recommend_v u 
+                    where u.user_id ='%s' 
+                    order by u.num_of_votes desc , u.avg_rating desc limit 20;""" %userID
+
+        self.cursor.execute(query)
+        result = self.cursor.fetchall()
+
+        self.cursor.close()
+        self.__disconnect__()
+
+        return result 
 
 
-# getDbDetails().getHighestVotedTrendingMovies()
+#SIVA API
+    def setUserRegistration(self,userId,userName,password,email,birthyear):
+        self.__connect__()
+        
+        query="INSERT INTO users(user_Id,user_name,user_pwd,user_email,birth_year) VALUES (%s, %s,%s,%s,%s)"
+        userVal=(userId,userName,password,email,birthyear)
+        result=self.cursor.execute(query,userVal)
+
+        self.connection.commit()
+        self.cursor.close()
+        self.__disconnect__()
+
+        return result
+
+
+    # def getUserLogin(self,userId,password):
+
+    #     self.__connect__()
+    #     query ="select * from users a where a.user_id ='%s' and user_pwd = '%s';" %(userId,password)
+
+    #     self.cursor.execute(query)
+    #     result = self.cursor.fetchone()
+
+    #     self.cursor.close()
+    #     self.__disconnect__()
+
+    #     return result 
+#END SIVA API
+
+
+    def getUserDetails(self,userId):
+
+        self.__connect__()
+        query ="select * from users a where a.user_id ='%s' ;" %userId
+
+        self.cursor.execute(query)
+        result = self.cursor.fetchone()
+
+        self.cursor.close()
+        self.__disconnect__()
+
+        return result 
+
+# getDbDetails().getUserMovieRecommendationById('ui00001')
 

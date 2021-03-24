@@ -36,17 +36,32 @@ def aboutHandler():
     return 'This is Cinemates...!'
 
 
-@app.route("/search-movies/<movieName>",methods=['GET'])
+@app.route("/movies",methods=['GET'])
 @cross_origin()
-def getMovies(movieName):
+def getAllMoviesBasic():
     try:
-        movieName = str.replace(movieName,'%20',' ')
-        result = getDbDetails().getMovies(movieName)
+        result = getDbDetails().getAllMoviesBasic()
         # res = dumps(result)
-        result = modelConverter().toMoviesName(result)
+        result = modelConverter().toMoviesBasic(result)
         res =  make_response(result,HTTPStatus.OK)
     except Exception as e:
         res = "Could not get the movies - " + str(e)
+        res =  make_response(str(res),HTTPStatus.INTERNAL_SERVER_ERROR) 
+    return res
+
+
+@app.route("/search-movies/<movieName>",methods=['GET'])
+@cross_origin()
+def getMoviesBasicByName(movieName):
+    try:
+        movieName = str.replace(movieName,'%20',' ')
+        result = getDbDetails().getMoviesBasicByName(movieName)
+        # res = dumps(result)
+        result = modelConverter().toMoviesBasic(result)
+        res =  make_response(result,HTTPStatus.OK)
+    except Exception as e:
+        res = "Could not get the movies - " + str(e)
+        res =  make_response(str(res),HTTPStatus.INTERNAL_SERVER_ERROR) 
     return res
 
 
@@ -59,6 +74,7 @@ def getHighestVotedTopMovies():
         res =  make_response(result,HTTPStatus.OK)
     except Exception as e:
         res = "Could not get the movies - " + str(e)
+        res =  make_response(str(res),HTTPStatus.INTERNAL_SERVER_ERROR) 
     return res
 
 
@@ -71,6 +87,7 @@ def getHighestVotedTrendingMovies():
         res =  make_response(result,HTTPStatus.OK)
     except Exception as e:
         res = "Could not get the movies - " + str(e)
+        res =  make_response(str(res),HTTPStatus.INTERNAL_SERVER_ERROR) 
     return res
 
 
@@ -83,6 +100,7 @@ def getMovieInfoById(title_id):
         res =  make_response(result,HTTPStatus.OK)
     except Exception as e:
         res = "Could not get the movie - " + str(e)
+        res =  make_response(str(res),HTTPStatus.INTERNAL_SERVER_ERROR) 
     return res
 
 
@@ -105,4 +123,99 @@ def setUserLiking():
         res =  make_response(str(result),HTTPStatus.OK)
     except Exception as e:
         res = "Could not update the movie - " + str(e)
+        res =  make_response(str(res),HTTPStatus.INTERNAL_SERVER_ERROR) 
     return res
+
+
+@app.route("/user-movie-recommendation-by-id/<user_id>", methods=['GET'])
+@cross_origin()
+def getUserMovieRecommendationById(user_id):
+    try:
+        result = getDbDetails().getUserMovieRecommendationById(user_id)
+        result = modelConverter().toMoviesBasic(result,True)            
+        res =  make_response(result,HTTPStatus.OK)
+    except Exception as e:
+        res = "Could not get the movies - " + str(e)
+        res =  make_response(str(res),HTTPStatus.INTERNAL_SERVER_ERROR) 
+    return res
+
+
+@app.route("/user-details/<user_id>", methods=['GET'])
+@cross_origin()
+def getUserDetails(user_id):
+    try:
+        result = getDbDetails().getUserDetails(user_id)
+        result = modelConverter().toUserInfo(result)
+        res =  make_response(result,HTTPStatus.OK)
+    except Exception as e:
+        res = "Could not get the user - " + str(e)
+        res =  make_response(str(res),HTTPStatus.INTERNAL_SERVER_ERROR) 
+    return res
+
+
+#SIVA APIS
+@app.route("/user-login", methods=['POST'])
+@cross_origin()
+def setUserLogin():
+
+    try:
+        if not request.json or not 'userId' in request.json or not 'password' in request.json:
+            res = "User ID or Password not provided"
+            res =  make_response(str(res),HTTPStatus.BAD_REQUEST)
+            return res
+        userId = request.json['userId']
+        password = request.json['password']
+
+        db = getDbDetails()
+        # result = db.getUserLogin(userId, password)
+        result = db.getUserDetails(userId)
+
+        if not result or password != result[2]:
+            res = "User ID or Password does not match"
+            res =  make_response(str(res),HTTPStatus.UNAUTHORIZED)
+            return res
+
+        result = modelConverter().toUserInfo(result)
+        res =  make_response(result,HTTPStatus.OK)
+    except Exception as e:
+        res = "Could not login user - " + str(e)
+        res =  make_response(str(res),HTTPStatus.INTERNAL_SERVER_ERROR)        
+
+    return res
+
+
+@app.route("/user-registration", methods=['POST'])
+@cross_origin()
+def setUserRegistration():
+
+    try:
+        if not request.json or not 'userName' in request.json or not 'password' in request.json or not 'userId' in request.json:
+            res = "User name or Password or User ID not provided"
+            res =  make_response(str(res),HTTPStatus.BAD_REQUEST)
+            return res
+        userId = request.json['userId']
+        userName = request.json['userName']
+        password = request.json['password']
+        email = request.json['emailId']
+        birthyear=request.json['birthyear']
+
+        db = getDbDetails()
+        result = db.getUserDetails(userId)
+
+        if result:
+            res = "User already exists"
+            res =  make_response(str(res),HTTPStatus.BAD_REQUEST)
+            return res
+
+        res = db.setUserRegistration(userId,userName,password,email,birthyear)
+        
+        result = db.getUserDetails(userId)
+        result = modelConverter().toUserInfo(result)
+
+        res =  make_response(result,HTTPStatus.OK)
+    except Exception as e:
+        res = "Could not update user registration " + str(e)
+        res =  make_response(str(res),HTTPStatus.INTERNAL_SERVER_ERROR) 
+    return res
+
+#END SIVA API
