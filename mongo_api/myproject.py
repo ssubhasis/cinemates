@@ -37,12 +37,12 @@ def getCusts():
     return res
 
 
-@app.route("/movie/<movieId>",methods=['GET'])
+@app.route("/movie/<titleId>",methods=['GET'])
 @cross_origin()
-def getMovieByID(movieId):
+def getMovieByID(titleId):
 
     try:
-        mydoc = getMongoDbDetails().getMovie(movieId)
+        mydoc = getMongoDbDetails().getMovie(titleId)
         res =  make_response(mydoc,HTTPStatus.OK)
     except Exception as e:
         res = "Could not get the movies - " + str(e)
@@ -51,16 +51,17 @@ def getMovieByID(movieId):
     return res
 
 
-@app.route("/movie/<movieId>/image",methods=['GET'])
+@app.route("/movie/<titleId>/image",methods=['GET'])
 @cross_origin()
-def getMovieImageByID(movieId):
+def getMovieImageByID(titleId):
 
     try:
-        mydoc = getMongoDbDetails().getMovieImage(movieId)
-        img = mydoc['image']
-        decode=img.decode()
-        img_tag = '<img alt="sample" src="data:image/png;base64,{0}">'.format(decode)
-        res =  make_response(img_tag,HTTPStatus.OK)
+        mydoc = getMongoDbDetails().getMovieImage(titleId)
+        # img = mydoc['image']
+        # decode=img.decode()
+        # img_tag = '<img alt="sample" src="data:image/png;base64,{0}">'.format(decode)
+        img = mydoc['cover_url']        
+        res =  make_response(img,HTTPStatus.OK)
     except Exception as e:
         res = "Could not get the movies - " + str(e)
         res =  make_response(str(res),HTTPStatus.INTERNAL_SERVER_ERROR) 
@@ -68,12 +69,12 @@ def getMovieImageByID(movieId):
     return res
 
 
-@app.route("/movie/<movieId>/external-image",methods=['GET'])
+@app.route("/movie/<titleId>/external-image",methods=['GET'])
 @cross_origin()
-def getMovieExternalImageByID(movieId):
+def getMovieExternalImageByID(titleId):
     try:
         ia = IMDb()
-        movie = ia.get_movie(str.replace(movieId,'tt',''))
+        movie = ia.get_movie(str.replace(titleId,'tt',''))
         res = movie['full-size cover url']
     except Exception as e:
         res = "Could not get the movies cover url - " + str(e)
@@ -119,13 +120,13 @@ def getTrendingMovies():
     return res
 
 
-@app.route("/user/user-movie-recommendation-by-id/<user_id>",methods=['GET'])
+@app.route("/user/user-movie-recommendation-by-id/<userId>",methods=['GET'])
 @cross_origin()
-def getUserMovieRecommendationById(user_id):
+def getUserMovieRecommendationById(userId):
     
     try:
         titles = ".."
-        titles = getExternalAPI().getUserMovieRecommendationById(user_id)
+        titles = getExternalAPI().getUserMovieRecommendationById(userId)
         mydoc = getMongoDbDetails().getMovies(titles)
 
         mydocList = list(mydoc)
@@ -150,6 +151,29 @@ def getPersonsExternalImageByID(nameId):
         res =  make_response(str(res),HTTPStatus.INTERNAL_SERVER_ERROR) 
 
     return res
+
+
+@app.route("/movie/post-comment", methods=['POST'])
+@cross_origin()
+def setUserMovieComments():
+    try:
+        if not request.json or not 'titleId' in request.json or not 'userId' in request.json or not 'userComment' in request.json:
+            res = "Title ID or User ID or Comment not provided"
+            res =  make_response(str(res),HTTPStatus.BAD_REQUEST)
+            return res
+        titleId = request.json['titleId']
+        userId = request.json['userId']
+        userComment = request.json['userComment']
+        
+
+        mydoc = getMongoDbDetails().setUserMovieComments(titleId,userId,userComment)
+        res =  make_response(mydoc,HTTPStatus.OK)
+
+    except Exception as e:
+        res = "Could not post user comments " + str(e)
+        res =  make_response(str(res),HTTPStatus.INTERNAL_SERVER_ERROR) 
+    return res
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')

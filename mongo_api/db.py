@@ -1,4 +1,7 @@
 from pymongo import MongoClient
+from datetime import datetime
+# import collections
+# import json
 
 
 class getMongoDbDetails():
@@ -28,17 +31,18 @@ class getMongoDbDetails():
         return mydoc
 
 
-    def getMovie(self,movieId):
+    def getMovie(self,titleId):
         self.__connect__("movies")
-        mydoc = self.collection.find_one({"_id": movieId},{ "_id": 0, "image": 0})
+        mydoc = self.collection.find_one({"_id": titleId},{ "_id": 0, "image": 0})
         self.__disconnect__()
 
         return mydoc
 
 
-    def getMovieImage(self,movieId):
+    def getMovieImage(self,titleId):
         self.__connect__("movies")
-        mydoc = self.collection.find_one({"_id": movieId},{ "_id": 0, "image": 1})
+        # mydoc = self.collection.find_one({"_id": titleId},{ "_id": 0, "image": 1})
+        mydoc = self.collection.find_one({"_id": titleId},{ "_id": 0, "cover_url": 1})
         self.__disconnect__()
 
         return mydoc
@@ -46,7 +50,33 @@ class getMongoDbDetails():
 
     def getMovies(self,titles):
         self.__connect__("movies")
-        mydoc = self.collection.find({"_id": {"$in": titles}}, { "_id": 0, "image": 0})
+        mydoc = self.collection.find({"_id": {"$in": titles}}, { "_id": 0, "image": 0, "user_comments": 0})
         self.__disconnect__()
 
         return mydoc
+    
+
+    def setUserMovieComments(self,titleId,userId,userComment):
+        self.__connect__("movies")
+        userComments = self.collection.find_one({"_id": titleId},{ "_id": 0, "user_comments": 1})
+        userComments = userComments.get("user_comments")
+        if not userComments:
+            userComments = []
+        
+        comment = {}
+        now = datetime.now()
+        comment["user_id"] = userId
+        comment["user_comment"] = userComment
+        comment["comment_time"] = now.strftime("%Y-%m-%d %H:%M:%S")
+
+        userComments.append(comment)
+
+        mydoc = self.collection.update_one({'_id': titleId},{'$set': { 'user_comments': userComments }})
+        mydoc =  self.collection.find_one({"_id": titleId},{ "_id": 0, "image": 0})
+
+        self.__disconnect__()
+
+        return mydoc
+
+
+# getMongoDbDetails().setUserMovieComments("tt0120737",'ui00001',"I love the movie")

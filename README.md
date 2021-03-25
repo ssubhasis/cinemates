@@ -126,3 +126,12 @@ http://18.206.168.148:5000/user/user-movie-recommendation-by-id/`<user id>`
 
 http://18.206.168.148:5000/user/user-movie-recommendation-by-id/ui00001
 
+
+## post api - add user comments - MongoDB
+
+http://18.206.168.148:5000/movie/post-comment
+
+{"titleId": "tt9243946",
+"userId": "ui00001",
+"userComment": "Ok movie"}
+
