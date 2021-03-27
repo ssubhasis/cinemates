@@ -2,6 +2,22 @@ import React from "react";
 import { Link as CUILink, Box, Flex, Text, Button, Stack } from "@chakra-ui/react";
 import Logo from '../Components/Logo'; 
 import {Link} from'react-router-dom'; 
+import {
+  Menu as MenuCUI,
+  MenuButton as MenuButtonCUI,
+  MenuList as MenuListCUI,
+  MenuItem as MenuItemCUI,
+  MenuItemOption,
+  MenuGroup,
+  MenuOptionGroup,
+  MenuIcon as MenuIconCUI,
+  MenuCommand,
+  MenuDivider,
+  ChevronDownIcon
+} from "@chakra-ui/react"
+
+
+
 
 
 const NavBar = (props) => {
@@ -105,9 +121,15 @@ const MenuLinks = ({ isOpen }) => {
         </Link> 
          </MenuItem>
      
-    
+         <MenuItem >
+        <Link to= "login"> 
+        Login
+        </Link> 
+         </MenuItem>
+
         
         <MenuItem  isLast>
+          
         <Link to= "myhub"> 
           <Button
             size="sm"
@@ -120,9 +142,9 @@ const MenuLinks = ({ isOpen }) => {
           >
             My Hub
           </Button>
-            
-
           </Link>
+         
+        
         </MenuItem>
        
    
