@@ -115,11 +115,7 @@ const MenuLinks = ({ isOpen }) => {
      
 
       
-        <MenuItem >
-        <Link to= "review"> 
-        Review
-        </Link> 
-         </MenuItem>
+        
      
          <MenuItem >
         <Link to= "login"> 
