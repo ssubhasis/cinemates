@@ -9,7 +9,7 @@ import MyHubPage from './Pages/MyHubPage';
 import ActorPage from './Pages/ActorPage'; 
 import MoviePage from './Pages/MoviePage'; 
 import Settings from './Pages/Settings'; 
-import LoginPage from './Pages/LoginPage';
+import LoginPage from './Pages/LoginPage'; 
 import {HashRouter as Router, Switch, Route } from 'react-router-dom'; 
 
 
@@ -42,8 +42,8 @@ class App extends Component {
                         component={MoviePage}/>
                     <Route path="/setting"
                         component={Settings}/>
-                    <Route path="/login"
-                        component={LoginPage} exact/>
+                    <Route path ="/login"
+                        component={LoginPage}/>
 
                 </Switch>
 

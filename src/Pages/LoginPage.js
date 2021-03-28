@@ -1,84 +1,137 @@
-
-import React, { useState } from "react";
-//import {Form,FormGroup ,FormLabel,FormControl} from "@chakra-ui/react";
-import {Form,FormGroup ,FormLabel,FormControl} from "react-bootstrap";
-import {Button, ButtonGroup} from "@chakra-ui/react"
+import React, {useState} from 'react';
 import {
-  Grid,
-  GridItem,
-  Input,
-  Stack,
-  Center,
-  Text
-} from "@chakra-ui/react"
+    Flex,
+    Box,
+    Heading,
+    FormControl,
+    FormLabel,
+    Input,
+    Button,
+    CircularProgress,
+    Icon,
+    InputGroup,
+    InputRightElement,
+    Text
+} from '@chakra-ui/react';
+import {userLogin} from '../Components/loginApi';
+import ErrorMessage from '../Components/LoginError'; 
 
-export default class LoginPage extends React.Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-        email: '',
-        password:''
+export default function LoginPage() {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
+  
+    const handleSubmit = async event => {
+      event.preventDefault();
+  
+      setIsLoading(true);
+  
+      try {
+        await userLogin({ email, password });
+        setIsLoggedIn(true);
+        setIsLoading(false);
+        setShowPassword(false);
+      } catch (error) {
+          console.log(error)
+          console.log('brokey')
+        setError('Invalid username or password');
+        setIsLoading(false);
+        setEmail('');
+        setPassword('');
+        setShowPassword(false);
+      }
     };
-
-    this.handleEmail= this.handleEmail.bind(this);
-    this.handlePassword= this.handlePassword.bind(this);
-    this.handleSubmit= this.handleSubmit.bind(this);
-}
-handleEmail(event) {
-  this.setState({email: event.target.value});
-}
-handlePassword(event) {
-  this.setState({password: event.target.value});
-}
-handleSubmit(event) {
-  this.props.history.push("/")
-  event.preventDefault();
-}
-
- validateForm() {
-     return this.email.length > 0 && this.password.length > 0;
-   }
-
-render(){
-  return (
-    <div className="Login">
-      <Center>
-      <Grid borderRadius="lg" bg="primary.100" 
-                    gap={6}
-                    p="30px"
-                    width="60%"
-                   >
-        <GridItem colSpan={6}  >
-          <Form onSubmit={this.handleSubmit}>
-            <Form.Group size="lg" controlId="email">
-              <Form.Label color="white">Email</Form.Label>
-              <Form.Control
-                autoFocus
-                type="email"
-                value={this.state.email}
-                onChange={this.handleEmail}
-              />
-            </Form.Group>
-            <Form.Group size="lg" controlId="password">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                type="password"
-                value={this.state.password}
-                onChange={this.handlePassword}
-              />
-            </Form.Group>
-            {/* <Button block size="lg" type="submit" disabled={!validateForm()}> */}
-            <Button block size="lg" type="submit">
-              Login
-            </Button>
-          </Form>
-      </GridItem>
-
-    </Grid>
-    </Center>
-    </div>
-  );
-}
-}
-
+  
+    const handlePasswordVisibility = () => setShowPassword(!showPassword);
+  
+    return (
+      <Flex width="full" align="center" justifyContent="center">
+        <Box
+          p={8}
+          maxWidth="500px"
+          borderWidth={1}
+          borderRadius={8}
+          boxShadow="lg"
+        >
+          {isLoggedIn ? (
+            <Box textAlign="center">
+              <Text>{email} logged in!</Text>
+              <Button
+                variantColor="orange"
+                variant="outline"
+                width="full"
+                mt={4}
+                onClick={() => setIsLoggedIn(false)}
+              >
+                Sign out
+              </Button>
+            </Box>
+          ) : (
+            <div>
+              <Box textAlign="center">
+                <Heading>Login</Heading>
+              </Box>
+              <Box my={4} textAlign="left">
+                <form onSubmit={handleSubmit}>
+                  {error && <ErrorMessage message={error} />}
+                  <FormControl isRequired>
+                    <FormLabel>Email</FormLabel>
+                    <Input
+                      type="email"
+                      placeholder="test@test.com"
+                      size="lg"
+                      onChange={event => setEmail(event.currentTarget.value)}
+                    />
+                  </FormControl>
+                  <FormControl isRequired mt={6}>
+                    <FormLabel>Password</FormLabel>
+                    <InputGroup>
+                      <Input
+                        type={showPassword ? 'text' : 'password'}
+                        placeholder="*******"
+                        size="lg"
+                        onChange={event => setPassword(event.currentTarget.value)}
+                      />
+                      <InputRightElement width="3rem">
+                        <Button
+                          h="1.5rem"
+                          size="sm"
+                          onClick={handlePasswordVisibility}
+                        >
+                          {showPassword ? (
+                            <Icon name="view-off" />
+                          ) : (
+                            <Icon name="view" />
+                          )}
+                        </Button>
+                      </InputRightElement>
+                    </InputGroup>
+                  </FormControl>
+                  <Button
+                    variantColor="teal"
+                    variant="outline"
+                    type="submit"
+                    width="full"
+                    mt={4}
+                  >
+                    {isLoading ? (
+                      <CircularProgress
+                        isIndeterminate
+                        size="24px"
+                        color="teal"
+                      />
+                    ) : (
+                      'Sign In'
+                    )}
+                  </Button>
+                </form>
+              </Box>
+            </div>
+          )}
+        </Box>
+      </Flex>
+    );
+  }
