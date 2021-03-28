@@ -8,9 +8,8 @@ import {
 } from "@chakra-ui/react";
 import {Link} from'react-router-dom'; 
 
-class BasicSetting extends React.Component {
-   
 
+export default class BasicSetting extends React.Component {
     render() {
         return (
 
@@ -21,7 +20,7 @@ class BasicSetting extends React.Component {
                     width="100%">
 
                         <h1 style={{color:"white"}}>Place holder for user image</h1>
-                        <h1 style={{color:"white"}}>Place holder for username</h1>
+                        <h1 style={{color:"white"}}>Place holder for username--John</h1>
                         <h1 style={{color:"white"}}>Place holder for birthday</h1>
                         <h1 style={{color:"white"}}>Place holder for email</h1>
 
@@ -37,9 +36,3 @@ class BasicSetting extends React.Component {
 
 
 }
-
-export default BasicSetting;
-
-
-
-
