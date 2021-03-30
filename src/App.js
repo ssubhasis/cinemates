@@ -38,7 +38,7 @@ class App extends Component {
                         component={MyHubPage}/>
                     <Route path="/actor"
                         component={ActorPage}/>
-                    <Route path="/movie"
+                    <Route path="/movie/:id"
                         component={MoviePage}/>
                     <Route path="/setting"
                         component={Settings}/>
