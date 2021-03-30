@@ -29,7 +29,36 @@ class getDbDetails():
     def getMoviesBasicByName(self,movieName):
 
         self.__connect__()
-        query = "select title_id ,primary_title, avg_rating, num_of_votes from movies where primary_title like '" + movieName + "%' limit 20;"""
+        query = "select title_id ,primary_title, avg_rating, num_of_votes from movies where primary_title like '" + movieName + "%' limit 20;"
+
+        self.cursor.execute(query)
+        result = self.cursor.fetchall()
+
+        self.cursor.close()
+        self.__disconnect__()
+
+        return result
+
+
+    def getMoviesBasic(self,movieName,movieGenre,movieRegion):
+
+        self.__connect__()
+        query = """ select  m.title_id ,m.primary_title, m.avg_rating, m.num_of_votes
+                    from movies m, movie_genere mg, movie_language ml
+                    where
+                    m.title_id= mg.title_id
+                    and m.title_id = ml.title_id """
+        if movieName:
+            query = query + " and m.primary_title like '"+movieName+"%' "
+        if movieGenre:
+            query = query + " and mg.genere_name = '"+movieGenre+"'"
+        if not movieRegion:
+            movieRegion = 'US'
+        query = query + " and ml.region = '"+movieRegion+"'"
+
+        query = query + """ group by m.title_id ,m.primary_title, m.avg_rating, m.num_of_votes
+                    order by m.num_of_votes desc , avg_rating desc
+                    limit 20 """
 
         self.cursor.execute(query)
         result = self.cursor.fetchall()

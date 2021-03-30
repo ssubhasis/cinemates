@@ -43,6 +43,19 @@ https://teampolaris.web.illinois.edu/search-movies/`<movie name`>
 https://teampolaris.web.illinois.edu/search-movies/The%20Rev
 
 
+## post Advance Search Movie names from MySQL
+
+https://teampolaris.web.illinois.edu/search-movies
+
+Request Body:
+
+{"movieName":"The Rev",
+"movieGenre":"Action",
+"movieRegion":"US"
+}
+Atleast one paramter is required
+
+
 ## get movie details from MySQL
 
 https://teampolaris.web.illinois.edu/search-movie-by-id/`<titleId`>

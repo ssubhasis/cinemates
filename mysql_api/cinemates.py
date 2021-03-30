@@ -65,6 +65,34 @@ def getMoviesBasicByName(movieName):
     return res
 
 
+@app.route("/search-movies",methods=['POST'])
+@cross_origin()
+def getMoviesBasic():
+    try:
+        if not request.json:
+            abort(400)
+        
+        movieName = None
+        movieGenre = None
+        movieRegion = None
+        if 'movieName' in request.json:
+            movieName = request.json['movieName']
+            movieName = str.replace(movieName,'%20',' ')
+        if 'movieGenre' in request.json:
+            movieGenre = request.json['movieGenre']
+        if 'movieRegion' in request.json:
+            movieRegion = request.json['movieRegion']
+
+        result = getDbDetails().getMoviesBasic(movieName,movieGenre,movieRegion)
+        # res = dumps(result)
+        result = modelConverter().toMoviesBasic(result)
+        res =  make_response(result,HTTPStatus.OK)
+    except Exception as e:
+        res = "Could not get the movies - " + str(e)
+        res =  make_response(str(res),HTTPStatus.INTERNAL_SERVER_ERROR) 
+    return res
+
+
 @app.route("/highest-voted-top-movies",methods=['GET'])
 @cross_origin()
 def getHighestVotedTopMovies():
@@ -96,7 +124,7 @@ def getHighestVotedTrendingMovies():
 def getMovieInfoById(title_id):
     try:
         result = getDbDetails().getMovieInfoById(title_id)
-        result = modelConverter().toMovieInfo(result)
+        result = modelConverter().toMovieInfo(result,True)
         res =  make_response(result,HTTPStatus.OK)
     except Exception as e:
         res = "Could not get the movie - " + str(e)

@@ -44,9 +44,12 @@ class modelConverter():
                 try:                    
                     movie = ia.get_movie(str.replace(row[0],'tt',''))
                     cover_url = movie['cover url']
+                    full_size_url = movie['full-size cover url']
                 except Exception as e:
                     cover_url = 'https://st.depositphotos.com/1654249/2526/i/600/depositphotos_25269433-stock-photo-3d-man-with-red-question.jpg'
+                    full_size_url = 'https://st.depositphotos.com/1654249/2526/i/600/depositphotos_25269433-stock-photo-3d-man-with-red-question.jpg'
                 d["cover_url"] = cover_url
+                d["full_size_url"] = full_size_url
 
             self.objects_list.append(d)
         
@@ -55,8 +58,9 @@ class modelConverter():
         return self.json_object
 
 
-    def toMovieInfo(self,row):
+    def toMovieInfo(self,row,getExternalImage=False):
         self.json_object = "dummy"
+        ia = IMDb()
         try:
             d=collections.OrderedDict()
             d["_id"] = row[0]
@@ -82,6 +86,14 @@ class modelConverter():
             d["Cinematographer"] = row[14]
             d["ProdDesigner"] = row[15]
             d["Editor"] = row[16]
+
+            if(getExternalImage):
+                try:                    
+                    movie = ia.get_movie(str.replace(row[0],'tt',''))
+                    full_size_url = movie['full-size cover url']
+                except Exception as e:
+                    full_size_url = 'https://st.depositphotos.com/1654249/2526/i/600/depositphotos_25269433-stock-photo-3d-man-with-red-question.jpg'
+                d["full_size_url"] = full_size_url
 
             self.info = d
 
