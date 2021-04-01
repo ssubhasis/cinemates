@@ -79,6 +79,11 @@ https://teampolaris.web.illinois.edu/highest-voted-top-movies
 https://teampolaris.web.illinois.edu/highest-voted-trending-movies
 
 
+## get Actors name and id from  Mysql
+http://teampolaris.web.illinois.edu/search-actors/`<actor name`>
+http://teampolaris.web.illinois.edu/search-actors/Leonardo D
+
+
 ## get Persons image url from external (full size images)
 
 http://18.206.168.148:5000/person/`<nconst`>/external-image

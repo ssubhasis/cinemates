@@ -246,4 +246,19 @@ def setUserRegistration():
         res =  make_response(str(res),HTTPStatus.INTERNAL_SERVER_ERROR) 
     return res
 
+
+@app.route("/search-actors/<actors>",methods=['GET'])
+@cross_origin()
+def getActorNamesBasicByName(actors):
+    try:
+        actorName = str.replace(actors,'%20',' ')
+        result = getDbDetails().getActorBasicByName(actorName)
+        # res = dumps(result)
+        result = modelConverter().toActorBasic(result)
+        res =  make_response(result,HTTPStatus.OK)
+    except Exception as e:
+        res = "Could not get the movies - " + str(e)
+        res =  make_response(str(res),HTTPStatus.INTERNAL_SERVER_ERROR) 
+    return res
+
 #END SIVA API

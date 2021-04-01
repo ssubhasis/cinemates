@@ -217,9 +217,23 @@ class getDbDetails():
     #     self.cursor.close()
     #     self.__disconnect__()
 
-    #     return result 
-#END SIVA API
+    #     return result
 
+
+    def getActorBasicByName(self,actorName):
+
+        self.__connect__()
+        query = "select name_id, name from cast_crew_name where name like '" + actorName + "%' limit 20;"
+
+        self.cursor.execute(query)
+        result = self.cursor.fetchall()
+
+        self.cursor.close()
+        self.__disconnect__()
+
+        return result
+    
+#END SIVA API
 
     def getUserDetails(self,userId):
 
