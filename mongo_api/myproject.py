@@ -68,6 +68,37 @@ def getMovieInfoByID(titleId):
     return res
 
 
+@app.route("/search-movies",methods=['POST'])
+@cross_origin()
+def getMoviesBasic():
+    try:
+        if not request.json:
+            abort(400)
+        
+        # movieName = None
+        # movieGenre = None
+        # movieRegion = None
+        # if 'movieName' in request.json:
+        #     movieName = request.json['movieName']
+        #     movieName = str.replace(movieName,'%20',' ')
+        # if 'movieGenre' in request.json:
+        #     movieGenre = request.json['movieGenre']
+        # if 'movieRegion' in request.json:
+        #     movieRegion = request.json['movieRegion']
+
+        result,titles = getExternalAPI().getMoviesBasic(request.json)
+        imageResult = getMongoDbDetails().getMovies(titles)
+        imageResult = list(imageResult)
+        result = dumps(imageResult)
+
+        # result = dumps(result)
+        res =  make_response(result,HTTPStatus.OK)
+    except Exception as e:
+        res = "Could not get the movies - " + str(e)
+        res =  make_response(str(res),HTTPStatus.INTERNAL_SERVER_ERROR) 
+    return res
+
+
 @app.route("/movie/<titleId>/image",methods=['GET'])
 @cross_origin()
 def getMovieImageByID(titleId):

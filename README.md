@@ -50,9 +50,22 @@ https://teampolaris.web.illinois.edu/search-movies/`<movie name`>
 https://teampolaris.web.illinois.edu/search-movies/The%20Rev
 
 
-## post Advance Search Movie names from MySQL
+## post Advance Search Movie names from MySQL  (internal)
 
 https://teampolaris.web.illinois.edu/search-movies
+
+Request Body:
+
+{"movieName":"The Rev",
+"movieGenre":"Action",
+"movieRegion":"US"
+}
+Atleast one paramter is required
+
+
+## post Advance Search Movie names from MongoDB
+
+http://18.206.168.148:5000/search-movies
 
 Request Body:
 
