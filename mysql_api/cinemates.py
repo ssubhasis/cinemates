@@ -124,7 +124,7 @@ def getHighestVotedTrendingMovies():
 def getMovieInfoById(title_id):
     try:
         result = getDbDetails().getMovieInfoById(title_id)
-        result = modelConverter().toMovieInfo(result,True)
+        result = modelConverter().toMovieInfo(result,False)
         res =  make_response(result,HTTPStatus.OK)
     except Exception as e:
         res = "Could not get the movie - " + str(e)
@@ -160,7 +160,7 @@ def setUserLiking():
 def getUserMovieRecommendationById(user_id):
     try:
         result = getDbDetails().getUserMovieRecommendationById(user_id)
-        result = modelConverter().toMoviesBasic(result)            
+        result = modelConverter().toMoviesBasic(result, False)            
         res =  make_response(result,HTTPStatus.OK)
     except Exception as e:
         res = "Could not get the movies - " + str(e)
@@ -246,7 +246,6 @@ def setUserRegistration():
         res =  make_response(str(res),HTTPStatus.INTERNAL_SERVER_ERROR) 
     return res
 
-
 @app.route("/search-actors/<actors>",methods=['GET'])
 @cross_origin()
 def getActorNamesBasicByName(actors):
@@ -262,3 +261,5 @@ def getActorNamesBasicByName(actors):
     return res
 
 #END SIVA API
+
+# getHighestVotedTopMovies()

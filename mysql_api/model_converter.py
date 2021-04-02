@@ -1,7 +1,8 @@
 import json
 import collections
 import re
-from imdb import IMDb 
+# from imdb import IMDb
+from get_external_api import getExternalAPI
 
 
 class modelConverter():
@@ -31,7 +32,7 @@ class modelConverter():
 
 
     def toMoviesBasic(self,rows,getExternalImage=False):
-        ia = IMDb()
+        # ia = IMDb()
         for row in rows:
             d = collections.OrderedDict()
             d["_id"] = row[0]
@@ -39,12 +40,18 @@ class modelConverter():
             d["primaryTitle"] = row[1]
             d["avgRating"] = row[2]
             d["numOfVotes"] = row[3]
-            
+
             if(getExternalImage):
                 try:                    
-                    movie = ia.get_movie(str.replace(row[0],'tt',''))
-                    cover_url = movie['cover url']
-                    full_size_url = movie['full-size cover url']
+                    # movie = ia.get_movie(str.replace(row[0],'tt',''))
+                    # cover_url = movie['cover url']
+                    # full_size_url = movie['full-size cover url']
+                    
+                    # not working
+                    mongoRespJson = getExternalAPI().getMovieInfoById(row[0])
+                    d["cover_url"] = mongoRespJson["cover_url"]
+                    d["full_size_url"] = mongoRespJson["full_size_url"]
+
                 except Exception as e:
                     cover_url = 'https://st.depositphotos.com/1654249/2526/i/600/depositphotos_25269433-stock-photo-3d-man-with-red-question.jpg'
                     full_size_url = 'https://st.depositphotos.com/1654249/2526/i/600/depositphotos_25269433-stock-photo-3d-man-with-red-question.jpg'
@@ -56,7 +63,6 @@ class modelConverter():
         self.json_object = json.dumps(self.objects_list)
 
         return self.json_object
-
 
     def toActorBasic(self,rows):
 
@@ -73,7 +79,7 @@ class modelConverter():
 
     def toMovieInfo(self,row,getExternalImage=False):
         self.json_object = "dummy"
-        ia = IMDb()
+        # ia = IMDb()
         try:
             d=collections.OrderedDict()
             d["_id"] = row[0]
@@ -102,11 +108,19 @@ class modelConverter():
 
             if(getExternalImage):
                 try:                    
-                    movie = ia.get_movie(str.replace(row[0],'tt',''))
-                    full_size_url = movie['full-size cover url']
+                    # movie = ia.get_movie(str.replace(row[0],'tt',''))
+                    # full_size_url = movie['full-size cover url']
+
+                    # not working
+                    mongoRespJson = getExternalAPI().getMovieInfoById(row[0])
+                    d["cover_url"] = mongoRespJson["cover_url"]
+                    d["full_size_url"] = mongoRespJson["full_size_url"]
+
                 except Exception as e:
+                    cover_url = 'https://st.depositphotos.com/1654249/2526/i/600/depositphotos_25269433-stock-photo-3d-man-with-red-question.jpg'
                     full_size_url = 'https://st.depositphotos.com/1654249/2526/i/600/depositphotos_25269433-stock-photo-3d-man-with-red-question.jpg'
                 d["full_size_url"] = full_size_url
+                d["cover_url"] = cover_url
 
             self.info = d
 
@@ -114,7 +128,7 @@ class modelConverter():
         except Exception as e:
             res = "Could convert the movie - " + str(e)
             self.json_object = res
-
+            
         return self.json_object
     
 

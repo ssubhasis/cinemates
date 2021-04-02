@@ -51,6 +51,23 @@ def getMovieByID(titleId):
     return res
 
 
+@app.route("/search-movie-by-id/<titleId>",methods=['GET'])
+@cross_origin()
+def getMovieInfoByID(titleId):
+
+    try:
+        mydoc = getMongoDbDetails().getMovie(titleId)
+        movieInfo = getExternalAPI().getMovieInfoByID(titleId)
+        movieInfo["cover_url"] = mydoc["cover_url"]
+        movieInfo["full_size_url"] = mydoc["full_size_url"]
+        res =  make_response(movieInfo,HTTPStatus.OK)
+    except Exception as e:
+        res = "Could not get the movies - " + str(e)
+        res =  make_response(str(res),HTTPStatus.INTERNAL_SERVER_ERROR) 
+
+    return res
+
+
 @app.route("/movie/<titleId>/image",methods=['GET'])
 @cross_origin()
 def getMovieImageByID(titleId):

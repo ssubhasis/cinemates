@@ -5,6 +5,13 @@
 https://teampolaris.web.illinois.edu/index
 
 
+## get movie details from MongoDB
+
+http://18.206.168.148:5000/search-movie-by-id/`<titleId`>
+
+http://18.206.168.148:5000/search-movie-by-id/tt0468569
+
+
 ## get movie details from MongoDB for top movies
 
 http://18.206.168.148:5000/movie/`<titleId`>
@@ -56,7 +63,7 @@ Request Body:
 Atleast one paramter is required
 
 
-## get movie details from MySQL
+## get movie details from MySQL (internal)
 
 https://teampolaris.web.illinois.edu/search-movie-by-id/`<titleId`>
 

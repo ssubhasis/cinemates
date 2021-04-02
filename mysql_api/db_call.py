@@ -219,7 +219,6 @@ class getDbDetails():
 
     #     return result
 
-
     def getActorBasicByName(self,actorName):
 
         self.__connect__()
@@ -234,6 +233,7 @@ class getDbDetails():
         return result
     
 #END SIVA API
+
 
     def getUserDetails(self,userId):
 

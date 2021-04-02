@@ -9,6 +9,7 @@ class getExternalAPI():
         self.HighestVotedTopMoviesUrl = "https://teampolaris.web.illinois.edu/highest-voted-top-movies"
         self.HighestVotedTrendingMoviesUrl = "https://teampolaris.web.illinois.edu/highest-voted-trending-movies"
         self.UserMovieRecommendationById = "http://teampolaris.web.illinois.edu/user-movie-recommendation-by-id"
+        self.MovieInfoById = "https://teampolaris.web.illinois.edu/search-movie-by-id"
 
 
     def getHighestVotedTopMovies(self):
@@ -39,3 +40,9 @@ class getExternalAPI():
             self.titles.append(movie_id)
 
         return self.titles
+
+
+    def getMovieInfoByID(self, titleId):
+        self.response = requests.get(self.MovieInfoById+"/"+titleId)
+
+        return self.response.json()
