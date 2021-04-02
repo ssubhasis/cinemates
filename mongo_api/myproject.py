@@ -223,5 +223,26 @@ def setUserMovieComments():
     return res
 
 
+@app.route("/movie/delete-comment", methods=['POST'])
+@cross_origin()
+def setRemoveUserMovieComments():
+    try:
+        if not request.json or not 'titleId' in request.json or not 'comment_seq' in request.json:
+            res = "Title ID or Comment Sequence not provided"
+            res =  make_response(str(res),HTTPStatus.BAD_REQUEST)
+            return res
+        titleId = request.json['titleId']
+        commentSeq = request.json['comment_seq']
+        
+
+        mydoc = getMongoDbDetails().setRemoveUserMovieComments(titleId,commentSeq)
+        res =  make_response(mydoc,HTTPStatus.OK)
+
+    except Exception as e:
+        res = "Could not delete user comments " + str(e)
+        res =  make_response(str(res),HTTPStatus.INTERNAL_SERVER_ERROR) 
+    return res
+
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0')

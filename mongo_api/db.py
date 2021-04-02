@@ -68,10 +68,26 @@ class getMongoDbDetails():
         comment["user_id"] = userId
         comment["user_comment"] = userComment
         comment["comment_time"] = now.strftime("%Y-%m-%d %H:%M:%S")
+        comment["comment_seq"] = len(userComments)+1
 
         userComments.append(comment)
 
         mydoc = self.collection.update_one({'_id': titleId},{'$set': { 'user_comments': userComments }})
+        mydoc =  self.collection.find_one({"_id": titleId},{ "_id": 0, "image": 0})
+
+        self.__disconnect__()
+
+        return mydoc
+    
+
+    def setRemoveUserMovieComments(self,titleId,commentSeq):
+        self.__connect__("movies")
+        # userComments = self.collection.find_one({"_id": titleId},{ "_id": 0, "user_comments": 1})
+        # userComments = userComments.get("user_comments")
+        # userComments = userComments.pop(commentSeq)
+
+        # mydoc = self.collection.update_one({'_id': titleId},{'$set': { 'user_comments': userComments }})
+        self.collection.update({"_id": titleId}, {"$pull": {"user_comments" : {"comment_seq": commentSeq }}})
         mydoc =  self.collection.find_one({"_id": titleId},{ "_id": 0, "image": 0})
 
         self.__disconnect__()

@@ -173,3 +173,10 @@ http://18.206.168.148:5000/movie/post-comment
 "userId": "ui00001",
 "userComment": "Ok movie"}
 
+
+## delete user comments - MongoDB
+
+http://18.206.168.148:5000/movie/delete-comment
+
+{"titleId": "tt9243946",
+"comment_seq": 3}
