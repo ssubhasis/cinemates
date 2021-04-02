@@ -10,9 +10,10 @@ import {
 import {Button, ButtonGroup} from "@chakra-ui/react"
 import TrendingMovies from '../Components/TrendingMovie';
 import HighestRatedMovies from '../Components/HighestRatedMovies';
-import {Link} from'react-router-dom'; 
+import {Link} from 'react-router-dom';
 import Search from '../Components/Search';
-import { createBreakpoints } from "@chakra-ui/theme-tools"
+import {createBreakpoints} from "@chakra-ui/theme-tools"
+import SearchBy from '../Components/SearchBy'; 
 
 
 const breakpoints = createBreakpoints({
@@ -20,8 +21,8 @@ const breakpoints = createBreakpoints({
     md: "48em",
     lg: "62em",
     xl: "80em",
-    "2xl": "96em",
-  })
+    "2xl": "96em"
+})
 
 export default function Homepage() {
 
@@ -34,13 +35,20 @@ export default function Homepage() {
                 backgroundColor="primary.100">
                 {/* 1st section of page, this holds the search bar and the top menu buttons  */}
                 <GridItem colSpan={6}>
-                <Search></Search>
+                    <Search></Search>
+                    
                     <Stack direction="row"
                         spacing={5}
                         align="center">
-                        
-                        <Text style={{color:"white", paddingLeft:"6%"}}>Search By</Text>
-                        <Button colorScheme="orange" variant="solid">
+
+                        <Text style={
+                            {
+                                color: "white",
+                                paddingLeft: "6%"
+                            }
+                        }>Search By</Text>
+                                 <SearchBy></SearchBy>
+                        {/* <Button colorScheme="orange" variant="solid">
                             Movie
                         </Button>
                         <Button colorScheme="orange" variant="outline">
@@ -48,37 +56,24 @@ export default function Homepage() {
                         </Button>
                         <Button colorScheme="orange" variant="outline">
                             Genre
-                        </Button>
+                        </Button> */}
 
-                        {/* <Link to="search">
-                        <Button colorScheme="orange" variant="outline">
-                            Advance Search
-                        </Button>
-                        </Link>
-
-                        <Link to ="myhub">
-                        <Button colorScheme="orange" variant="outline">
-                            My Hub
-                        </Button>
-                        </Link> */}
 
                     </Stack>
-                 
+
                 </GridItem>
 
-                <GridItem colSpan={6}  >
-                    <Text fontSize="4xl" color="white" >
+                <GridItem colSpan={6}>
+                    <Text fontSize="4xl" color="white" marginBottom="5px">
                         Trending Movies</Text>
-                    <Center>
-                        <TrendingMovies></TrendingMovies>
-                    </Center>
+
+                    <TrendingMovies></TrendingMovies>
+
                 </GridItem>
 
 
-             
-
-<GridItem colSpan={6}  >
-                    <Text fontSize="4xl" color="white" >
+                <GridItem colSpan={6} marginBottom="50px">
+                    <Text fontSize="4xl" color="white"  marginBottom="5px">
                         Highest Rated Movies</Text>
                     <Center>
                         <HighestRatedMovies></HighestRatedMovies>
@@ -86,9 +81,7 @@ export default function Homepage() {
                 </GridItem>
 
 
-
             </Grid>
         </div>
     );
 }
-

@@ -14,7 +14,9 @@ class TrendingMovies extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            trending: []
+            trending: [],
+            titleId: ''
+
         };
     }
 
@@ -31,6 +33,10 @@ class TrendingMovies extends React.Component {
         this.getTrending();
     }
 
+    handleClick(movie) { // e.preventDefault();
+        window.location.href = "/#/movie/" + movie.titleId;
+        console.log(movie);
+    }
 
     render() {
 
@@ -38,49 +44,61 @@ class TrendingMovies extends React.Component {
         return (
 
             <div>
+                <Center>
+
+                    <Wrap borderRadius="lg" bg="primary.500"
+                        gap={6}
+                        p="30px"
+                        width="90%">
 
 
-                <Wrap borderRadius="lg" bg="primary.500"
-                    gap={6}
-                    p="30px"
-                    width="100%">
-
-
-                    {
-                    this.state.trending.map((movie, index) => (
-                        <Box w="15rem" bg="white" p="5px" borderRadius="md">
-                            <div key={
-                                movie.titleId
+                        {
+                        this.state.trending.map((movie, index) => (
+                            <Box w="15rem" bg="primary.500" p="5px" borderRadius="md"
+                                onClick={
+                                    () => this.handleClick(movie)
                             }>
-                                <img src={
-                                        movie.cover_url
-                                    }
-                                    style={
+
+                                <div key={
+                                    movie.titleId
+                                }>
+
+                                    <Center>
+                                        <img src={
+                                                movie.cover_url
+                                            }
+                                            style={
+                                                {
+
+                                                    width: "50%",
+                                                    height: "auto",
+                                                    borderRadius: "5%"
+
+                                                }
+
+                                            }/>
+                                    </Center>
+                                    <Text color="white">
                                         {
+                                        movie.primaryTitle
+                                    }</Text>
 
-                                            width: "100%",
-                                            height: "auto"
+                                    <p style={
+                                        {color: "white"}
+                                    }>Rated {
+                                        movie.avgRating
+                                    }
+                                        by {
+                                        movie.numOfVotes
+                                    }
+                                        viewers.</p>
+                                </div>
 
-                                        }
+                            </Box>
+                        ))
+                    } </Wrap>
 
-                                    }/>
-                                <Text >{
-                                    movie.primaryTitle
-                                }</Text>
-
-                                <p>Rated {
-                                    movie.avgRating
-                                }
-                                    by {
-                                    movie.numOfVotes
-                                }
-                                    viewers.</p>
-                            </div>
-                        </Box>
-                    ))
-                } </Wrap>
-
-
+                </Center>
             </div>
         );
     }
@@ -89,4 +107,3 @@ class TrendingMovies extends React.Component {
 }
 
 export default TrendingMovies;
-

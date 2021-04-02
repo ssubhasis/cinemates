@@ -40,6 +40,8 @@ class App extends Component {
                         component={ActorPage}/>
                     <Route path="/movie/:id"
                         component={MoviePage}/>
+                         <Route path="/moviee"
+                        component={MoviePage}/>
                     <Route path="/setting"
                         component={Settings}/>
                     <Route path ="/login"

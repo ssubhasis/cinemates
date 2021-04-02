@@ -1,54 +1,103 @@
-import React, { Component } from 'react';
-import {Grid, GridItem,Box, Text, Center} from "@chakra-ui/react";
+import React, {Component} from 'react';
+import {
+    Grid,
+    GridItem,
+    Box,
+    Text,
+    Center,
+    Wrap
+} from "@chakra-ui/react";
 
-class HighestRatedMovies extends React.Component{
+class HighestRatedMovies extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { 
-          highestrated:[] 
+        this.state = {
+            highestrated: [],
+            titleId: ''
         };
-      }
+    }
 
 
-      getHighestRated() {
-        fetch('http://18.206.168.148:5000/movies/highestrated ')
-          .then(response => response.json())
-          .then(response => {
-            this.setState({
-              highestrated: response
-            })
+    getHighestRated() {
+        fetch('http://18.206.168.148:5000/movies/highestrated ').then(response => response.json()).then(response => {
+            this.setState({highestrated: response})
             console.log(this.state)
-          })
-      }
+        })
+    }
 
-      
-      componentDidMount() {
-        this.getHighestRated(); 
-      }
 
-      render(){
-          return (
-        <div>
-        
-        <Grid borderRadius="lg"  bg="primary.500" templateColumns="repeat(4, 1fr)" gap={6} p="30px" width="100%" > 
-      
-        {this.state.highestrated.map((movie, index) => (
-          <Box bg="white" p="5px" borderRadius="md">
-        <div key={movie.titleId}>
-        <img src={movie.cover_url} width="101" height="150"/>
-          <h1 >{movie.primaryTitle}</h1>
-          <p>Rated {movie.avgRating} by {movie.numOfVotes} viewers.</p>
-        </div>
-        </Box>  
-    ))}
+    componentDidMount() {
+        this.getHighestRated();
+    }
 
-        </Grid>
-        </div>
-          );
-      }
+    handleClick(movie) { // e.preventDefault();
+        window.location.href = "/#/movie/" + movie.titleId;
+        console.log(movie);
+    }
 
+    render() {
+        return (
+            <div>
+                <Center>
+
+                    <Wrap borderRadius="lg" bg="primary.500"
+                        gap={6}
+                        p="30px"
+                        width="90%">
+
+
+                        {
+                        this.state.highestrated.map((movie, index) => (
+                            <Box w="15rem" bg="primary.500" p="5px" borderRadius="md"
+                                onClick={
+                                    () => this.handleClick(movie)
+                            }>
+
+                                <div key={
+                                    movie.titleId
+                                }>
+
+                                    <Center>
+                                        <img src={
+                                                movie.cover_url
+                                            }
+                                            style={
+                                                {
+
+                                                    width: "50%",
+                                                    height: "auto",
+                                                    borderRadius: "5%"
+
+                                                }
+
+                                            }/>
+                                    </Center>
+                                    <Text color="white">
+                                        {
+                                        movie.primaryTitle
+                                    }</Text>
+
+                                    <p style={
+                                        {color: "white"}
+                                    }>Rated {
+                                        movie.avgRating
+                                    }
+                                        by {
+                                        movie.numOfVotes
+                                    }
+                                        viewers.</p>
+                                </div>
+
+                            </Box>
+                        ))
+                    } </Wrap>
+
+                </Center>
+            </div>
+        );
+    }
 
 
 }
 
-export default HighestRatedMovies; 
+export default HighestRatedMovies;

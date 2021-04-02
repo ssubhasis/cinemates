@@ -11,13 +11,15 @@ export default class UserComments extends React.Component{
       }
 
 
+
       getComments() {
         console.log(this.state.title_id)
         let api = 'http://18.206.168.148:5000/movie/' + this.state.title_id
         fetch(api)
           .then(response =>  response.json())
           .then(response => {
-            this.setState({
+            if (response.user_comment===undefined) this.setState({ comments: []});
+            else this.setState({
                 comments: response.user_comments
             })
             console.log(response)

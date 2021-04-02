@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
-import {Button, ButtonGroup, Input} from "@chakra-ui/react"
+import {Button, ButtonGroup, Input, Grid, Box, SimpleGrid} from "@chakra-ui/react"
 import axios from 'axios'
 import Suggestions from '../Components/Suggestions'
+import { withRouter } from 'react-router-dom';
+
 
 // const { API_KEY } = process.env
 const API_URL = 'https://teampolaris.web.illinois.edu/search-movies'
@@ -42,20 +44,24 @@ class Search extends Component {
           this.state.queryTitleId= r.titleId
       };
     });
-    window.location.href = "https://www.google.com/search?q="+this.state.queryTitleId;
+    window.location.href = "/#/movie/"+this.state.queryTitleId;
   }
 
 
   render() {
     return (
+
       <form onSubmit={this.onSubmitHandler}>
+        
         <Input list="browsers" name="browser" id="browser"
             style={
                 {
-                    marginTop: "10px",
-                    width: "88%",
+                    marginTop: "20px",
+                    width: "75%",
                     height:"50px",
-                    borderRadius: "40px"
+                    borderRadius: "40px",
+                    marginRight:"20px",
+                    marginBottom:"20px"
                 }
             }
             focusBorderColor="orange.400"
@@ -66,11 +72,14 @@ class Search extends Component {
             onChange={this.handleInputChange}
         />
 
-        <Suggestions results={this.state.results} /><br/>
-        <Button  colorScheme="orange" variant="solid" type="submit" onClick={this.onSubmitHandler}>Submit</Button>
-     
-
+        <Suggestions results={this.state.results} />
+       
+        <Button colorScheme="orange" variant="solid" type="submit" onClick={this.onSubmitHandler}>Submit</Button>
+       
+    
       </form>
+   
+     
     )
 
   }
