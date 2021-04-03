@@ -87,9 +87,9 @@ def getMoviesBasic():
         #     movieRegion = request.json['movieRegion']
 
         result,titles = getExternalAPI().getMoviesBasic(request.json)
-        imageResult = getMongoDbDetails().getMovies(titles)
-        imageResult = list(imageResult)
-        result = dumps(imageResult)
+        moviesList = getMongoDbDetails().getMovies(titles)
+        moviesList = list(moviesList)
+        result = dumps(moviesList)
 
         # result = dumps(result)
         res =  make_response(result,HTTPStatus.OK)

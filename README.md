@@ -58,7 +58,8 @@ Request Body:
 
 {"movieName":"The Rev",
 "movieGenre":"Action",
-"movieRegion":"US"
+"movieRegion":"US",
+"movieRating": 7
 }
 Atleast one paramter is required
 
@@ -69,9 +70,10 @@ http://18.206.168.148:5000/search-movies
 
 Request Body:
 
-{"movieName":"The Rev",
+{"movieName":"The Re",
 "movieGenre":"Action",
-"movieRegion":"US"
+"movieRegion":"US",
+"movieRating": 7
 }
 Atleast one paramter is required
 

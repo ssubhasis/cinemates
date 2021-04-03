@@ -75,6 +75,7 @@ def getMoviesBasic():
         movieName = None
         movieGenre = None
         movieRegion = None
+        movieRating = None
         if 'movieName' in request.json:
             movieName = request.json['movieName']
             movieName = str.replace(movieName,'%20',' ')
@@ -82,13 +83,15 @@ def getMoviesBasic():
             movieGenre = request.json['movieGenre']
         if 'movieRegion' in request.json:
             movieRegion = request.json['movieRegion']
+        if 'movieRating' in request.json:
+            movieRating = request.json['movieRating']
 
-        result = getDbDetails().getMoviesBasic(movieName,movieGenre,movieRegion)
+        result = getDbDetails().getMoviesBasic(movieName,movieGenre,movieRegion,movieRating)
         # res = dumps(result)
         result = modelConverter().toMoviesBasic(result)
         res =  make_response(result,HTTPStatus.OK)
     except Exception as e:
-        res = "Could not get the movies - " + str(e)
+        res = "Could not get the movies - " + str(e) + " - " + str(request.json)
         res =  make_response(str(res),HTTPStatus.INTERNAL_SERVER_ERROR) 
     return res
 

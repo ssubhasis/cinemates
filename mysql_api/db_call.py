@@ -40,7 +40,7 @@ class getDbDetails():
         return result
 
 
-    def getMoviesBasic(self,movieName,movieGenre,movieRegion):
+    def getMoviesBasic(self,movieName,movieGenre,movieRegion,movieRating):
 
         self.__connect__()
         query = """ select  m.title_id ,m.primary_title, m.avg_rating, m.num_of_votes
@@ -52,6 +52,8 @@ class getDbDetails():
             query = query + " and m.primary_title like '"+movieName+"%' "
         if movieGenre:
             query = query + " and mg.genere_name = '"+movieGenre+"'"
+        if movieRating:
+            query = query + " and m.avg_rating >= "+str(movieRating)+""
         if not movieRegion:
             movieRegion = 'US'
         query = query + " and ml.region = '"+movieRegion+"'"
