@@ -13,7 +13,7 @@ export default class MovieInfo extends React.Component{
 
       getMovieInfo() {
         console.log(this.state.title_id)
-        let api = 'https://teampolaris.web.illinois.edu/search-movie-by-id/' + this.state.title_id
+        let api = 'http://18.206.168.148:5000/search-movie-by-id/' + this.state.title_id
 
         fetch(api)
           .then(response => response.json())

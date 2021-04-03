@@ -21,6 +21,7 @@ import UserComments from '../Components/UserComments';
 import { useParams } from "react-router";
 
 
+
 export default function MoviePage() {
 
     let { id } = useParams();
@@ -31,14 +32,17 @@ export default function MoviePage() {
         <Wrap gridTemplateColumns="auto 1fr" bg="primary.100"
             gap={8}
             p="30px"
-            height="auto">
+            height="100%">
 
-{/*             <Flex direction="column" bg="primary.500" padding="5px" >
+
+
+            <Flex direction="column" bg="primary.500" padding="5px" >
             <Search></Search>
-            <GenreSelect></GenreSelect>
-            <LanguageSelect></LanguageSelect>
-            <StarSelect></StarSelect>
-            </Flex> */}
+                <GenreSelect></GenreSelect>
+                <LanguageSelect></LanguageSelect>
+                <StarSelect></StarSelect>
+            </Flex>   
+
 
             <Flex direction="column" bg="primary.500" padding="5px" >
                 <MovieInfo id={id} ></MovieInfo>
