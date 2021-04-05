@@ -19,7 +19,7 @@ export default function LanguageSelect(props){
     }
     return (
         <div> 
-            <Grid bg="orange.500" borderRadius="lg" padding="10px" margin="10px">
+            <Grid bg="primary.200" borderRadius="lg" padding="10px" margin="10px">
                <GridItem overflowY="scroll" maxHeight="15vh">
                 <h2>Region</h2>
                 <RadioGroup onChange={handleRegionChange} >

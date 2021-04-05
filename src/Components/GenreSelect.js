@@ -24,7 +24,7 @@ import {
 
     return (
         <div> 
-            <Grid bg="orange.500" borderRadius="lg" padding="10px" margin="10px" >
+            <Grid bg="primary.200" borderRadius="lg" padding="10px" margin="10px" >
                 <GridItem overflowY="scroll" maxHeight="40vh">
                 <h2>Genre</h2>
                 <RadioGroup onChange={handleGenreChange}>

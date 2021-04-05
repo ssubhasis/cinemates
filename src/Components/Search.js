@@ -74,7 +74,7 @@ class Search extends Component {
 
         <Suggestions results={this.state.results} />
        
-        <Button colorScheme="orange" variant="solid" type="submit" onClick={this.onSubmitHandler}>Submit</Button>
+        <Button bgColor="primary.200" variant="solid" type="submit" onClick={this.onSubmitHandler}>Submit</Button>
        
     
       </form>

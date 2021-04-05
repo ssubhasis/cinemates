@@ -10,6 +10,7 @@ import {
     Wrap,
     Flex,
     WrapItem,
+    IconButton,
    Button
 } from "@chakra-ui/react"
 import AdvancedSearch from '../Components/AdvancedSearch';
@@ -65,28 +66,41 @@ class SearchPage extends React.Component{
     render (){
     return (
         <div> 
-            <Wrap gridTemplateColumns="auto 1fr" bg="primary.100"
+            <Grid h="100%" templateColumns="auto 1fr"
                 gap={8}
-                p="30px"
-                height="auto">
-
-                <Flex direction="column" bg="primary.500" padding="5px" >
+                backgroundColor="primary.100">
+    
+   
+                
+                <Flex direction="column" bg="primary.500" padding="20px" marginTop="20px"
+                       marginBottom="20px" marginLeft="20px"   borderRadius= "5%" >
                 <AdvancedSearch onSearchChange={this.handleSearch}></AdvancedSearch>
                 <GenreSelect onSelectGenre={this.handleGenre}></GenreSelect>
                 <LanguageSelect onSelectRegion={this.handleRegion}></LanguageSelect>
                 <StarSelect onSelectStar={this.handleStar}></StarSelect>
-                <Button colorScheme="orange" size="md"  onClick={this.onSubmit}> Submit </Button>
+                <Button bgColor="primary.200" size="md" variant="solid" maxWidth="50px" marginLeft= "10px"onClick={this.onSubmit}> Go </Button>
+
+               
+
                 </Flex>
+                
 
 
+                <Wrap borderRadius="lg" bg="primary.500"
+                        gap={6}
+                        p="10px"
+                        width="95%"
+                       marginTop="20px"
+                       marginBottom="20px"
+                       borderRadius= "2%">
 
-            
-                    <Center w="auto" h="100%" bg="green.200">
+                
+                   
                    
 
                     {
                         this.state.searchResults.map((movie, index) => (
-                            <Box w="15rem" bg="pink.200" p="5px" borderRadius="md"
+                            <Box w="15rem"  p="5px" borderRadius="md"
                                 onClick={
                                     () => this.handleClick(movie)
                             }>
@@ -130,11 +144,13 @@ class SearchPage extends React.Component{
                             </Box>
                         ))
                     }
-                    </Center>
+                    
+                 
          
-
-
-            </Wrap>
+                </Wrap>
+                   
+                    
+            </Grid>
         </div>
     );
     }

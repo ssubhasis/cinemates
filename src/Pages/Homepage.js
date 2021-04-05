@@ -37,7 +37,7 @@ export default function Homepage() {
                 <GridItem colSpan={6}>
                     <Search></Search>
                     
-                    <Stack direction="row"
+                    {/* <Stack direction="row"
                         spacing={5}
                         align="center">
 
@@ -48,18 +48,10 @@ export default function Homepage() {
                             }
                         }>Search By</Text>
                                  <SearchBy></SearchBy>
-                        {/* <Button colorScheme="orange" variant="solid">
-                            Movie
-                        </Button>
-                        <Button colorScheme="orange" variant="outline">
-                            Actor
-                        </Button>
-                        <Button colorScheme="orange" variant="outline">
-                            Genre
-                        </Button> */}
+                        
 
 
-                    </Stack>
+                    </Stack> */}
 
                 </GridItem>
 

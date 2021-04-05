@@ -37,7 +37,7 @@ function RadioCard(props) {
   
 
   function SearchBy() {
-    const options = ["Movie", "Actor", "Genre"]
+    const options = ["Movie", "Actor"]
   
     const { getRootProps, getRadioProps } = useRadioGroup({
       name: "basic search",
