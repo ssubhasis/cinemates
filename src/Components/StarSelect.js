@@ -24,7 +24,7 @@ export default function StarSelect(){
             <Wrap bg="orange.500" borderRadius="lg" padding="10px" margin="10px">
                 <h2>Rating</h2>
            
-            <Rating name="simple-controlled"/>
+             <Rating name="simple-controlled"/>
 
                 </Wrap>
         </div>
