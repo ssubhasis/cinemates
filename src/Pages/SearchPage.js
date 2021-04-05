@@ -19,7 +19,7 @@ import StarSelect from '../Components/StarSelect';
 import axios from 'axios'
 
 
-const API_URL = 'https://teampolaris.web.illinois.edu/search-movies'
+const API_URL = 'http://18.206.168.148:5000/search-movies'
 
 class SearchPage extends React.Component{
     state = { searchQuery:'', 
@@ -56,6 +56,11 @@ class SearchPage extends React.Component{
         console.log(this.state); 
     }
 
+    handleClick(movie) { // e.preventDefault();
+        window.location.href = "/#/movie/" + movie.titleId;
+        console.log(movie);
+    }
+
 
     render (){
     return (
@@ -77,7 +82,7 @@ class SearchPage extends React.Component{
 
             
                     <Center w="auto" h="100%" bg="green.200">
-                        <h1>HELLO</h1>
+                   
 
                     {
                         this.state.searchResults.map((movie, index) => (
