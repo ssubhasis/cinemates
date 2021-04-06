@@ -60,15 +60,21 @@ class getMongoDbDetails():
         self.__connect__("movies")
         userComments = self.collection.find_one({"_id": titleId},{ "_id": 0, "user_comments": 1})
         userComments = userComments.get("user_comments")
+        nextCommentId = 1
         if not userComments:
             userComments = []
+        else:
+            for tempUserComment in userComments:
+                if tempUserComment["comment_seq"] > nextCommentId:
+                    nextCommentId = tempUserComment["comment_seq"]
+            nextCommentId = nextCommentId + 1
         
         comment = {}
         now = datetime.now()
         comment["user_id"] = userId
         comment["user_comment"] = userComment
         comment["comment_time"] = now.strftime("%Y-%m-%d %H:%M:%S")
-        comment["comment_seq"] = len(userComments)+1
+        comment["comment_seq"] = nextCommentId
 
         userComments.append(comment)
 
@@ -78,7 +84,27 @@ class getMongoDbDetails():
         self.__disconnect__()
 
         return mydoc
-    
+
+
+    def setUserMovieCommentsUpdate(self,titleId,userId,userComment,commentSeq):
+        self.__connect__("movies")
+        userComments = self.collection.find_one({"_id": titleId},{ "_id": 0, "user_comments": 1})
+        userComments = userComments.get("user_comments")
+
+        newUserComments = []
+        for tempUserComment in userComments:
+            if tempUserComment["comment_seq"] == commentSeq:
+                now = datetime.now()
+                tempUserComment["user_comment"] = userComment
+                tempUserComment["comment_time"] = now.strftime("%Y-%m-%d %H:%M:%S")
+            newUserComments.append(tempUserComment)
+
+        mydoc = self.collection.update_one({'_id': titleId},{'$set': { 'user_comments': newUserComments }})
+        mydoc =  self.collection.find_one({"_id": titleId},{ "_id": 0, "image": 0})
+
+        self.__disconnect__()
+
+        return mydoc
 
     def setRemoveUserMovieComments(self,titleId,commentSeq):
         self.__connect__("movies")

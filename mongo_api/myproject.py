@@ -213,8 +213,11 @@ def setUserMovieComments():
         userId = request.json['userId']
         userComment = request.json['userComment']
         
-
-        mydoc = getMongoDbDetails().setUserMovieComments(titleId,userId,userComment)
+        if 'comment_seq' in request.json:
+            commentSeq = request.json['comment_seq']
+            mydoc = getMongoDbDetails().setUserMovieCommentsUpdate(titleId,userId,userComment,commentSeq)
+        else:
+            mydoc = getMongoDbDetails().setUserMovieComments(titleId,userId,userComment)
         res =  make_response(mydoc,HTTPStatus.OK)
 
     except Exception as e:

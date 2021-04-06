@@ -176,6 +176,16 @@ http://18.206.168.148:5000/movie/post-comment
 "userComment": "Ok movie"}
 
 
+## post api - update user comments - MongoDB
+
+http://18.206.168.148:5000/movie/post-comment
+
+{"titleId": "tt9243946",
+"userId": "ui00001",
+"userComment": "Ok movie!!!",
+"comment_seq": 6}
+
+
 ## delete user comments - MongoDB
 
 http://18.206.168.148:5000/movie/delete-comment
