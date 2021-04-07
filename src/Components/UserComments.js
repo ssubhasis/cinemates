@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
-import {GridItem,Box, Text, Heading} from "@chakra-ui/react";
+import {GridItem,Box, Text, Heading,Button} from "@chakra-ui/react";
+import axios from 'axios';
+import DeleteComment from './DeleteComment';
 
 export default class UserComments extends React.Component{
     constructor(props) {
         super(props);
         this.state = { 
           title_id : this.props.id,
-          comments : []
+          comments : [],
+          del_comnt : []
         };
+       //this.handleDelete = this.handleDelete.bind(this);
       }
 
 
@@ -18,7 +22,8 @@ export default class UserComments extends React.Component{
         fetch(api)
           .then(response =>  response.json())
           .then(response => {
-            if (response.user_comment===undefined) this.setState({ comments: []});
+            console.log(response.user_comments)
+            if (response.user_comments===undefined) this.setState({ comments: []})
             else this.setState({
                 comments: response.user_comments
             })
@@ -31,6 +36,12 @@ export default class UserComments extends React.Component{
         this.getComments(); 
       }
 
+      handleDelete(title_id,cmnt_id){
+        console.log(title_id,cmnt_id)
+        DeleteComment(title_id,cmnt_id)
+        window.location.reload(false);
+      } 
+
       render(){
         console.log(this.state)
           return (
@@ -42,6 +53,8 @@ export default class UserComments extends React.Component{
            <Box bg="white" p="5px" borderRadius="md">
            <Text textAlign = "left" color = "blue">{cmnt.user_id} : </Text>
            <Text textAlign = "left">{cmnt.user_comment}</Text>
+           <Button> Edit</Button><br />
+            <Button onClick={() => { this.handleDelete(this.state.title_id,cmnt.comment_seq) }} > Delete </Button> 
            </Box>
         </div>
 

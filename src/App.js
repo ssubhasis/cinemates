@@ -32,7 +32,7 @@ class App extends Component {
                         component={SearchPage}/>
                     <Route path="/topcharts"
                         component={TopChartsPage}/>
-                    <Route path="/review"
+                    <Route path="/review/:id"
                         component={ReviewPage}/>
                     <Route path="/myhub"
                         component={MyHubPage}/>

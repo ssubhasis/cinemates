@@ -19,6 +19,7 @@ import {Link} from'react-router-dom';
 import MovieInfo from '../Components/MovieInfo';
 import UserComments from '../Components/UserComments';
 import { useParams } from "react-router";
+import { useHistory } from "react-router-dom";
 
 
 
@@ -27,6 +28,12 @@ export default function MoviePage() {
     let { id } = useParams();
 
     console.log(id);
+
+    const history = useHistory();
+
+  function handleClick() {
+    history.push("/review/"+id);
+  }
     return (
         <div> 
         <Wrap gridTemplateColumns="auto 1fr" bg="primary.100"
@@ -49,9 +56,7 @@ export default function MoviePage() {
             </Flex>
 
             <Flex direction="row" bg="primary.500" padding="5px" >
-                <Link to="review">
-                    <Button> Write a Review</Button>
-                </Link>
+                <Button onClick={handleClick}>Write a Review</Button>  
                 <UserComments id={id} ></UserComments>  
             </Flex>   
 
