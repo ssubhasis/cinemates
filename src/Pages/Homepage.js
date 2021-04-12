@@ -13,7 +13,8 @@ import HighestRatedMovies from '../Components/HighestRatedMovies';
 import {Link} from 'react-router-dom';
 import Search from '../Components/Search';
 import {createBreakpoints} from "@chakra-ui/theme-tools"
-import SearchBy from '../Components/SearchBy'; 
+import SearchBy from '../Components/SearchBy';
+import SearchActor from '../Components/SearchActor';  
 
 
 const breakpoints = createBreakpoints({
@@ -36,8 +37,9 @@ export default function Homepage() {
                 {/* 1st section of page, this holds the search bar and the top menu buttons  */}
                 <GridItem colSpan={6}>
                     <Search></Search>
+                    <SearchActor></SearchActor>
                     
-                    {/* <Stack direction="row"
+                    <Stack direction="row"
                         spacing={5}
                         align="center">
 
@@ -51,7 +53,7 @@ export default function Homepage() {
                         
 
 
-                    </Stack> */}
+                    </Stack>
 
                 </GridItem>
 
