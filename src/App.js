@@ -32,13 +32,15 @@ class App extends Component {
                         component={SearchPage}/>
                     <Route path="/topcharts"
                         component={TopChartsPage}/>
-                    <Route path="/review"
+                    <Route path="/review/:id"
                         component={ReviewPage}/>
                     <Route path="/myhub"
                         component={MyHubPage}/>
-                    <Route path="/actor"
+                    <Route path="/actor/:id"
                         component={ActorPage}/>
                     <Route path="/movie/:id"
+                        component={MoviePage}/>
+                         <Route path="/moviee"
                         component={MoviePage}/>
                     <Route path="/setting"
                         component={Settings}/>

@@ -1,60 +1,64 @@
 import React, { Component } from 'react'
 import {Button, ButtonGroup, Input, Grid, Box, SimpleGrid} from "@chakra-ui/react"
-import axios from 'axios'
-import Suggestions from '../Components/Suggestions'
+import axios from 'axios'; 
+import ActorSuggestions from '../Components/ActorSuggestions'; 
 import { withRouter } from 'react-router-dom';
 
 
 // const { API_KEY } = process.env
-const API_URL = 'https://teampolaris.web.illinois.edu/search-movies'
+const API_URL = 'http://teampolaris.web.illinois.edu/search-actors'
 
-class Search extends Component {
+class SearchActor extends Component {
   state = {
     query: '',
     results: [],
-    queryTitleId: ''
+    queryAId: ''
   }
 
-  getInfo = () => {
+  getActorInfo = () => {
     axios.get(`${API_URL}/${this.state.query}`)
       .then(({ data }) => {
         this.setState({
           results: data
         })
-        console.log(data)
+      
       })
+     
   }
 
-  handleInputChange = () => {
+  handleActorInputChange = () => {
     this.setState({
       query: this.search.value
     }, () => {
       if (this.state.query && this.state.query.length > 1) {
         if (this.state.query.length % 2 === 0) {
-          this.getInfo()
+          this.getActorInfo()
         }
       } else if (!this.state.query) {
       }
     })
+   
   }
 
-  onSubmitHandler = (e) => {
+  onActorSubmitHandler = (e) => {
     e.preventDefault();
     this.state.results.map(r => {
-        if (r.primaryTitle == this.state.query){
-          this.state.queryTitleId= r.titleId
+        if (r._name == this.state.query){
+          this.state.queryAId= r._id
+          
       };
     });
-    window.location.href = "/#/movie/"+this.state.queryTitleId;
+    console.log(this.state.queryAId); 
+   window.location.href = "/#/actor/"+this.state.queryAId;
   }
 
 
   render() {
     return (
 
-      <form onSubmit={this.onSubmitHandler}>
+      <form onSubmit={this.onActorSubmitHandler}>
         
-        <Input list="browsers" name="browser" id="browser"
+        <Input list="actors" name="actorname" id="actorname"
             style={
                 {
                     marginTop: "20px",
@@ -68,14 +72,14 @@ class Search extends Component {
             focusBorderColor="orange.400"
             size="lg"
             bg="white"
-            placeholder="Search by movie"
+            placeholder="Search by actor"
             ref={input => this.search = input}
-            onChange={this.handleInputChange}
+            onChange={this.handleActorInputChange}
         />
 
-        <Suggestions results={this.state.results} />
+        <ActorSuggestions results={this.state.results} />
        
-        <Button bgColor="primary.200" variant="solid" type="submit" onClick={this.onSubmitHandler}>Go</Button>
+        <Button bgColor="primary.200" variant="solid" type="submit" onClick={this.onActorSubmitHandler}>Go</Button>
        
     
       </form>
@@ -86,4 +90,4 @@ class Search extends Component {
   }
 }
 
-export default Search
+export default SearchActor

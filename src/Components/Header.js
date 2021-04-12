@@ -100,8 +100,8 @@ const MenuLinks = ({ isOpen }) => {
 
        
         <MenuItem >
-        <Link to= "search"> 
-        Search 
+        <Link to= "/search"> 
+        Advanced Search 
         </Link>
         </MenuItem>
        
