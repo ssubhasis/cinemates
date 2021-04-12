@@ -263,6 +263,32 @@ def getActorNamesBasicByName(actors):
         res =  make_response(str(res),HTTPStatus.INTERNAL_SERVER_ERROR) 
     return res
 
+@app.route("/actorchart-info/<nameId>",methods=['GET'])
+@cross_origin()
+def getChartInfoByActorId(nameId):
+    try:
+        # titleId = str.replace(titleId,'%20',' ')
+        result = getDbDetails().getChartInfoBasicByActor(nameId)
+        # res = dumps(result)
+        result = modelConverter().toActorChartInfoBasic(result)
+        res =  make_response(result,HTTPStatus.OK)
+    except Exception as e:
+        res = "Could not get the movies - " + str(e)
+        res =  make_response(str(res),HTTPStatus.INTERNAL_SERVER_ERROR) 
+    return res
+
 #END SIVA API
+
+@app.route("/search-actor-by-id/<name_id>", methods=['GET'])
+@cross_origin()
+def getActorInfoById(name_id):
+    try:
+        result1,result2,result3 = getDbDetails().getActorInfoById(name_id)
+        result = modelConverter().toActorInfo(result1,result2,result3,True)
+        res =  make_response(result,HTTPStatus.OK)
+    except Exception as e:
+        res = "Could not get the movie - " + str(e)
+        res =  make_response(str(res),HTTPStatus.INTERNAL_SERVER_ERROR) 
+    return res
 
 # getHighestVotedTopMovies()

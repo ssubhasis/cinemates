@@ -101,10 +101,19 @@ https://teampolaris.web.illinois.edu/highest-voted-top-movies
 https://teampolaris.web.illinois.edu/highest-voted-trending-movies
 
 
-## get Actors name and id from  Mysql
+## get Actors name from  Mysql
 http://teampolaris.web.illinois.edu/search-actors/`<actor name`>
 http://teampolaris.web.illinois.edu/search-actors/Leonardo D
 
+
+## get Actors details by ID from  MySQL
+https://teampolaris.web.illinois.edu/search-actor-by-id/`<name id`>
+https://teampolaris.web.illinois.edu/search-actor-by-id/nm0000138
+
+
+## get Actors move details with rating and year for bar chart MySQL 
+http://teampolaris.web.illinois.edu/actorchart-info/`<name id`>
+http://teampolaris.web.illinois.edu/actorchart-info/nm0000138
 
 ## get Persons image url from external (full size images)
 

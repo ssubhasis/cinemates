@@ -1,7 +1,7 @@
 import json
 import collections
 import re
-# from imdb import IMDb
+from imdb import IMDb
 from get_external_api import getExternalAPI
 
 
@@ -77,6 +77,7 @@ class modelConverter():
         return self.json_object
 
 
+
     def toMovieInfo(self,row,getExternalImage=False):
         self.json_object = "dummy"
         # ia = IMDb()
@@ -149,3 +150,85 @@ class modelConverter():
             self.json_object = res
 
         return self.json_object
+
+
+    def toActorChartInfoBasic(self,rows):
+
+        for row in rows:
+            d=collections.OrderedDict()
+            d["release_year"] = row[0]
+            d["avg_rating"] = row[1]
+            d["num_votes"] = row[2]
+            self.objects_list.append(d)
+
+        self.json_object=json.dumps(self.objects_list)
+
+        return self.json_object
+
+
+    def toActorInfo(self,row1,row2,row3,getExternalImage=False):
+        self.json_object = "dummy"
+        ia = IMDb()
+        try:
+            d=collections.OrderedDict()
+            d["_id"] = row1[0]
+            d["nameId"]=row1[0]
+            d["name"] = row1[1]
+            d["birthYear"] = row1[2]
+            d["deathYear"] = row1[3]
+            d["professions"] = row1[4]
+
+            knownFor = []
+            for row in row2:
+                tmp=collections.OrderedDict()
+                tmp["titleId"] = row[1]
+                tmp["primaryTitle"] = row[2]
+                knownFor.append(tmp)
+            d["knownFor"] = knownFor
+
+            roles = []
+            for row in row3:
+                tmp=collections.OrderedDict()
+                tmp["catagory"] = row[0]
+                tmp["job"] = row[1]
+                replaceDict = { '[': '', ']': '', '"': '', '\r':'','\n':''}
+                tmp["movie_characters"] = self.replace_all(row[2],replaceDict)
+                tmp["primaryTitle"] = row[3]
+                tmp["titleId"] = row[4]
+                roles.append(tmp)
+            d["roles"] = roles
+
+            if(getExternalImage):
+                try:   
+                    person = ia.get_person(str.replace(d["nameId"],'nm',''))
+                    full_size_url = person['full-size headshot']                 
+                    # movie = ia.get_movie(str.replace(row[0],'tt',''))
+                    # full_size_url = movie['full-size cover url']
+
+                    # not working
+                    # mongoRespJson = getExternalAPI().getMovieInfoById(row[0])
+                    # d["cover_url"] = mongoRespJson["cover_url"]
+                    # d["full_size_url"] = mongoRespJson["full_size_url"]
+
+                except Exception as e:
+                    # cover_url = 'https://st.depositphotos.com/1654249/2526/i/600/depositphotos_25269433-stock-photo-3d-man-with-red-question.jpg'
+                    full_size_url = 'https://st.depositphotos.com/1654249/2526/i/600/depositphotos_25269433-stock-photo-3d-man-with-red-question.jpg'
+                d["full_size_url"] = full_size_url
+                # d["cover_url"] = cover_url
+
+            self.info = d
+
+            self.json_object = json.dumps(self.info)
+        except Exception as e:
+            res = "Could convert the actor - " + str(e)
+            self.json_object = res
+            
+        return self.json_object
+    
+
+    def replace_all(self,text, dic):
+        for i, j in dic.items():
+            text = text.replace(i, j)
+        return text
+
+        

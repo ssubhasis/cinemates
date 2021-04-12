@@ -224,7 +224,19 @@ class getDbDetails():
     def getActorBasicByName(self,actorName):
 
         self.__connect__()
-        query = "select name_id, name from cast_crew_name where name like '" + actorName + "%' limit 20;"
+        query = "select name_id, name from cast_crew_name where name like '%" + actorName + "%' limit 20;"
+
+        self.cursor.execute(query)
+        result = self.cursor.fetchall()
+
+        self.cursor.close()
+        self.__disconnect__()
+
+        return result
+
+    def getChartInfoBasicByActor(self,nameId):
+        self.__connect__()
+        query = "SELECT release_year, avg_rating, num_of_votes FROM role,movies  WHERE movies.title_id=role.title_id and role.name_id ='%s';" %nameId
 
         self.cursor.execute(query)
         result = self.cursor.fetchall()
@@ -249,6 +261,45 @@ class getDbDetails():
         self.__disconnect__()
 
         return result 
+    
+
+    def getActorInfoById(self,nameId):
+
+        self.__connect__()
+        query = """ select ccn.name_id, ccn.name, ccn.birth_year, ccn.death_year, v_ccf.professions
+                    from cast_crew_name ccn,
+                    (select ccf.name_id, GROUP_CONCAT(ccf.prof_nm) as professions
+                    from cast_crew_prof ccf
+                    where name_id='"""+nameId+"""'
+                    group by ccf.name_id) v_ccf
+                    where ccn.name_id = '"""+nameId+"""'
+                    and ccn.name_id = v_ccf.name_id;"""
+
+        self.cursor.execute(query)
+        result1 = self.cursor.fetchone()
+
+        query = """select kf.name_id, m.title_id, m.primary_title
+                    from known_for kf, movies m
+                    where kf.name_id='"""+nameId+"""'
+                    and kf.title_id=m.title_id;"""
+
+        self.cursor.execute(query)
+        result2 = self.cursor.fetchall()
+
+        query = """ select r.catagoty as catagory, r.job, r.movie_characters, 
+                    m.primary_title, r.title_id
+                from role r,  movies m
+                where name_id='"""+nameId+"""'
+                and r.title_id=m.title_id; """
+        
+        self.cursor.execute(query)
+        result3 = self.cursor.fetchall()
+
+        self.cursor.close()
+        self.__disconnect__()
+
+        return result1,result2,result3
 
 # getDbDetails().getUserMovieRecommendationById('ui00001')
+# getDbDetails().getActorInfoById('nm0000138')
 
