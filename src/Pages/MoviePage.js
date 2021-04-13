@@ -42,13 +42,13 @@ export default function MoviePage() {
             height="100%">
 
 
-
+{/* 
             <Flex direction="column" bg="primary.500" padding="5px" >
             <Search></Search>
                 <GenreSelect></GenreSelect>
                 <LanguageSelect></LanguageSelect>
                 <StarSelect></StarSelect>
-            </Flex>   
+            </Flex>    */}
 
 
             <Flex direction="column" bg="primary.500" padding="5px" >
