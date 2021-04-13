@@ -7,33 +7,40 @@ export default class Actorinfo extends React.Component{
         super(props);
         this.state = { 
         actor_id : this.props.id,
-        //actorinfo:[],
-       // actor_name:''
+        actor_basic_info:{ roles:[]},
+       
+        image: ''
+
+        
         };
       }
 
 
-    //   getActorInfo() {
-    //     console.log(this.state.actor_id)
-    //     let api = 'http://teampolaris.web.illinois.edu/search-actors/' + this.state.actor_id
+      // getActorInfo() {
+      //   console.log(this.state.actor_id)
+      //   let api = 'https://teampolaris.web.illinois.edu/search-actor-by-id/' + this.state.actor_id
 
-    //     fetch(api)
-    //       .then(response => response.json())
-    //       .then(response => {
-    //         this.setState({
-    //             actorinfo: [response]
-    //         })
-    //         console.log(this.state.actorinfo + "fetch api response")
-    //       })
-    //   }
+      //   fetch(api)
+      //     .then(response => response.json())
+      //     .then(response => {
+      //       this.setState({
+      //           actor_basic_info: [response]
+      //       })
+      //       console.log(this.state.actor_basic_info + "fetch api response")
+      //     })
+      // }
 
+
+      
       
     getActorInfo(){
         console.log(this.state.actor_id +"console log get actor info")
-        axios.get ( 'http://teampolaris.web.illinois.edu/search-actors/' + this.state.actor_id)
+        axios.get ( 'http://teampolaris.web.illinois.edu/search-actor-by-id/' + this.state.actor_id)
         .then((response) => {
-        console.log(response.data + "console response data");
-        
+          this.setState({
+                   actor_basic_info: response.data
+                   })
+        console.log(JSON.stringify (response.data )+ "console response data");
 
         }); 
     }
@@ -42,23 +49,40 @@ export default class Actorinfo extends React.Component{
       }
 
       render(){
-        console.log(this.state.actorinfo +"please")
+        
           return (
       <div>
           
-        {/* {this.state.actorinfo.map((actor, index) => (
+        <div key={this.state.actor_basic_info._id}>
         
-        <div key={actor._id}>
-       
-          <Heading bg = "black"> {actor._name} </Heading>
-          
-            
-          
-          
+          <Heading>  {this.state.actor_basic_info.name}</Heading>
+          { <img src={this.state.actor_basic_info.full_size_url} width="400" height="500"/> } 
+          <Text> Birth Year:  {this.state.actor_basic_info.birthYear}</Text>
+          <Text> Death Year: {this.state.actor_basic_info.deathYear}</Text>
+         
+         
+
+          <Heading> Roles </Heading>
         </div>
+
         
-    ))} */}
-     <h1>hi</h1>
+       
+
+        <div> 
+            {this.state.actor_basic_info.roles.map((role)  => (
+              <div > 
+                <Text>Movie: {role.primaryTitle} </Text> 
+                <Text> Category: {role.catagory} </Text>
+                <Text> Character: {role.movie_characters} </Text>
+                <Text> Job: {role.job} </Text>
+
+                <br></br> 
+                
+
+              </div>
+            ))} 
+        </div>
+
 
         </div> 
         
