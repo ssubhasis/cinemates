@@ -18,12 +18,15 @@ import ErrorMessage from '../Components/LoginError';
 
 
 export default function LoginPage() {
-    const [email, setEmail] = useState('');
+    const [userId, setUserId] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
+    const [userName, setUserName] = useState('');    
+    const [userEmail, setUserEmail] = useState('');
+    const [userBirthYear, setUserBirthYear] = useState('');
   
     const handleSubmit = async event => {
       event.preventDefault();
@@ -31,7 +34,13 @@ export default function LoginPage() {
       setIsLoading(true);
   
       try {
-        await userLogin({ email, password });
+        await userLogin({ userId, password })
+        .then(response => {
+          setUserName(response.userName);
+          setUserEmail(response.userEmail);
+          setUserBirthYear(response.userBirthYear);
+          console.log('The response is: ' + response);
+        });
         setIsLoggedIn(true);
         setIsLoading(false);
         setShowPassword(false);
@@ -40,7 +49,7 @@ export default function LoginPage() {
           console.log('brokey')
         setError('Invalid username or password');
         setIsLoading(false);
-        setEmail('');
+        setUserId('');
         setPassword('');
         setShowPassword(false);
       }
@@ -60,7 +69,7 @@ export default function LoginPage() {
         >
           {isLoggedIn ? (
             <Box textAlign="center">
-              <Text>{email} logged in!</Text>
+              <Text>{userId} logged in!</Text>
               <Button
                 variantColor="orange"
                 variant="outline"
@@ -80,12 +89,12 @@ export default function LoginPage() {
                 <form onSubmit={handleSubmit}>
                   {error && <ErrorMessage message={error} />}
                   <FormControl isRequired>
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel>User ID</FormLabel>
                     <Input
-                      type="email"
-                      placeholder="test@test.com"
+                      type="text"
+                      placeholder="ui0001"
                       size="lg"
-                      onChange={event => setEmail(event.currentTarget.value)}
+                      onChange={event => setUserId(event.currentTarget.value)}
                     />
                   </FormControl>
                   <FormControl isRequired mt={6}>

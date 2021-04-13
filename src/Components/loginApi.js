@@ -1,11 +1,18 @@
-export const userLogin = async ({ email, password }) => {
+import axios from 'axios'
+
+export const userLogin = async ({ userId, password }) => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        if (email === 'test@test.com' && password === 'password') {
-          resolve();
+        const body = {"userId":userId,
+                    "password":password}
+        // searchResults = []
+        const API_URL = "https://teampolaris.web.illinois.edu/user-login"
+        axios.post(API_URL, body)
+        .then(response => { if (userId === response.data.userId && password === response.data.userPassword) {
+          resolve(response.data);
         } else {
-          reject();
-        }
+          reject();}
+      }).catch((error) => {reject();});
       }, 3000);
     });
   };
