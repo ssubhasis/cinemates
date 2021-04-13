@@ -18,6 +18,5 @@ export default function  DeleteComment (title_id,cmnt_id){
             .then(res => res.json())
             .then((resp) => {console.log(resp)})
 
-      
 
 }
