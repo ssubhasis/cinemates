@@ -108,7 +108,7 @@ const MenuLinks = ({ isOpen }) => {
 
         
         <MenuItem >
-        <Link to= "topcharts"> 
+        <Link to= "/topcharts"> 
         Top Charts
         </Link>
          </MenuItem>
@@ -118,7 +118,7 @@ const MenuLinks = ({ isOpen }) => {
         
      
          <MenuItem >
-        <Link to= "login"> 
+        <Link to= "/login"> 
         Login
         </Link> 
          </MenuItem>
@@ -126,7 +126,7 @@ const MenuLinks = ({ isOpen }) => {
         
         <MenuItem  isLast>
           
-        <Link to= "myhub"> 
+        <Link to= "/myhub"> 
           <Button
             size="sm"
             rounded="md"

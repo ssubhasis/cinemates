@@ -40,8 +40,10 @@ export default class UserComments extends React.Component{
 
       handleDelete(title_id,cmnt_id){
         console.log(title_id,cmnt_id)
-        DeleteComment(title_id,cmnt_id)
-        window.location.reload(false);
+        let res = DeleteComment(title_id,cmnt_id)
+        console.log(res)
+        if (res === true)
+          window.location.reload();
       } 
 
       handleChangeComment= (e) => {
@@ -83,6 +85,7 @@ export default class UserComments extends React.Component{
           </Editable>
 
            <Button  onClick={() => {this.updateComment(this.state.title_id, cmnt.user_comment ,cmnt.comment_seq) }}> Save</Button><br />
+            
             <Button onClick={() => { this.handleDelete(this.state.title_id,cmnt.comment_seq) }} > Delete </Button> 
            </Box>
         </div>

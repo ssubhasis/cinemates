@@ -9,7 +9,9 @@ import {
     Wrap,
     Flex,
     WrapItem,
-   Button
+   Button,
+   Select,
+   Heading
 } from "@chakra-ui/react"
 import Search from '../Components/Search';
 import GenreSelect from '../Components/GenreSelect'; 
@@ -20,6 +22,8 @@ import MovieInfo from '../Components/MovieInfo';
 import UserComments from '../Components/UserComments';
 import { useParams } from "react-router";
 import { useHistory } from "react-router-dom";
+import ModifyRaying from '../Components/ModifyRating';
+
 
 
 
@@ -31,8 +35,16 @@ export default function MoviePage() {
 
     const history = useHistory();
 
+    const [value, setValue] = React.useState("")
+
   function handleClick() {
     history.push("/review/"+id);
+  }
+
+  const handleChange = (value) => {
+    setValue(Number(value.target.value))
+    console.log(value.target.value)
+    ModifyRaying(id,value.target.value)
   }
     return (
         <div> 
@@ -57,11 +69,27 @@ export default function MoviePage() {
 
             <Flex direction="row" bg="primary.500" padding="5px" >
                 <Button onClick={handleClick}>Write a Review</Button>  
+                <Heading  as="h5" size="sm" color = "white"> Rate the Movie</Heading>
+                <Select value={value}
+                        onChange={handleChange}
+                        width="35%"
+                            bg="white"
+                            borderColor="white"
+                            color="Black"
+                            placeholder="Select option">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                </Select>
                 <UserComments id={id} ></UserComments>  
             </Flex>   
-
-
-
         </Wrap>
     </div>
     );
