@@ -20,7 +20,8 @@ import MovieInfo from '../Components/MovieInfo';
 import UserComments from '../Components/UserComments';
 import { useParams } from "react-router";
 import { useHistory } from "react-router-dom";
-
+import Login from '../Components/Login/Login';
+import useToken from '../Components/App/useToken';
 
 
 export default function MoviePage() {
@@ -34,6 +35,13 @@ export default function MoviePage() {
   function handleClick() {
     history.push("/review/"+id);
   }
+
+  const { token, setToken } = useToken();
+
+  if(!token) {
+    return <Login setToken={setToken} />
+  }
+
     return (
         <div> 
         <Wrap gridTemplateColumns="auto 1fr" bg="primary.100"
