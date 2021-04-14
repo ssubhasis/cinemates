@@ -29,7 +29,7 @@ export default class Actorinfo extends React.Component{
       //       console.log(this.state.actor_basic_info + "fetch api response")
       //     })
       // }
-
+   
 
       
       
