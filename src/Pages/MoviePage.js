@@ -21,6 +21,7 @@ import UserComments from '../Components/UserComments';
 import { useParams } from "react-router";
 import { useHistory } from "react-router-dom";
 import Login from '../Components/Login/Login';
+import LoginPage from '../Pages/LoginPage';
 import useToken from '../Components/App/useToken';
 
 
@@ -32,15 +33,16 @@ export default function MoviePage() {
 
     const history = useHistory();
 
-  function handleClick() {
-    history.push("/review/"+id);
-  }
+    function handleClick() {
+        history.push("/review/"+id);
+    }
 
-  const { token, setToken } = useToken();
+    const { token, setToken } = useToken();
 
-  if(!token) {
-    return <Login setToken={setToken} />
-  }
+    if(!token) {
+        // return <Login setToken={setToken} />
+        return <LoginPage setToken={setToken} />
+    }
 
     return (
         <div> 
@@ -48,7 +50,6 @@ export default function MoviePage() {
             gap={8}
             p="30px"
             height="100%">
-
 
 {/* 
             <Flex direction="column" bg="primary.500" padding="5px" >
@@ -66,9 +67,7 @@ export default function MoviePage() {
             <Flex direction="row" bg="primary.500" padding="5px" >
                 <Button onClick={handleClick}>Write a Review</Button>  
                 <UserComments id={id} ></UserComments>  
-            </Flex>   
-
-
+            </Flex>
 
         </Wrap>
     </div>

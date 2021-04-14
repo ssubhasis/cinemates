@@ -13,48 +13,81 @@ import {
     InputRightElement,
     Text
 } from '@chakra-ui/react';
-import {userLogin} from '../Components/loginApi';
+import PropTypes from 'prop-types';
+import {userLogin, loginUser} from '../Components/loginApi';
 import ErrorMessage from '../Components/LoginError'; 
+// import useToken from '../Components/App/useToken';
 
 
-export default function LoginPage() {
-    const [userId, setUserId] = useState('');
-    const [password, setPassword] = useState('');
+export default function LoginPage({ setToken }) {
+    // const [userId, setUserId] = useState('');
+    // const [password, setPassword] = useState('');
+    // const [token, setToken] = useState('');
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
-    const [userName, setUserName] = useState('');    
-    const [userEmail, setUserEmail] = useState('');
-    const [userBirthYear, setUserBirthYear] = useState('');
+    // const [userName, setUserName] = useState('');    
+    // const [userEmail, setUserEmail] = useState('');
+    // const [userBirthYear, setUserBirthYear] = useState('');
   
-    const handleSubmit = async event => {
-      event.preventDefault();
+    // const handleSubmit = async event => {
+    //   event.preventDefault();
   
+    //   setIsLoading(true);
+  
+    //   try {
+    //     await userLogin({ userId, password })
+    //     .then(response => {
+    //       setUserName(response.userName);
+    //       setUserEmail(response.userEmail);
+    //       setUserBirthYear(response.userBirthYear);
+    //       console.log('The response is: ' + response);
+    //     });
+    //     setIsLoggedIn(true);
+    //     setIsLoading(false);
+    //     setShowPassword(false);
+    //   } catch (error) {
+    //       console.log(error)
+    //       console.log('brokey')
+    //     setError('Invalid username or password');
+    //     setIsLoading(false);
+    //     setUserId('');
+    //     setPassword('');
+    //     setShowPassword(false);
+    //   }
+    // };
+  
+    const [userId, setUserId] = useState();
+    const [password, setPassword] = useState();
+  
+    const handleSubmit = async e => {
+      e.preventDefault();
       setIsLoading(true);
-  
+
       try {
-        await userLogin({ userId, password })
-        .then(response => {
-          setUserName(response.userName);
-          setUserEmail(response.userEmail);
-          setUserBirthYear(response.userBirthYear);
-          console.log('The response is: ' + response);
+        const token = await loginUser({
+            userId,
+          password
         });
+        // if (!setToken){
+        //   const { token, setToken } = useToken();
+        // }
+        setToken(token);
         setIsLoggedIn(true);
         setIsLoading(false);
         setShowPassword(false);
       } catch (error) {
-          console.log(error)
-          console.log('brokey')
+        console.log(error)
+        console.log('brokey')
         setError('Invalid username or password');
         setIsLoading(false);
         setUserId('');
         setPassword('');
         setShowPassword(false);
       }
-    };
-  
+    }
+
     const handlePasswordVisibility = () => setShowPassword(!showPassword);
   
     return (
@@ -145,4 +178,8 @@ export default function LoginPage() {
         </Box>
       </Flex>
     );
+  }
+
+  LoginPage.propTypes = {
+    setToken: PropTypes.func.isRequired
   }

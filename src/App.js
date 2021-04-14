@@ -10,7 +10,10 @@ import ActorPage from './Pages/ActorPage';
 import MoviePage from './Pages/MoviePage'; 
 import Settings from './Pages/Settings'; 
 import LoginPage from './Pages/LoginPage'; 
+import SignInPage from './Pages/SignInPage'; 
+import Login from './Components/Login/Login';
 import {HashRouter as Router, Switch, Route } from 'react-router-dom'; 
+import SignOutPage from './Pages/SignOutPage';
 
 
 class App extends Component {
@@ -45,7 +48,11 @@ class App extends Component {
                     <Route path="/setting"
                         component={Settings}/>
                     <Route path ="/login"
-                        component={LoginPage}/>
+                        component={SignInPage}/>
+                        {/* component={Login}/> */}
+                        {/* component={LoginPage}/> */}
+                    <Route path="/logout"
+                        component={SignOutPage}/>
 
                 </Switch>
 
