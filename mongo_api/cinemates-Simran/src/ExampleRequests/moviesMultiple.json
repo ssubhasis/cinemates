@@ -1,0 +1,32 @@
+{
+    "movies": [
+        {
+            "titleId": 1,
+            "primaryTitle": "Revenege of the Sith",
+            "orginalTitle": "Star Wars Renge of the Sith",
+            "releaseYear": 1990,
+            "runtime": 90,
+            "director": "lucas",
+            "avgRating": 4,
+            "numOfVotes": 2,
+            "rating": "PG-13",
+            "genreName": "sci-fi",
+            "cast": [
+                {
+                    "nameId": 1,
+                    "name": "John Smith"
+                }, {
+                    "nameId": 2,
+                    "name": "Ben Smith"
+                }
+            ],
+            "languages": [
+                {
+                    "lang": "english"
+                }
+
+            ]
+
+        }
+    ]
+}
