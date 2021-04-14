@@ -49,7 +49,7 @@ class getDbDetails():
                     m.title_id= mg.title_id
                     and m.title_id = ml.title_id """
         if movieName:
-            query = query + " and m.primary_title like '"+movieName+"%' "
+            query = query + " and m.primary_title like '%"+movieName+"%' "
         if movieGenre:
             query = query + " and mg.genere_name = '"+movieGenre+"'"
         if movieRating:
