@@ -79,8 +79,10 @@ const MenuItem = ({ children, isLast, to = "/", ...rest }) => {
 const MenuLinks = ({ isOpen }) => {
   const { token, setToken } = useToken();
   let enableLoging;
+  let enableSignUp;
   if(!token) {
     enableLoging = <MenuItem><Link to= "/login">Login</Link></MenuItem>;
+    enableSignUp = <MenuItem><Link to= "/signup">SignUp</Link></MenuItem>;
   }else{
     enableLoging = <MenuItem><Link to= "/logout">Logout</Link></MenuItem>
   }
@@ -133,6 +135,7 @@ const MenuLinks = ({ isOpen }) => {
         </Link> 
         </MenuItem> */}
         {enableLoging}
+        {enableSignUp}
 
         
         <MenuItem  isLast>

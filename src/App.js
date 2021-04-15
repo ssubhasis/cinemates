@@ -14,7 +14,7 @@ import SignInPage from './Pages/SignInPage';
 import Login from './Components/Login/Login';
 import {HashRouter as Router, Switch, Route } from 'react-router-dom'; 
 import SignOutPage from './Pages/SignOutPage';
-
+import SignUpPage from './Pages/SignUpPage';
 
 class App extends Component {
     
@@ -53,6 +53,8 @@ class App extends Component {
                         {/* component={LoginPage}/> */}
                     <Route path="/logout"
                         component={SignOutPage}/>
+                    <Route path="/signup"
+                        component={SignUpPage}/>
 
                 </Switch>
 
