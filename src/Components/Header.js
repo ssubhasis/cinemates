@@ -16,9 +16,7 @@ import {
   ChevronDownIcon
 } from "@chakra-ui/react"
 
-
-
-
+import useToken from '../Components/App/useToken';
 
 const NavBar = (props) => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -77,7 +75,18 @@ const MenuItem = ({ children, isLast, to = "/", ...rest }) => {
   );
 };
 
+
 const MenuLinks = ({ isOpen }) => {
+  const { token, setToken } = useToken();
+  let enableLoging;
+  let enableSignUp;
+  if(!token) {
+    enableLoging = <MenuItem><Link to= "/login">Login</Link></MenuItem>;
+    enableSignUp = <MenuItem><Link to= "/signup">SignUp</Link></MenuItem>;
+  }else{
+    enableLoging = <MenuItem><Link to= "/logout">Logout</Link></MenuItem>
+  }
+
   return (
     <Box
       display={{ base: isOpen ? "block" : "none", md: "block" }}
@@ -113,15 +122,20 @@ const MenuLinks = ({ isOpen }) => {
         </Link>
          </MenuItem>
      
-
-      
-        
      
-         <MenuItem >
+        {/* <MenuItem>
         <Link to= "/login"> 
         Login
         </Link> 
-         </MenuItem>
+        </MenuItem>
+
+        <MenuItem>
+        <Link to= "/logout"> 
+        Logout
+        </Link> 
+        </MenuItem> */}
+        {enableLoging}
+        {enableSignUp}
 
         
         <MenuItem  isLast>

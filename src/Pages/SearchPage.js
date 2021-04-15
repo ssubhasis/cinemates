@@ -17,6 +17,7 @@ import AdvancedSearch from '../Components/AdvancedSearch';
 import GenreSelect from '../Components/GenreSelect'; 
 import LanguageSelect from '../Components/LanguageSelect';
 import StarSelect from '../Components/StarSelect'; 
+import StarSelectAlt from '../Components/StarSelectAlt'; 
 import axios from 'axios'
 
 
@@ -77,7 +78,8 @@ class SearchPage extends React.Component{
                 <AdvancedSearch onSearchChange={this.handleSearch}></AdvancedSearch>
                 <GenreSelect onSelectGenre={this.handleGenre}></GenreSelect>
                 <LanguageSelect onSelectRegion={this.handleRegion}></LanguageSelect>
-                <StarSelect onSelectStar={this.handleStar}></StarSelect>
+                {/* <StarSelect onSelectStar={this.handleStar}></StarSelect> */}
+                <StarSelectAlt onSelectStar={this.handleStar}></StarSelectAlt>
                 <Button bgColor="primary.200" size="md" variant="solid" maxWidth="50px" marginLeft= "10px"onClick={this.onSubmit}> Go </Button>
 
                

@@ -22,9 +22,9 @@ import MovieInfo from '../Components/MovieInfo';
 import UserComments from '../Components/UserComments';
 import { useParams } from "react-router";
 import { useHistory } from "react-router-dom";
-import ModifyRaying from '../Components/ModifyRating';
-
-
+import Login from '../Components/Login/Login';
+import LoginPage from '../Pages/LoginPage';
+import useToken from '../Components/App/useToken';
 
 
 export default function MoviePage() {
@@ -35,24 +35,23 @@ export default function MoviePage() {
 
     const history = useHistory();
 
-    const [value, setValue] = React.useState("")
+    function handleClick() {
+        history.push("/review/"+id);
+    }
 
-  function handleClick() {
-    history.push("/review/"+id);
-  }
+    const { token, setToken } = useToken();
 
-  const handleChange = (value) => {
-    setValue(Number(value.target.value))
-    console.log(value.target.value)
-    ModifyRaying(id,value.target.value)
-  }
+    if(!token) {
+        // return <Login setToken={setToken} />
+        return <LoginPage setToken={setToken} />
+    }
+
     return (
         <div> 
         <Wrap gridTemplateColumns="auto 1fr" bg="primary.100"
             gap={8}
             p="30px"
             height="100%">
-
 
 {/* 
             <Flex direction="column" bg="primary.500" padding="5px" >
@@ -89,7 +88,8 @@ export default function MoviePage() {
                 <option value="10">10</option>
                 </Select>
                 <UserComments id={id} ></UserComments>  
-            </Flex>   
+            </Flex>
+
         </Wrap>
     </div>
     );
