@@ -44,7 +44,8 @@ export default function SignUpPage()  {
         }
     
             axios.post(API_URL, body) 
-            .then(response => console.log(response)); 
+            .then(res => res.json())
+            .then((resp) => {console.log(resp)}); 
             // const response = axios.post(API_URL, body)
             // .then((response) => {
             //                     console.log(response);})
