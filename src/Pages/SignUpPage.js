@@ -44,7 +44,14 @@ export default function SignUpPage()  {
         }
     
             axios.post(API_URL, body) 
-            .then(response => setState({searchResults:response.data})); 
+            .then(response => console.log(response)); 
+            // const response = axios.post(API_URL, body)
+            // .then((response) => {
+            //                     console.log(response);})
+            // .catch(function(error) {
+            //     console.log(error.response.data); // this is the part you need that catches 400 request
+            //     }); 
+            // setState(response);
             setIsLoading(false);
             setShowPassword(false);
             window.location.href='/';
