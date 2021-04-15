@@ -58,7 +58,7 @@ class SearchActor extends Component {
 
       <form onSubmit={this.onActorSubmitHandler}>
         
-        <Input list="actors" name="actorname" id="actorname"
+        <Input list="actors" name="actorname" id="actorname" autocomplete="off"
             style={
                 {
                     marginTop: "20px",

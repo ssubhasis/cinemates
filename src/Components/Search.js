@@ -54,7 +54,7 @@ class Search extends Component {
 
       <form onSubmit={this.onSubmitHandler}>
         
-        <Input list="browsers" name="browser" id="browser"
+        <Input list="browsers" name="browser" id="browser" autocomplete="off"
             style={
                 {
                     marginTop: "20px",

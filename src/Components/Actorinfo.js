@@ -30,7 +30,11 @@ export default class Actorinfo extends React.Component{
       //     })
       // }
    
-
+    handleClick(e) { // e.preventDefault();
+       window.location.href = "/#/movie/" + e.target.id; 
+        console.log(e.target.id)
+        //console.log(this.state.actor_basic_info.roles[0].primaryTitle);
+    }
       
       
     getActorInfo(){
@@ -71,7 +75,7 @@ export default class Actorinfo extends React.Component{
         <div> 
             {this.state.actor_basic_info.roles.map((role)  => (
               <div > 
-                <Text>Movie: {role.primaryTitle} </Text> 
+                <Text id={role.titleId} onClick = {this.handleClick.bind(this)}>Movie: {role.primaryTitle} </Text> 
                 <Text> Category: {role.catagory} </Text>
                 <Text> Character: {role.movie_characters} </Text>
                 <Text> Job: {role.job} </Text>
