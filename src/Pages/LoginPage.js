@@ -27,6 +27,7 @@ export default function LoginPage({ setToken }) {
     const [isLoading, setIsLoading] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
+
     // const [userName, setUserName] = useState('');    
     // const [userEmail, setUserEmail] = useState('');
     // const [userBirthYear, setUserBirthYear] = useState('');
@@ -77,6 +78,7 @@ export default function LoginPage({ setToken }) {
         setIsLoggedIn(true);
         setIsLoading(false);
         setShowPassword(false);
+        sessionStorage.setItem('userID',userId)
       } catch (error) {
         console.log(error)
         console.log('brokey')
@@ -86,9 +88,18 @@ export default function LoginPage({ setToken }) {
         setPassword('');
         setShowPassword(false);
       }
+      
     }
 
+
+    console.log(userId)
+
     const handlePasswordVisibility = () => setShowPassword(!showPassword);
+
+    const handleSignout = () => {setIsLoggedIn(false);
+                        sessionStorage.removeItem('userID')};
+
+
   
     return (
       <Flex width="full" align="center" justifyContent="center">
@@ -108,7 +119,7 @@ export default function LoginPage({ setToken }) {
                 variant="outline"
                 width="full"
                 mt={4}
-                onClick={() => setIsLoggedIn(false)}
+                onClick={() => handleSignout()}
               >
                 Sign out
               </Button>
@@ -182,4 +193,5 @@ export default function LoginPage({ setToken }) {
 
   LoginPage.propTypes = {
     setToken: PropTypes.func.isRequired
+  
   }

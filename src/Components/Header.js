@@ -140,7 +140,7 @@ const MenuLinks = ({ isOpen }) => {
         
         <MenuItem  isLast>
           
-        <Link to= "myhub"> 
+        <Link to= "/myhub"> 
           <Button
             size="sm"
             rounded="md"

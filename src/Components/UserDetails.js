@@ -15,14 +15,18 @@ export default class UserDetails extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: []
+            user: [],
+            userid : this.props.userID
         };
     }
     
 
 
     getUser() {
-        fetch('https://teampolaris.web.illinois.edu/user-details/ui00001 ').then(response => response.json()).then(response => {
+        console.log(this.state.userid)
+        let api_ud ='https://teampolaris.web.illinois.edu/user-details/' + this.state.userid
+        console.log(api_ud)
+        fetch(api_ud).then(response => response.json()).then(response => {
             this.setState({user: response})
             console.log(this.state)
         })
