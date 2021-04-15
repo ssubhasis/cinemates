@@ -22,13 +22,16 @@ export default class UserRecommendation extends React.Component {
         super(props);
         this.state = {
             recommend: [],
-            currIndex: 0
+            currIndex: 0,
+            userid : this.props.userID
         };
     }
-
+     
 
     getRecommend() {
-        fetch('http://18.206.168.148:5000/user/user-movie-recommendation-by-id/ui00001').then(response => response.json()).then(response => {
+        console.log(this.state.userid)
+        let api_ur = 'http://18.206.168.148:5000/user/user-movie-recommendation-by-id/' + this.state.userid
+        fetch(api_ur).then(response => response.json()).then(response => {
             this.setState({recommend: response})
             console.log(this.state)
         })
