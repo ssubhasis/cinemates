@@ -91,7 +91,8 @@ class getDbDetails():
         query = """select   title_id ,primary_title ,original_title ,release_year
                             ,case runtime when '' then 0 when null  then 0 ELSE runtime end as runtime ,avg_rating
                             ,case num_of_votes when '' then 0 when null then 0 ELSE num_of_votes end as num_of_votes ,is_adult 
-                    from movies m order by m.num_of_votes desc , avg_rating desc limit 20;"""
+                    from movies m 
+                    order by round(m.num_of_votes/10000) desc , avg_rating desc limit 20;"""
 
         self.cursor.execute(query)
         result = self.cursor.fetchall()
@@ -110,7 +111,7 @@ class getDbDetails():
                             ,case num_of_votes when '' then 0 when null then 0 ELSE num_of_votes end as num_of_votes ,is_adult 
                     from movies m 
                     where release_year = '2020'
-                    order by m.num_of_votes desc , avg_rating desc limit 20;"""
+                    order by round(m.num_of_votes/10000) desc , avg_rating desc limit 20;"""
 
         self.cursor.execute(query)
         result = self.cursor.fetchall()
@@ -179,10 +180,16 @@ class getDbDetails():
     def getUserMovieRecommendationById(self,userID):
 
         self.__connect__()
-        query = """select u.title_id, u.primary_title, u.avg_rating, u.num_of_votes 
-                    from user_movie_recommend_v u 
-                    where u.user_id ='%s' 
-                    order by u.num_of_votes desc , u.avg_rating desc limit 20;""" %userID
+        # query = """select u.title_id, u.primary_title, u.avg_rating, u.num_of_votes 
+        #             from user_movie_recommend_v u 
+        #             where u.user_id ='%s' 
+        #             order by u.num_of_votes desc , u.avg_rating desc limit 20;""" %userID
+        query = """select uu.title_id, uu.primary_title, uu.avg_rating, uu.num_of_votes
+                    from (
+                        select *, RANK() OVER(partition by u.gen_nm ORDER BY round(u.num_of_votes/10000) desc, u.avg_rating desc) rating
+                        from user_movie_recommend_v u 
+                        where u.user_id ='%s' ) as uu
+                    where uu.rating <=10; """ %userID
 
         self.cursor.execute(query)
         result = self.cursor.fetchall()
