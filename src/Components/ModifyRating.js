@@ -2,11 +2,15 @@ import React, { Component } from 'react';
 
 
 export default function  ModifyRaying (title_id,rte){
-        console.log(title_id,rte)
+
+    console.log(localStorage.getItem('userID'))
+
+    let userID= localStorage.getItem('userID')
+        console.log(title_id,rte, userID)
         const request_option = {
                     method : 'POST',
                     headers: {'Content-Type': 'application/json'},
-                    body : JSON.stringify({'titleId': title_id,'userId': 'ui00001' ,'rating':rte})
+                    body : JSON.stringify({'titleId': title_id,'userId': userID ,'rating':rte})
         };
 
             console.log(request_option)
