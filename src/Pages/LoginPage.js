@@ -78,7 +78,7 @@ export default function LoginPage({ setToken }) {
         setIsLoggedIn(true);
         setIsLoading(false);
         setShowPassword(false);
-        sessionStorage.setItem('userID',userId)
+        localStorage.setItem('userID',userId)
       } catch (error) {
         console.log(error)
         console.log('brokey')
@@ -97,7 +97,7 @@ export default function LoginPage({ setToken }) {
     const handlePasswordVisibility = () => setShowPassword(!showPassword);
 
     const handleSignout = () => {setIsLoggedIn(false);
-                        sessionStorage.removeItem('userID')};
+                        localStorage.removeItem('userID')};
 
 
   

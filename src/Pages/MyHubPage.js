@@ -11,15 +11,21 @@ import {Button, ButtonGroup} from "@chakra-ui/react"
 import UserDetails from '../Components/UserDetails';
 import SavedDisplay from '../Components/SavedDisplay'; 
 import UserRecommendation from '../Components/UserRecommendation'; 
-import LoginPage from '../Pages/LoginPage';
+import useToken from '../Components/App/useToken';
 import { Redirect } from 'react-router-dom';
 
 
 export default function MyHubPage() {
 
-    console.log(sessionStorage.getItem('userID'))
+   const { token, getToken } = useToken();
+   
+   let ud =getToken()
 
-    let userID= sessionStorage.getItem('userID')
+    console.log(ud)
+
+    console.log(localStorage.getItem('userID'))
+
+    let userID= localStorage.getItem('userID')
 
     if (!userID)
         { return <Redirect push to="/login"/> }
