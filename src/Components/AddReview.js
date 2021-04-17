@@ -7,10 +7,14 @@ import {Link} from'react-router-dom';
 export default function  AddReview (id,cmnt){
     console.log(cmnt)
 
+    console.log(localStorage.getItem('userID'))
+
+    let userID= localStorage.getItem('userID')
+
     const request_option = {
                 method : 'POST',
                 headers: {'Content-Type': 'application/json'},
-                body : JSON.stringify({"titleId": id, "userId": "ui00001", "userComment": cmnt})
+                body : JSON.stringify({"titleId": id, "userId": userID, "userComment": cmnt})
     };
 
         console.log(request_option)

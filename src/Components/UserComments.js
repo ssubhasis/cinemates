@@ -11,12 +11,13 @@ export default class UserComments extends React.Component{
           title_id : this.props.id,
           comments : [],
           del_comnt : [],
-          cmnt:''
+          cmnt:'',
+          userID : localStorage.getItem('userID')
         };
        //this.handleDelete = this.handleDelete.bind(this);
       }
 
-
+  
 
       getComments() {
         console.log(this.state.title_id)
@@ -39,7 +40,7 @@ export default class UserComments extends React.Component{
       }
 
       handleDelete(title_id,cmnt_id){
-        console.log(title_id,cmnt_id)
+        console.log(title_id,cmnt_id,this.state.userID)
         let res = DeleteComment(title_id,cmnt_id)
         console.log(res)
         if (res === true)
@@ -53,10 +54,11 @@ export default class UserComments extends React.Component{
 
 
       updateComment(id,cmnt, cmnt_id){
+        console.log(this.state.userID)
         const request_option = {
           method : 'POST',
           headers: {'Content-Type': 'application/json'},
-          body : JSON.stringify({"titleId": id, "userId": "ui00001", "userComment": this.state.cmnt, 'comment_seq': cmnt_id})
+          body : JSON.stringify({"titleId": id, "userId": this.state.userID, "userComment": this.state.cmnt, 'comment_seq': cmnt_id})
         };
 
         
@@ -66,6 +68,11 @@ export default class UserComments extends React.Component{
          
            console.log(cmnt)
       }
+
+      handleError(){
+        console.log("Error!! User not authorized")
+         //"Error!! User not authorized"
+      } 
 
       render(){
         console.log(this.state)
@@ -84,9 +91,15 @@ export default class UserComments extends React.Component{
             <EditableInput />
           </Editable>
 
-           <Button  onClick={() => {this.updateComment(this.state.title_id, cmnt.user_comment ,cmnt.comment_seq) }}> Save</Button><br />
-            
-            <Button onClick={() => { this.handleDelete(this.state.title_id,cmnt.comment_seq) }} > Delete </Button> 
+           <Button  onClick={() => {
+             if (cmnt.user_id === this.state.userID)
+              this.updateComment(this.state.title_id, cmnt.user_comment ,cmnt.comment_seq) 
+              else this.handleError()
+              }}> Save</Button><br />
+            <Button onClick={() => { 
+              if (cmnt.user_id === this.state.userID)
+                this.handleDelete(this.state.title_id,cmnt.comment_seq) 
+              else this.handleError()}} > Delete </Button> 
            </Box>
         </div>
 

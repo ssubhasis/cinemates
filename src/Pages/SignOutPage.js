@@ -7,6 +7,7 @@ export default function SignOutPage() {
 
     const { token, setToken, removeToken } = useToken();
 
+
     if(!token) {
         ;
         // return <Login setToken={setToken} />
@@ -15,7 +16,7 @@ export default function SignOutPage() {
     }else{
         // setToken(null);
         //console.log(sessionStorage.getItem('userID'));
-        sessionStorage.removeItem('userID');
+        localStorage.setItem('userID',null);
         //console.log(sessionStorage.getItem('userID'));
         removeToken();
 
