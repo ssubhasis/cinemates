@@ -40,11 +40,15 @@ export default class UserComments extends React.Component{
       }
 
       handleDelete(title_id,cmnt_id){
-        console.log(title_id,cmnt_id,this.state.userID)
+        //console.log(title_id,cmnt_id,this.state.userID)
         let res = DeleteComment(title_id,cmnt_id)
-        console.log(res)
-        if (res === true)
-          window.location.reload();
+        //console.log(res)
+        this.setState({
+          comments:this.state.comments.filter(x => x.comment_seq !== cmnt_id)
+        })
+
+       // if (res === true)
+       // location.reload();
       } 
 
       handleChangeComment= (e) => {
@@ -71,7 +75,7 @@ export default class UserComments extends React.Component{
 
       handleError(){
         console.log("Error!! User not authorized")
-        alert("Error! User not authroized");
+        alert("Error! User not authorized");
          //"Error!! User not authorized"
       } 
 
@@ -97,7 +101,7 @@ export default class UserComments extends React.Component{
               this.updateComment(this.state.title_id, cmnt.user_comment ,cmnt.comment_seq) 
               else this.handleError()
               }}> Save</Button><br />
-            <Button onClick={() => { 
+            <Button onClick={() => {  
               if (cmnt.user_id === this.state.userID)
                 this.handleDelete(this.state.title_id,cmnt.comment_seq) 
               else this.handleError()}} > Delete </Button> 

@@ -18,11 +18,14 @@ export default function  AddReview (id,cmnt){
     };
 
         console.log(request_option)
+        
      fetch('http://18.206.168.148:5000/movie/post-comment',request_option)
         .then(res => res.json())
-        .then((resp) => {console.log(resp)});
-        //force update needed 
-        window.location.href = "/#/movie/"+id ;
+        .then((resp) => {console.log(resp)})
+        .then(window.location.href = "/#/movie/"+id)
+        .then(window.location.reload());
+        //force update needed
+       
         return false;
   
       

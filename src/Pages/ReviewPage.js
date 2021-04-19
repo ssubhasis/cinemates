@@ -48,7 +48,7 @@ export default function ReviewPage() {
                             placeholder="Here is a sample placeholder" ></Textarea>
                     {console.log(value)}
                        <Button  margin="20px" backgroundColor="orange.500" 
-                       onClick={() => { AddReview(id,value) }}>
+                       onClick={() => { AddReview(id,value) } } >
                            Add Review</Button>
                    </Flex>
                 
