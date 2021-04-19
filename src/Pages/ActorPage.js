@@ -1,6 +1,8 @@
 import React from 'react';
 import Actorinfo from '../Components/Actorinfo'; 
 import { useParams } from "react-router";
+import ActorBarChartinfo from '../Components/ActorBarChartinfo'
+
 
 
 export default function ActorPage() {
@@ -13,6 +15,7 @@ export default function ActorPage() {
         <div>
             <h1>Actor Page</h1>
             <Actorinfo id={id} ></Actorinfo>
+            <ActorBarChartinfo id={id} ></ActorBarChartinfo >
         </div>
     );
 }

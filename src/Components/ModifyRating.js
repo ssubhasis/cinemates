@@ -10,7 +10,7 @@ export default function  ModifyRaying (title_id,rte){
         const request_option = {
                     method : 'POST',
                     headers: {'Content-Type': 'application/json'},
-                    body : JSON.stringify({'titleId': title_id,'userId': userID ,'rating':rte})
+                    body : JSON.stringify({'titleId': title_id,'userId': userID ,'rating':rte}) //true or false added for saving here 
         };
 
             console.log(request_option)

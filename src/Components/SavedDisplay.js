@@ -1,4 +1,4 @@
-import React , {Component} from 'react';
+import React, {Component} from 'react';
 import {
     Grid,
     GridItem,
@@ -9,22 +9,25 @@ import {
 
 
 class SavedDisplay extends React.Component {
-   
+
 
     render() {
         return (
 
+
             <div>
+            
+                     <Text fontSize="3xl" color="white" marginTop="30px" textAlign="left"  >
+                       Saved Movies
+                    </Text>
+                    
+                <Grid borderRadius="lg" bg="primary.500"  marginRight="5%" paddingBottom="20px"  width="94%">
 
-
-                <Grid borderRadius="lg" bg="primary.500"
-                    width="100%">
-                         <h1 style={{color:"white"}}>Saved Movie</h1>
-                        <h1 style={{color:"white"}}>Place holder for saved movies</h1>
-                  
-
-                        
-                 </Grid>
+                   
+                    <h1 style={
+                        {color: "white"}
+                    }>Place holder for saved movies</h1>
+                </Grid>
 
 
             </div>
@@ -35,7 +38,3 @@ class SavedDisplay extends React.Component {
 }
 
 export default SavedDisplay;
-
-
-
-

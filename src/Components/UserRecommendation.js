@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
 import {
     Grid,
+    Wrap,
     GridItem,
     Box,
     Text,
-    Center
+    Center,
+    Flex
 } from "@chakra-ui/react";
 import 'swiper/swiper.scss';
 import 'swiper/components/navigation/navigation.scss';
@@ -37,6 +39,11 @@ export default class UserRecommendation extends React.Component {
         })
     }
 
+    handleClick(movie) { // e.preventDefault();
+        window.location.href = "/#/movie/" + movie.titleId;
+        console.log(movie);
+    }
+
 
     componentDidMount() {
         this.getRecommend();
@@ -48,11 +55,23 @@ export default class UserRecommendation extends React.Component {
 
 
         return (
-            <div>
-                <Grid borderRadius="lg" bg="primary.500" templateColumns="repeat(4, 1fr)"
+            <div >
+            
+                     <Text fontSize="3xl" color="white"  textAlign="left" paddingLeft="5%" >
+                        My Recommendations</Text>
+                    
+                <Wrap borderRadius="lg" bg="primary.500" templateColumns="repeat(4, 1fr)"
                     gap={6}
                     p="30px"
-                    width="100%">
+                    justify="center"
+                    marginLeft="5%"
+                    marginRight="5%"
+                    marginBottom="5%"
+                    width="90%"
+                    height ="500px" 
+                    overflowY="scroll"
+                  >
+
 
                 {/* <Swiper
                     spaceBetween={50}
@@ -68,19 +87,37 @@ export default class UserRecommendation extends React.Component {
                     {this.state.recommend.map((movie, index) => (
                        /*  <>
                     <SwiperSlide key={movie}> */
-                        <Box bg="white" p="5px" borderRadius="md">
+                        <Box bg="primary.500" p="5px" borderRadius="md" w="15rem"
+                        onClick={
+                            () => this.handleClick(movie)
+                    } >
+
+                            
                             <div key={
                                 movie.titleId
                             }>
+                                    <Center>
                                 <img src={
                                         movie.cover_url
                                     }
-                                    width="101"
-                                    height="150"/>
+                                    style={
+                                        {
+
+                                            width: "50%",
+                                            height: "auto",
+                                            borderRadius: "5%"
+
+                                        }
+
+                                    }/>
+                        </Center>
+                            <Text color="white">
                                 {
                                     movie.primaryTitle
                                 }
-                                <p>Rated {
+                                </Text>
+                                <p style={
+                                        {color: "white"}} >Rated {
                                     movie.avgRating
                                 }
                                     by {
@@ -101,7 +138,7 @@ export default class UserRecommendation extends React.Component {
                     ))                  
                 }
                     {/* </Swiper> */}
-        </Grid>
+        </Wrap>
 
             </div>
         );
