@@ -71,6 +71,7 @@ export default class UserComments extends React.Component{
 
       handleError(){
         console.log("Error!! User not authorized")
+        alert("Error! User not authroized");
          //"Error!! User not authorized"
       } 
 
