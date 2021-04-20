@@ -149,7 +149,7 @@ def setUserLiking():
         else:
             rating = request.json['rating']
         if not 'liking' in request.json:
-            liking = None
+            liking = 0
         else:
             liking = request.json['liking']
 
