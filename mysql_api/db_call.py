@@ -163,11 +163,12 @@ class getDbDetails():
         return result
     
 
-    def setUserLiking(self, titleId, userId, rating):
+    def setUserLiking(self, titleId, userId, rating, liking):
 
         self.__connect__()
 
-        args = [titleId, userId, rating]
+        args = [titleId, userId, rating, liking]
+        # args = [titleId, userId, rating]
         result = self.cursor.callproc('p_handle_user_rating', args)
         self.connection.commit()
 
@@ -176,6 +177,43 @@ class getDbDetails():
 
         return result
     
+
+    def getMoviesSavedByUserId(self, userId):
+        
+        self.__connect__()
+        query = """select m.title_id, m.primary_title, m.avg_rating, m.num_of_votes,
+        u.user_rating, u.liking
+        from movies m, user_liking u 
+        where m.title_id = u.title_id
+        and u.user_id ='%s' and u.liking = 1;""" %userId
+
+        self.cursor.execute(query)
+
+        result = self.cursor.fetchall()
+
+        self.cursor.close()
+        self.__disconnect__()
+
+        return result 
+
+
+    def getMovieSavedByUserId(self, userId, titleId):
+        
+        self.__connect__()
+        query = """select m.title_id, m.primary_title, m.avg_rating, m.num_of_votes,
+        u.user_rating, u.liking
+        from movies m, user_liking u 
+        where m.title_id = u.title_id
+        and u.user_id ='"""+userId+"""' and m.title_id = '"""+titleId+"""';"""
+
+        self.cursor.execute(query)
+
+        result = self.cursor.fetchall()
+
+        self.cursor.close()
+        self.__disconnect__()
+
+        return result 
 
     def getUserMovieRecommendationById(self,userID):
 
@@ -309,4 +347,4 @@ class getDbDetails():
 
 # getDbDetails().getUserMovieRecommendationById('ui00001')
 # getDbDetails().getActorInfoById('nm0000138')
-
+# getDbDetails().setUserLiking('tt0035423', 'ui00001', 4, None)

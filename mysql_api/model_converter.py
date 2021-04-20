@@ -64,6 +64,25 @@ class modelConverter():
 
         return self.json_object
 
+
+    def toMoviesBasicUserLiking(self,rows):
+        # ia = IMDb()
+        for row in rows:
+            d = collections.OrderedDict()
+            d["_id"] = row[0]
+            d["titleId"] = row[0]
+            d["primaryTitle"] = row[1]
+            d["avgRating"] = row[2]
+            d["numOfVotes"] = row[3]
+            d["userRating"] = row[4]
+            d["userSaved"] = row[5]
+
+            self.objects_list.append(d)
+        
+        self.json_object = json.dumps(self.objects_list)
+
+        return self.json_object
+
     def toActorBasic(self,rows):
 
         for row in rows:
@@ -71,7 +90,6 @@ class modelConverter():
             d["_id"]=row[0]
             d["_name"]=row[1]
             self.objects_list.append(d)
-
         self.json_object=json.dumps(self.objects_list)
 
         return self.json_object
@@ -153,14 +171,15 @@ class modelConverter():
 
 
     def toActorChartInfoBasic(self,rows):
-
+        self.json_object = "dummy"
         for row in rows:
             d=collections.OrderedDict()
-            d["release_year"] = row[0]
+            d["release_year"] = int(row[0])
             d["avg_rating"] = row[1]
             d["num_votes"] = row[2]
             self.objects_list.append(d)
 
+        self.objects_list= sorted(self.objects_list, key=lambda d: d["release_year"])
         self.json_object=json.dumps(self.objects_list)
 
         return self.json_object

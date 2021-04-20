@@ -122,7 +122,7 @@ http://18.206.168.148:5000/person/`<nconst`>/external-image
 http://18.206.168.148:5000/person/nm0001392/external-image
 
 
-## post/set User Liking in MySQL
+## post/set User Rating in MySQL
 
 https://teampolaris.web.illinois.edu/modify-user-liking
 
@@ -131,6 +131,16 @@ Request Body:
 {"titleId":"tt0035423",
 "userId":"ui00001",
 "rating":4}
+
+## post/set User Liking in MySQL
+
+https://teampolaris.web.illinois.edu/modify-user-liking
+
+Request Body:
+
+{"titleId":"tt0035423",
+"userId":"ui00001",
+"liking":1}
 
 
 ## post api - get user loging in MySQL
@@ -201,3 +211,24 @@ http://18.206.168.148:5000/movie/delete-comment
 
 {"titleId": "tt9243946",
 "comment_seq": 3}
+
+
+## get movie saved by user id from MySQL(internal)
+
+https://teampolaris.web.illinois.edu/movies-saved-by-user-id/`<user id>`
+
+https://teampolaris.web.illinois.edu/movies-saved-by-user-id/ui00001
+
+
+## get movie saved by user id from MongoDB
+
+http://18.206.168.148:5000/movies-saved-by-user-id/`<user id>`
+
+http://18.206.168.148:5000/movies-saved-by-user-id/ui00001
+
+
+## get movie rating and liking by user id
+
+https://teampolaris.web.illinois.edu/movie-rated-by-user-id/`<user id>`/`<titleId`>
+
+https://teampolaris.web.illinois.edu/movie-rated-by-user-id/ui00001/tt1070874

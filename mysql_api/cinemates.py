@@ -140,20 +140,53 @@ def getMovieInfoById(title_id):
 def setUserLiking():
 
     try:
-        if not request.json or not 'titleId' in request.json or not 'userId' in request.json or not 'rating' in request.json:
+        if not request.json or not 'titleId' in request.json or not 'userId' in request.json or (not 'rating' in request.json and not 'liking' in request.json):
             abort(400)
         titleId = request.json['titleId']
         userId = request.json['userId']
-        rating = request.json['rating']
+        if not 'rating' in request.json:
+            rating = None
+        else:
+            rating = request.json['rating']
+        if not 'liking' in request.json:
+            liking = None
+        else:
+            liking = request.json['liking']
 
         db = getDbDetails()
-        result = db.setUserLiking(titleId, userId, rating)
+        result = db.setUserLiking(titleId, userId, rating,liking)
 
         result = db.getMovieInfoById(titleId)
         result = modelConverter().toMovieInfo(result)
         res =  make_response(str(result),HTTPStatus.OK)
     except Exception as e:
         res = "Could not update the movie - " + str(e)
+        res =  make_response(str(res),HTTPStatus.INTERNAL_SERVER_ERROR) 
+    return res
+
+
+@app.route("/movies-saved-by-user-id/<user_id>", methods=['GET'])
+@cross_origin()
+def getMoviesSavedByUserId(user_id):
+    try:
+        result = getDbDetails().getMoviesSavedByUserId(user_id)
+        result = modelConverter().toMoviesBasicUserLiking(result)            
+        res =  make_response(result,HTTPStatus.OK)
+    except Exception as e:
+        res = "Could not get the movies - " + str(e)
+        res =  make_response(str(res),HTTPStatus.INTERNAL_SERVER_ERROR) 
+    return res
+
+
+@app.route("/movie-rated-by-user-id/<user_id>/<title_id>", methods=['GET'])
+@cross_origin()
+def getMovieSavedByUserId(user_id, title_id):
+    try:
+        result = getDbDetails().getMovieSavedByUserId(user_id, title_id)
+        result = modelConverter().toMoviesBasicUserLiking(result)            
+        res =  make_response(result,HTTPStatus.OK)
+    except Exception as e:
+        res = "Could not get the movies - " + str(e)
         res =  make_response(str(res),HTTPStatus.INTERNAL_SERVER_ERROR) 
     return res
 

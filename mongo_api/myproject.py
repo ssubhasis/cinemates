@@ -60,6 +60,7 @@ def getMovieInfoByID(titleId):
         movieInfo = getExternalAPI().getMovieInfoByID(titleId)
         movieInfo["cover_url"] = mydoc["cover_url"]
         movieInfo["full_size_url"] = mydoc["full_size_url"]
+        # movieInfo["user_comments"] = mydoc["user_comments"]
         res =  make_response(movieInfo,HTTPStatus.OK)
     except Exception as e:
         res = "Could not get the movies - " + str(e)
@@ -244,6 +245,27 @@ def setRemoveUserMovieComments():
     except Exception as e:
         res = "Could not delete user comments " + str(e)
         res =  make_response(str(res),HTTPStatus.INTERNAL_SERVER_ERROR) 
+    return res
+
+
+@app.route("/movies-saved-by-user-id/<userId>",methods=['GET'])
+@cross_origin()
+def getMoviesSavedByUserId(userId):
+    
+    try:
+        titles = ".."
+        result,titles = getExternalAPI().getUserSavedMovies(userId)
+        moviesList = getMongoDbDetails().getMovies(titles)
+        moviesList = list(moviesList)
+        result = dumps(moviesList)
+
+        # result = dumps(result)
+        res =  make_response(result,HTTPStatus.OK)
+        
+    except Exception as e:
+        res = "Could not get the movies - " + str(e) + str(titles)
+        res =  make_response(str(res),HTTPStatus.INTERNAL_SERVER_ERROR) 
+
     return res
 
 
