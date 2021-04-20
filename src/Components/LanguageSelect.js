@@ -1,6 +1,8 @@
 import React from 'react';
 import {
     Grid,
+    Box,
+    Portal,
     GridItem,
     Input,
     Stack,
@@ -18,13 +20,12 @@ export default function LanguageSelect(props){
         props.onSelectRegion(region);           
     }
     return (
-        <div> 
-            <Grid bg="primary.200" borderRadius="lg" padding="10px" margin="10px">
-               <GridItem overflowY="scroll" maxHeight="15vh">
+            
+            <Grid bg="primary.200" borderRadius="lg" padding="10px" margin="10px" h="15vh" overflowY="scroll" minHeight="1vh">
                 <h2>Region</h2>
-                <RadioGroup onChange={handleRegionChange} >
-                        <Stack direction="column">
+                <RadioGroup onChange={handleRegionChange}>
 
+                        <Stack direction="column">
                         <Radio value="US">US</Radio>
                         <Radio value="GB">GB</Radio>
                         <Radio value="XWW">XWW</Radio>
@@ -84,8 +85,6 @@ export default function LanguageSelect(props){
                         <Radio value="TH">TH</Radio>
                         </Stack>
                 </RadioGroup>
-                </GridItem>
                 </Grid>
-        </div>
     );
 }

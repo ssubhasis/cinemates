@@ -66,15 +66,14 @@ class SearchPage extends React.Component{
 
     render (){
     return (
-        <div> 
             <Grid h="100%" templateColumns="auto 1fr"
                 gap={8}
-                backgroundColor="primary.100">
+                backgroundColor="primary.100" >
     
    
                 
                 <Flex direction="column" bg="primary.500" padding="20px" marginTop="20px"
-                       marginBottom="20px" marginLeft="20px"   borderRadius= "5%" >
+                       marginBottom="20px" marginLeft="20px"   borderRadius= "5%">
                 <AdvancedSearch onSearchChange={this.handleSearch}></AdvancedSearch>
                 <GenreSelect onSelectGenre={this.handleGenre}></GenreSelect>
                 <LanguageSelect onSelectRegion={this.handleRegion}></LanguageSelect>
@@ -94,7 +93,9 @@ class SearchPage extends React.Component{
                         width="95%"
                        marginTop="20px"
                        marginBottom="20px"
-                       borderRadius= "2%">
+                       borderRadius= "2%"
+                       >
+
 
                 
                    
@@ -153,7 +154,6 @@ class SearchPage extends React.Component{
                    
                     
             </Grid>
-        </div>
     );
     }
 }export default SearchPage

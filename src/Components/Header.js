@@ -75,7 +75,7 @@ const MenuItem = ({ children, isLast, to = "/", ...rest }) => {
   );
 };
 
-
+//add rerender here 
 const MenuLinks = ({ isOpen }) => {
   const { token, setToken } = useToken();
   let enableLoging;

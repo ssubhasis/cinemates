@@ -54,7 +54,7 @@ class SearchBarRender extends Component {
 
         <div>
 
-            <Text style={{color: "white", textAlign:"left"}}>Search By</Text>
+            <Text  fontSize="2xl"  color="white" paddingTop="10px">Search By</Text>
             <Button onClick = {this.handleClick.bind(this)} bgColor="primary.200" variant="solid" size="lg" marginRight="2%"> 
                 Movie
             </Button>
