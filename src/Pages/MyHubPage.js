@@ -55,7 +55,7 @@ export default function MyHubPage() {
 
                 <GridItem colSpan={3}
                     bg="primary.100">
-                        <SavedDisplay/> 
+                        <SavedDisplay userID={userID} > hi</SavedDisplay> 
                     </GridItem>
 
                 <GridItem colSpan={4}
