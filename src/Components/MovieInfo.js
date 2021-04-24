@@ -35,6 +35,7 @@ export default class MovieInfo extends React.Component{
           return (
       <div>
           
+          
         {this.state.movieinfo.map((movie, index) => (
         
         <div key={movie.titleId}>

@@ -26,8 +26,9 @@ import { useHistory } from "react-router-dom";
 import Login from '../Components/Login/Login';
 import LoginPage from '../Pages/LoginPage';
 import useToken from '../Components/App/useToken';
- import ModifyRaying from '../Components/ModifyRating';
-
+import ModifyRaying from '../Components/ModifyRating';
+import SaveMovie from '../Components/SaveMovie'; 
+import { Switch } from "@chakra-ui/react"; 
 
 export default function MoviePage() {
 
@@ -71,11 +72,19 @@ export default function MoviePage() {
             </Flex>    */}
 
 
+
+
             <Flex direction="column" bg="primary.500" padding="5px" >
                 <MovieInfo id={id} ></MovieInfo>
             </Flex>
 
+
             <Flex direction="row" bg="primary.500" padding="5px" >
+           
+  
+            <Switch colorScheme="orange" size="lg"  defaultChecked="true"/>
+
+
                  <Button onClick={handleClick}>Write a Review</Button>  
                  <Heading  as="h5" size="sm" color = "white"> Rate the Movie</Heading>
                  <Select value={value}
