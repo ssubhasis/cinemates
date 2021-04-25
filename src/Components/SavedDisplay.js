@@ -3,6 +3,7 @@ import {
     Grid,
     GridItem,
     Box,
+    Wrap, 
     Text,
     Center
 } from "@chakra-ui/react";
@@ -43,8 +44,17 @@ export default  class SavedDisplay extends React.Component {
                      <Text fontSize="3xl" color="white" marginTop="30px" textAlign="left"  >
                        Saved Movies 
                     </Text>
-                    
-                <Grid borderRadius="lg" bg="primary.500"  marginRight="5%" paddingBottom="20px"  width="94%">
+                 <Wrap borderRadius="lg" bg="primary.500" templateColumns="repeat(4, 1fr)"
+                    gap={6}
+                    p="30px"
+                    justify="center"
+                    marginLeft="5%"
+                    marginRight="5%"
+                    marginBottom="5%"
+                    width="90%"
+                    height ="500px" 
+                    overflowY="scroll"> 
+                <Box bg="primary.500" p="5px" borderRadius="md" w="15rem">
                 {this.state.savedmovie.map((movie, index) => (
                 //    <Box bg="primary.500" p="5px" borderRadius="md" w="15rem" >                    
                     <div key={
@@ -57,7 +67,7 @@ export default  class SavedDisplay extends React.Component {
                                style={
                                    {
 
-                                       width: "auto%",
+                                       width: "auto",
                                        height: "auto",
                                        borderRadius: "5%"
 
@@ -83,7 +93,8 @@ export default  class SavedDisplay extends React.Component {
 
                     ))
     }
-                </Grid>
+                </Box>
+                </Wrap>  
 
 
             </div>

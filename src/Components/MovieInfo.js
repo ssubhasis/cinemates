@@ -45,11 +45,11 @@ export default class MovieInfo extends React.Component{
           </Heading>
           <Box bg="white" p="5px" borderRadius="md">
             <Text textAlign = "left" >Rated {movie.avgRating} by {movie.numOfVotes} viewers.</Text>
-            <Text textAlign = "left" >Directed by :{movie.Director}</Text>
-            <Text textAlign = "left" >Actors:{movie.Actors}</Text>
-            <Text textAlign = "left" >Writers :{movie.Writer}</Text>
-            <Text textAlign = "left" >Producers :{movie.Producer}</Text>
-            <Text textAlign = "left" >Music :{movie.composer}</Text>
+            <Text textAlign = "left" >Directed by: {movie.Director} </Text>
+            <Text textAlign = "left" >Actors: {movie.Actors} </Text>
+            <Text textAlign = "left" >Writers: {movie.Writer} </Text>
+            <Text textAlign = "left" >Producers: {movie.Producer} </Text>
+            <Text textAlign = "left" >Music: {movie.composer} </Text>
             
           {/* { <p>Rated {movie.avgRating} by {movie.numOfVotes} viewers.</p> } */}
           </Box>  
