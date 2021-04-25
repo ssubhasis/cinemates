@@ -20,44 +20,13 @@ import ErrorMessage from '../Components/LoginError';
 
 
 export default function LoginPage({ setToken }) {
-    // const [userId, setUserId] = useState('');
-    // const [password, setPassword] = useState('');
-    // const [token, setToken] = useState('');
+  
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
 
-    // const [userName, setUserName] = useState('');    
-    // const [userEmail, setUserEmail] = useState('');
-    // const [userBirthYear, setUserBirthYear] = useState('');
-  
-    // const handleSubmit = async event => {
-    //   event.preventDefault();
-  
-    //   setIsLoading(true);
-  
-    //   try {
-    //     await userLogin({ userId, password })
-    //     .then(response => {
-    //       setUserName(response.userName);
-    //       setUserEmail(response.userEmail);
-    //       setUserBirthYear(response.userBirthYear);
-    //       console.log('The response is: ' + response);
-    //     });
-    //     setIsLoggedIn(true);
-    //     setIsLoading(false);
-    //     setShowPassword(false);
-    //   } catch (error) {
-    //       console.log(error)
-    //       console.log('brokey')
-    //     setError('Invalid username or password');
-    //     setIsLoading(false);
-    //     setUserId('');
-    //     setPassword('');
-    //     setShowPassword(false);
-    //   }
-    // };
+    
   
     const [userId, setUserId] = useState();
     const [password, setPassword] = useState();
@@ -102,7 +71,7 @@ export default function LoginPage({ setToken }) {
 
   
     return (
-      <Flex width="full" align="center" justifyContent="center">
+      <Flex width="full" align="center" justifyContent="center" paddingTop="10%" >
   
         <Box
           p={8}
@@ -110,6 +79,8 @@ export default function LoginPage({ setToken }) {
           borderWidth={1}
           borderRadius={8}
           boxShadow="lg"
+          bg="primary.500"
+        
         >
           {isLoggedIn ? (
             <Box textAlign="center">
@@ -127,13 +98,13 @@ export default function LoginPage({ setToken }) {
           ) : (
             <div>
               <Box textAlign="center">
-                <Heading>Login</Heading>
+                <Heading   color="white" >Login</Heading>
               </Box>
               <Box my={4} textAlign="left">
                 <form onSubmit={handleSubmit}>
                   {error && <ErrorMessage message={error} />}
                   <FormControl isRequired>
-                    <FormLabel>User ID</FormLabel>
+                    <FormLabel   color="white" >User ID</FormLabel>
                     <Input
                       type="text"
                       placeholder="ui0001"
@@ -142,7 +113,7 @@ export default function LoginPage({ setToken }) {
                     />
                   </FormControl>
                   <FormControl isRequired mt={6}>
-                    <FormLabel>Password</FormLabel>
+                    <FormLabel   color="white" >Password</FormLabel>
                     <InputGroup>
                       <Input
                         type={showPassword ? 'text' : 'password'}
@@ -154,6 +125,7 @@ export default function LoginPage({ setToken }) {
                         <Button
                           h="1.5rem"
                           size="sm"
+                          
                           onClick={handlePasswordVisibility}
                         >
                           {showPassword ? (
@@ -166,10 +138,12 @@ export default function LoginPage({ setToken }) {
                     </InputGroup>
                   </FormControl>
                   <Button
-                    variantColor="teal"
-                    variant="outline"
+                    
+                    colorScheme="orange"
+                    variant="solid"
                     type="submit"
                     width="full"
+                    
                     mt={4}
                   >
                     {isLoading ? (
