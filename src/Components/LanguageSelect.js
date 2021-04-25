@@ -8,83 +8,86 @@ import {
     Stack,
     Text,
     Center,
-    Radio,
-    RadioGroup
+
+    optionGroup,
+    Select
 } from "@chakra-ui/react"
 
 
 export default function LanguageSelect(props){
    
+    
+
     const handleRegionChange = (region) => {
         console.log(region)
-        props.onSelectRegion(region);           
+        props.onSelectRegion(region.target.value);           
     }
     return (
             
             <Grid bg="primary.200" borderRadius="lg" padding="10px" margin="10px" h="15vh" overflowY="scroll" minHeight="1vh">
                 <h2>Region</h2>
-                <RadioGroup onChange={handleRegionChange}>
-
-                        <Stack direction="column">
-                        <Radio value="US">US</Radio>
-                        <Radio value="GB">GB</Radio>
-                        <Radio value="XWW">XWW</Radio>
-                        <Radio value="CA">CA</Radio>
-                        <Radio value="DE">DE</Radio>
-                        <Radio value="RU">RU</Radio>
-                        <Radio value="FR">FR</Radio>
-                        <Radio value="IN">IN</Radio>
-                        <Radio value="JP">JP</Radio>
-                        <Radio value="PL">PL</Radio>
-                        <Radio value="BR">BR</Radio>
-                        <Radio value="ES">ES</Radio>
-                        <Radio value="GR">GR</Radio>
-                        <Radio value="IT">IT</Radio>
-                        <Radio value="AU">AU</Radio>
-                        <Radio value="HU">HU</Radio>
-                        <Radio value="AR">AR</Radio>
-                        <Radio value="TR">TR</Radio>
-                        <Radio value="PT">PT</Radio>
-                        <Radio value="FI">FI</Radio>
-                        <Radio value="MX">MX</Radio>
-                        <Radio value="BG">BG</Radio>
-                        <Radio value="SE">SE</Radio>
-                        <Radio value="RS">RS</Radio>
-                        <Radio value="TW">TW</Radio>
-                        <Radio value="RO">RO</Radio>
-                        <Radio value="UA">UA</Radio>
-                        <Radio value="LT">LT</Radio>
-                        <Radio value="CN">CN</Radio>
-                        <Radio value="DK">DK</Radio>
-                        <Radio value="NO">NO</Radio>
-                        <Radio value="CZ">CZ</Radio>
-                        <Radio value="HR">HR</Radio>
-                        <Radio value="HK">HK</Radio>
-                        <Radio value="IL">IL</Radio>
-                        <Radio value="IE">IE</Radio>
-                        <Radio value="LV">LV</Radio>
-                        <Radio value="AT">AT</Radio>
-                        <Radio value="NL">NL</Radio>
-                        <Radio value="EE">EE</Radio>
-                        <Radio value="SI">SI</Radio>
-                        <Radio value="CL">CL</Radio>
-                        <Radio value="KR">KR</Radio>
-                        <Radio value="VN">VN</Radio>
-                        <Radio value="NZ">NZ</Radio>
-                        <Radio value="PE">PE</Radio>
-                        <Radio value="UY">UY</Radio>
-                        <Radio value="CO">CO</Radio>
-                        <Radio value="SK">SK</Radio>
-                        <Radio value="IR">IR</Radio>
-                        <Radio value="PH">PH</Radio>
-                        <Radio value="BE">BE</Radio>
-                        <Radio value="ID">ID</Radio>
-                        <Radio value="CH">CH</Radio>
-                        <Radio value="XEU">XEU</Radio>
-                        <Radio value="VE">VE</Radio>
-                        <Radio value="TH">TH</Radio>
-                        </Stack>
-                </RadioGroup>
+                <Select onChange={handleRegionChange} 
+                 placeholder="Select option"  >
+                        
+                        <option value="US">US</option>
+                        <option value="GB">GB</option>
+                        <option value="XWW">XWW</option>
+                        <option value="CA">CA</option>
+                        <option value="DE">DE</option>
+                        <option value="RU">RU</option>
+                        <option value="FR">FR</option>
+                        <option value="IN">IN</option>
+                        <option value="JP">JP</option>
+                        <option value="PL">PL</option>
+                        <option value="BR">BR</option>
+                        <option value="ES">ES</option>
+                        <option value="GR">GR</option>
+                        <option value="IT">IT</option>
+                        <option value="AU">AU</option>
+                        <option value="HU">HU</option>
+                        <option value="AR">AR</option>
+                        <option value="TR">TR</option>
+                        <option value="PT">PT</option>
+                        <option value="FI">FI</option>
+                        <option value="MX">MX</option>
+                        <option value="BG">BG</option>
+                        <option value="SE">SE</option>
+                        <option value="RS">RS</option>
+                        <option value="TW">TW</option>
+                        <option value="RO">RO</option>
+                        <option value="UA">UA</option>
+                        <option value="LT">LT</option>
+                        <option value="CN">CN</option>
+                        <option value="DK">DK</option>
+                        <option value="NO">NO</option>
+                        <option value="CZ">CZ</option>
+                        <option value="HR">HR</option>
+                        <option value="HK">HK</option>
+                        <option value="IL">IL</option>
+                        <option value="IE">IE</option>
+                        <option value="LV">LV</option>
+                        <option value="AT">AT</option>
+                        <option value="NL">NL</option>
+                        <option value="EE">EE</option>
+                        <option value="SI">SI</option>
+                        <option value="CL">CL</option>
+                        <option value="KR">KR</option>
+                        <option value="VN">VN</option>
+                        <option value="NZ">NZ</option>
+                        <option value="PE">PE</option>
+                        <option value="UY">UY</option>
+                        <option value="CO">CO</option>
+                        <option value="SK">SK</option>
+                        <option value="IR">IR</option>
+                        <option value="PH">PH</option>
+                        <option value="BE">BE</option>
+                        <option value="ID">ID</option>
+                        <option value="CH">CH</option>
+                        <option value="XEU">XEU</option>
+                        <option value="VE">VE</option>
+                        <option value="TH">TH</option>
+                        
+                </Select>
                 </Grid>
     );
 }

@@ -40,10 +40,16 @@ class HighestRatedMovies extends React.Component {
             <div>
                 <Center>
 
-                    <Wrap borderRadius="lg" bg="primary.500"
-                        gap={6}
-                        p="30px"
-                        width="90%">
+                    <Wrap borderRadius="lg" bg="primary.500" templateColumns="repeat(4, 1fr)"
+                    gap={6}
+                    p="30px"
+                    justify="center"
+                    marginLeft="5%"
+                    marginRight="5%"
+                    marginBottom="5%"
+                    width="90%"
+                    height ="520px" 
+                    overflowY="scroll">
 
 
                         {

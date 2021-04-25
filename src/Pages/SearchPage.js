@@ -68,6 +68,7 @@ class SearchPage extends React.Component{
     return (
             <Grid h="100%" templateColumns="auto 1fr"
                 gap={8}
+                paddingBottom="20px"
                 backgroundColor="primary.100" >
     
    

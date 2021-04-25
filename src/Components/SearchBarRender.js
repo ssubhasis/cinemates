@@ -54,8 +54,8 @@ class SearchBarRender extends Component {
 
         <div>
 
-            <Text  fontSize="2xl"  color="white" paddingTop="10px">Search By</Text>
-            <Button onClick = {this.handleClick.bind(this)} bgColor="primary.200" variant="solid" size="lg" marginRight="2%"> 
+            <Text  fontSize="2xl"  color="white" paddingTop="20px">Search By</Text>
+            <Button onClick = {this.handleClick.bind(this)} bgColor="primary.200" variant="solid" size="lg" marginRight="2%" paddingTop="10px"> 
                 Movie
             </Button>
 

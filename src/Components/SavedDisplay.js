@@ -54,9 +54,10 @@ export default  class SavedDisplay extends React.Component {
                     width="90%"
                     height ="500px" 
                     overflowY="scroll"> 
-                <Box bg="primary.500" p="5px" borderRadius="md" w="15rem">
+    
                 {this.state.savedmovie.map((movie, index) => (
-                //    <Box bg="primary.500" p="5px" borderRadius="md" w="15rem" >                    
+                //    <Box bg="primary.500" p="5px" borderRadius="md" w="15rem" >  
+                <Box bg="primary.500" p="5px" borderRadius="md" w="15rem">                  
                     <div key={
                            movie.titleId
                        }>
@@ -89,11 +90,11 @@ export default  class SavedDisplay extends React.Component {
                            }
                                viewers.</p>
                        </div>
-                 //  </Box>
+                   </Box>
 
                     ))
     }
-                </Box>
+    
                 </Wrap>  
 
 
