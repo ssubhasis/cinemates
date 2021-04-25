@@ -31,15 +31,17 @@ export default function MoviePage() {
     let {id} = useParams();
     let userID = localStorage.getItem('userID')
     let [isMovieSaved, setIsMovieSaved] = React.useState(false)
-    let [loadMovieSaved, setLoadMovieSaved] = React.useState("")
+    
 
-    console.log(id);
+    //console.log(id);
 
     const history = useHistory();
     const [value, setValue] = React.useState("")
    
     useEffect(() => {
         getMovieSavedStatus()
+        getMovieRatingStatus()
+
     });
 
 
@@ -59,28 +61,42 @@ export default function MoviePage() {
         setValue(Number(value.target.value))
         console.log(value.target.value)
         ModifyRaying(id, value.target.value)
+        console.log(value.target.value +"this is just the value being logged from handle change")
+        
     }
 
     //fetch the saved movies to keep saved status 
-    
     const getMovieSavedStatus =() => {
         let api = 'http://18.206.168.148:5000/movies-saved-by-user-id/' + userID
-        console.log(api)
+        //console.log(api)
         fetch(api)
           .then(response => response.json())
           .then(response => {
         let mapOfSavedMovies = response.map(({ titleId }) => titleId);
-        console.log('savedmovies')
-        console.log(mapOfSavedMovies)
+        
+        //console.log(mapOfSavedMovies)
           if (mapOfSavedMovies.includes(id)){
             setIsMovieSaved(true)
 
           }
           })
-
-          
-          
     }
+
+    //fetch rating of movie to save status
+    const getMovieRatingStatus = () => {
+        let api = "https://teampolaris.web.illinois.edu/movie-rated-by-user-id/" + userID + "/"+ id
+        fetch(api)
+          .then(response => response.json())
+          .then(response => {
+            setValue(response.userRating)
+
+           // console.log(response.userRating +" This is the response from movie rating status ")
+          })
+
+    
+    }
+
+  
 
 
 
@@ -99,7 +115,7 @@ export default function MoviePage() {
                 )
             };
 
-        console.log(request_option)
+       
         fetch('https://teampolaris.web.illinois.edu/modify-user-liking',request_option)
            .then(res => res.json())
            .then((resp) => {console.log(resp)})
@@ -118,7 +134,7 @@ export default function MoviePage() {
             };
 
 
-        console.log(request_option)
+        
         fetch('https://teampolaris.web.illinois.edu/modify-user-liking',request_option)
            .then(res => res.json())
            .then((resp) => {console.log(resp)})
@@ -153,6 +169,10 @@ export default function MoviePage() {
                     <Switch isChecked={isMovieSaved} colorScheme="orange" size="lg" onChange={handleSaveMovie}/>
 
 
+                <Text color="white"> You have not rated this movie yet</Text>
+                <Text color="white"> You have rated this movie {value} out of 10</Text>
+                
+
                     <Button onClick={handleClick}>Write a Review</Button>
                     <Heading as="h5" size="sm" color="white">
                         Rate the Movie</Heading>
@@ -162,7 +182,8 @@ export default function MoviePage() {
                         bg="white"
                         borderColor="white"
                         color="Black"
-                        placeholder="Select option">
+                        placeholder="Select option"
+                        >
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
