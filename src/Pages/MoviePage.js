@@ -36,7 +36,7 @@ export default function MoviePage() {
     //console.log(id);
 
     const history = useHistory();
-    const [value, setValue] = React.useState("")
+    let [value, setValue] = React.useState("")
    
     useEffect(() => {
         getMovieSavedStatus()
@@ -59,7 +59,7 @@ export default function MoviePage() {
 
     const handleChange = (value) => {
         setValue(Number(value.target.value))
-        console.log(value.target.value)
+        //console.log(value.target.value)
         ModifyRaying(id, value.target.value)
         console.log(value.target.value +"this is just the value being logged from handle change")
         
@@ -85,12 +85,17 @@ export default function MoviePage() {
     //fetch rating of movie to save status
     const getMovieRatingStatus = () => {
         let api = "https://teampolaris.web.illinois.edu/movie-rated-by-user-id/" + userID + "/"+ id
+        
         fetch(api)
           .then(response => response.json())
           .then(response => {
-            setValue(response.userRating)
+              if(response.length > 0)
+              {
+            setValue(response[0].userRating)
+            console.log(response+"!!!!!@")
+              }
 
-           // console.log(response.userRating +" This is the response from movie rating status ")
+           //console.log(response+" This is the response from movie rating status ")
           })
 
     
@@ -169,8 +174,7 @@ export default function MoviePage() {
                     <Switch isChecked={isMovieSaved} colorScheme="orange" size="lg" onChange={handleSaveMovie}/>
 
 
-                <Text color="white"> You have not rated this movie yet</Text>
-                <Text color="white"> You have rated this movie {value} out of 10</Text>
+                
                 
 
                     <Button onClick={handleClick}>Write a Review</Button>
