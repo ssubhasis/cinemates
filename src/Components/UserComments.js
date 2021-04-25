@@ -83,7 +83,8 @@ export default class UserComments extends React.Component{
         console.log(this.state)
           return (
        <div>
-         <Text textAlign = "left" color = "white"> User Comments</Text>
+        <Text align="left" fontSize="lg" color="white" paddingTop="20px">
+                        User Comments</Text>
         {this.state.comments.map((cmnt, index) => (
         <div key={cmnt.titleId}>
           <br />

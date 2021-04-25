@@ -39,20 +39,23 @@ export default class MovieInfo extends React.Component{
         {this.state.movieinfo.map((movie, index) => (
         
         <div key={movie.titleId}>
-        { <img src={movie.full_size_url} width="400" height="500"/> } 
-          <Heading bg = "white"> {movie.primaryTitle}
+
+          <Heading color = "white"> {movie.primaryTitle}
           <Text fontSize="xs" textAlign = "right">Duration:{movie.runtime} mins</Text>
           </Heading>
-          <Box bg="white" p="5px" borderRadius="md">
-            <Text textAlign = "left" >Rated {movie.avgRating} by {movie.numOfVotes} viewers.</Text>
-            <Text textAlign = "left" >Directed by: {movie.Director} </Text>
-            <Text textAlign = "left" >Actors: {movie.Actors} </Text>
-            <Text textAlign = "left" >Writers: {movie.Writer} </Text>
-            <Text textAlign = "left" >Producers: {movie.Producer} </Text>
-            <Text textAlign = "left" >Music: {movie.composer} </Text>
+
+        { <img src={movie.full_size_url}   style={{width:"400px" , height:"600px", borderRadius:"5%" }}  /> } 
+        
+          
+            <Text  color="white" textAlign = "left"  paddingTop="20px">Rated {movie.avgRating} by {movie.numOfVotes} viewers.</Text>
+            <Text color="white"  textAlign = "left" >Directed by: {movie.Director} </Text>
+            <Text  color="white" textAlign = "left" >Actors: {movie.Actors} </Text>
+            <Text color="white"  textAlign = "left" >Writers: {movie.Writer} </Text>
+            <Text  color="white" textAlign = "left" >Producers: {movie.Producer} </Text>
+            <Text  color="white" textAlign = "left" >Music: {movie.composer} </Text>
             
           {/* { <p>Rated {movie.avgRating} by {movie.numOfVotes} viewers.</p> } */}
-          </Box>  
+       
         </div>
         
     ))}

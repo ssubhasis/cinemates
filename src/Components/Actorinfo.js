@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Text, GridItem,Box, Flex, Heading} from "@chakra-ui/react";
+import {Text, GridItem,Box, Flex, Heading, Center} from "@chakra-ui/react";
 import axios from 'axios';
 
 export default class Actorinfo extends React.Component{
@@ -16,19 +16,7 @@ export default class Actorinfo extends React.Component{
       }
 
 
-      // getActorInfo() {
-      //   console.log(this.state.actor_id)
-      //   let api = 'https://teampolaris.web.illinois.edu/search-actor-by-id/' + this.state.actor_id
-
-      //   fetch(api)
-      //     .then(response => response.json())
-      //     .then(response => {
-      //       this.setState({
-      //           actor_basic_info: [response]
-      //       })
-      //       console.log(this.state.actor_basic_info + "fetch api response")
-      //     })
-      // }
+   
    
     handleClick(e) { // e.preventDefault();
        window.location.href = "/#/movie/" + e.target.id; 
@@ -55,40 +43,41 @@ export default class Actorinfo extends React.Component{
       render(){
         
           return (
+            
       <div>
           
         <div key={this.state.actor_basic_info._id}>
         
-          <Heading>  {this.state.actor_basic_info.name}</Heading>
-          { <img src={this.state.actor_basic_info.full_size_url} width="400" height="500"/> } 
-          <Text> Birth Year:  {this.state.actor_basic_info.birthYear}</Text>
-          <Text> Death Year: {this.state.actor_basic_info.deathYear}</Text>
+          <Heading color="white" paddingBottom="20px">  {this.state.actor_basic_info.name}</Heading>
+          <Center>
+          { <img src={this.state.actor_basic_info.full_size_url} style={{  borderRadius: "5%", width:"400" ,height:"500"}}/> } 
+          </Center>
+          <Text color="white" paddingTop="10px"> Birth Year:  {this.state.actor_basic_info.birthYear}</Text>
+          <Text color="white"> Death Year: {this.state.actor_basic_info.deathYear}</Text>
          
          
 
-          <Heading> Roles </Heading>
+          <Heading color="white"> Roles </Heading>
         </div>
 
         
        
 
-        <div> 
+        <div style={{columnCount:2}}> 
             {this.state.actor_basic_info.roles.map((role)  => (
-              <div > 
-                <Text id={role.titleId} onClick = {this.handleClick.bind(this)}>Movie: {role.primaryTitle} </Text> 
-                <Text> Category: {role.catagory} </Text>
-                <Text> Character: {role.movie_characters} </Text>
-                <Text> Job: {role.job} </Text>
-
-                <br></br> 
-                
-
+              <div  > 
+                <Text color="white" as="u"  id={role.titleId} onClick = {this.handleClick.bind(this)}>Movie: {role.primaryTitle} </Text> 
+                <Text color="white"> Category: {role.catagory} </Text>
+                <Text color="white"> Character: {role.movie_characters} </Text>
+                <br></br>
+      
               </div>
             ))} 
         </div>
 
 
         </div> 
+   
         
           );
       }

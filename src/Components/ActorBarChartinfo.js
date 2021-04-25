@@ -1,6 +1,7 @@
 import React from 'react';
 import {Bar} from 'react-chartjs-2';
 import axios from 'axios';
+import { color } from '@chakra-ui/styled-system';
 
 
 const barchartInfo = {
@@ -75,34 +76,41 @@ export default class ActorBasChartinfo extends React.Component {
     console.log(barchartInfo.labels.length)
     return (
       <div>
-        <Bar
+        <Bar width="900px"  height="500px"
           data={barchartInfo}
           options={{
+            
             scales: {
+             
               yAxes: [{
+             
                 scaleLabel: {
                   display: true,
-                  labelString: 'Rating'
+                  labelString: 'Rating',
+                  fontColor:"white"
                 },
                 gridLines: {
                   display:true
               }
               }],
-              xAxes: [{
+              xAxes:  [{
                 scaleLabel: {
                   display: true,
-                  labelString: 'Year'
+                  labelString: 'Year',
+                  fontColor:"white"
                 },
                 gridLines: {
-                  display:true
+                  display:true,
+                  fontColor:"white"
               }
               }],
             }, 
             title:{
+              fontColor:"white",
               display:true,
               text:'Movie Rating',
               fontSize:20,
-              color:"#FCA311"
+              
             },
             tooltips: {
               mode: 'point',
@@ -111,7 +119,7 @@ export default class ActorBasChartinfo extends React.Component {
                 title: function(tooltipItem, data) {},
                   label: function(tooltipItem, data) {
                     return ['Movie: ' + data.datasets[tooltipItem.datasetIndex].data0[tooltipItem.index],
-                    'Avg Rating: ' + data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index],
+                    'Average Rating: ' + data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index],
                     'Num of Votes: ' + data.datasets[tooltipItem.datasetIndex].data2[tooltipItem.index]]
                      
                   },
@@ -121,6 +129,7 @@ export default class ActorBasChartinfo extends React.Component {
             legend:{
               display:true,
               position:'right'
+              
             }
           }}
         />

@@ -158,28 +158,30 @@ export default function MoviePage() {
         
         <div>
             <Wrap gridTemplateColumns="auto 1fr" bg="primary.100"
-                gap={8}
-                p="30px"
+              spacing="30px"
+                p="40px"
+              
+        
                 height="100%">
 
 
-                <Flex direction="column" bg="primary.500" padding="5px">
+                <Flex direction="column" bg="primary.500" padding="20px" borderRadius="lg"  margin="50px" >
                     <MovieInfo id={id}></MovieInfo>
                 </Flex>
 
 
-                <Flex direction="row" bg="primary.500" padding="5px">
+                <Flex direction="column" bg="primary.500" padding="50px" borderRadius="lg" width="60%" >
 
-                <Text color="white">Save Movie</Text>
-                    <Switch isChecked={isMovieSaved} colorScheme="orange" size="lg" onChange={handleSaveMovie}/>
+                <Text  fontSize="lg" color="white" align="left" paddingBottom="10px" >Save Movie</Text>
+                <Switch  align="left" isChecked={isMovieSaved} colorScheme="orange" size="lg" onChange={handleSaveMovie}/>
 
 
                 
                 
 
-                    <Button onClick={handleClick}>Write a Review</Button>
-                    <Heading as="h5" size="sm" color="white">
-                        Rate the Movie</Heading>
+                    
+                    <Text  paddingBottom="10px" align="left" fontSize="lg" color="white">
+                        Rate the Movie</Text>
                     <Select value={value}
                         onChange={handleChange}
                         width="35%"
@@ -187,6 +189,8 @@ export default function MoviePage() {
                         borderColor="white"
                         color="Black"
                         placeholder="Select option"
+                        align="left"
+                        paddingBottom="20px"
                         >
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -199,8 +203,11 @@ export default function MoviePage() {
                         <option value="9">9</option>
                         <option value="10">10</option>
                     </Select>
+                   
+                    <Button bg="primary.200"  size="lg" marginTop="20px" onClick={handleClick}>Write a Review</Button>
                     <UserComments id={id}></UserComments>
                 </Flex>
+
 
             </Wrap>
         </div>
