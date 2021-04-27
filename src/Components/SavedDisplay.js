@@ -32,7 +32,11 @@ export default  class SavedDisplay extends React.Component {
             console.log(this.state.savedmovie)
           })
       }
-
+      handleClick(movie) { // e.preventDefault();
+        window.location.href = "/#/movie/" + movie.titleId;
+        console.log(movie);
+    }
+    
       componentDidMount() {
         this.getSavedMovie();
     }
@@ -57,7 +61,10 @@ export default  class SavedDisplay extends React.Component {
     
                 {this.state.savedmovie.map((movie, index) => (
                 //    <Box bg="primary.500" p="5px" borderRadius="md" w="15rem" >  
-                <Box bg="primary.500" p="5px" borderRadius="md" w="15rem">                  
+                <Box bg="primary.500" p="5px" borderRadius="md" w="15rem"
+                onClick={
+                    () => this.handleClick(movie)
+            } >                  
                     <div key={
                            movie.titleId
                        }>

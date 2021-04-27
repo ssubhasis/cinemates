@@ -21,6 +21,7 @@ const options = {
   scales: {
     yAxes: [
       {
+       
         stacked: false,
         ticks: {
           beginAtZero: true,

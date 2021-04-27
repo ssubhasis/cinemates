@@ -107,7 +107,8 @@ export default function LoginPage({ setToken }) {
                     <FormLabel   color="white" >User ID</FormLabel>
                     <Input
                       type="text"
-                      placeholder="ui0001"
+                      color="white"
+                      placeholder="username"
                       size="lg"
                       onChange={event => setUserId(event.currentTarget.value)}
                     />
@@ -116,8 +117,9 @@ export default function LoginPage({ setToken }) {
                     <FormLabel   color="white" >Password</FormLabel>
                     <InputGroup>
                       <Input
+                      color="white"
                         type={showPassword ? 'text' : 'password'}
-                        placeholder="*******"
+                        placeholder="password"
                         size="lg"
                         onChange={event => setPassword(event.currentTarget.value)}
                       />
