@@ -45,10 +45,6 @@ export default function MoviePage() {
     });
 
 
-    function handleClick() {
-        history.push("/review/" + id);
-    }
-
     const {token, setToken} = useToken();
     
 
@@ -57,6 +53,9 @@ export default function MoviePage() {
         return <LoginPage setToken={setToken}/>
     }
 
+    function handleClick() {
+        history.push("/review/" + id);
+    } 
     const handleChange = (value) => {
         setValue(Number(value.target.value))
         //console.log(value.target.value)
@@ -80,6 +79,8 @@ export default function MoviePage() {
 
           }
           })
+
+    
     }
 
     //fetch rating of movie to save status

@@ -15,6 +15,7 @@ import Login from './Components/Login/Login';
 import {HashRouter as Router, Switch, Route } from 'react-router-dom'; 
 import SignOutPage from './Pages/SignOutPage';
 import SignUpPage from './Pages/SignUpPage';
+import BasicMoviePage from './Pages/BasicMoviePage';
 
 class App extends Component {
     
@@ -42,11 +43,10 @@ class App extends Component {
                     <Route path="/actor/:id"
                         component={ActorPage}/>
                     <Route path="/movie/:id"
-                        component={MoviePage}/>
-                         <Route path="/moviee"
-                        component={MoviePage}/>
+                        component={BasicMoviePage}/>
+                    
                     <Route path="/setting"
-                        component={Settings}/>
+                        component={Settings}/> 
                     <Route path ="/login"
                         component={SignInPage}/>
                         {/* component={Login}/> */}
@@ -55,6 +55,7 @@ class App extends Component {
                         component={SignOutPage}/>
                     <Route path="/signup"
                         component={SignUpPage}/>
+                   
 
                 </Switch>
 

@@ -24,6 +24,7 @@ const options = {
         stacked: false,
         ticks: {
           beginAtZero: true,
+          fontColor: "white"
         },
       },
     ],
