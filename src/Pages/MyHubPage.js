@@ -28,8 +28,8 @@ export default function MyHubPage() {
 
     let userID= localStorage.getItem('userID')
 
-    if (!userID)
-        { return <Redirect push to="/login"/> }
+    if (!ud || ud === null)
+        {return <Redirect push to="/login"/> }
     else {
     return (
         <div> {/* 

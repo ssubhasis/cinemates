@@ -4,18 +4,7 @@ import axios from 'axios';
 import { color } from '@chakra-ui/styled-system';
 
 
-const barchartInfo = {
-  labels: [],
-  datasets: [
-    {
-      label: ' avg rating ',
-      data0:[],
-      data: [],
-      data2:[],
-      backgroundColor: 'rgb(252, 163, 17)'
-    }
-  ],
-}
+
 
 const options = {
   scales: {
@@ -65,14 +54,26 @@ export default class ActorBasChartinfo extends React.Component {
   }
 
   render() {
-    if(barchartInfo.labels.length==0)
+    const barchartInfo = {
+      labels: [],
+      datasets: [
+        {
+          label: ' avg rating ',
+          data0:[],
+          data: [],
+          data2:[],
+          backgroundColor: 'rgb(252, 163, 17)'
+        }
+      ],
+    }
+
     {
-    {this.state.actor_basic_info.map((movie, index)=> (
+      this.state.actor_basic_info.map((movie, index)=> (
       barchartInfo.labels.push(parseInt(movie.release_year)),
       barchartInfo.datasets[0].data.push(parseFloat(movie.avg_rating)),
       barchartInfo.datasets[0].data2.push(parseInt(movie.num_votes)),
       barchartInfo.datasets[0].data0.push(movie.movie_title)
-    ))}
+    ))
   }
 
     console.log(barchartInfo.labels.length)
@@ -93,7 +94,12 @@ export default class ActorBasChartinfo extends React.Component {
                 },
                 gridLines: {
                   display:true
-              }
+              },
+              ticks: {
+                beginAtZero:true,
+                min: 0,
+                max: 10   
+            }
               }],
               xAxes:  [{
                 scaleLabel: {
