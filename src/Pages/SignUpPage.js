@@ -30,6 +30,7 @@ export default function SignUpPage()  {
     const API_URL = 'https://teampolaris.web.illinois.edu/user-registration'
     const [state, setState] = useState();
 
+    const delay = ms => new Promise(res => setTimeout(res, ms));
 
     const handleSubmit = async e => {
         e.preventDefault();
@@ -44,7 +45,7 @@ export default function SignUpPage()  {
         }
 
             axios.post(API_URL, body) 
-            .then(res => res.json())
+            // .then(res => res.json())
             .then((resp) => {console.log(resp)});
             // const response = axios.post(API_URL, body)
             // .then((response) => {
@@ -55,7 +56,7 @@ export default function SignUpPage()  {
             // setState(response);
             setIsLoading(false);
             setShowPassword(false);
-            window.location.href='/';
+            
 
         } catch (error) {
             console.log(error)
@@ -66,6 +67,8 @@ export default function SignUpPage()  {
             setPassword('');
             setShowPassword(false);
         }
+        await delay(1000);
+        window.location.href='/';
       }
 
     const handlePasswordVisibility = () => setShowPassword(!showPassword);
@@ -160,7 +163,7 @@ export default function SignUpPage()  {
                                 color="teal"
                             />
                             ) : (
-                            'Sign In'
+                            'Sign Up'
                             )}
                         </Button>
                         </form>
