@@ -177,6 +177,7 @@ class modelConverter():
             d["release_year"] = int(row[0])
             d["avg_rating"] = row[1]
             d["num_votes"] = row[2]
+            d["movie_title"]=row[3]
             self.objects_list.append(d)
 
         self.objects_list= sorted(self.objects_list, key=lambda d: d["release_year"])

@@ -281,7 +281,7 @@ class getDbDetails():
 
     def getChartInfoBasicByActor(self,nameId):
         self.__connect__()
-        query = "SELECT release_year, avg_rating, num_of_votes FROM role,movies  WHERE movies.title_id=role.title_id and role.name_id ='%s';" %nameId
+        query = "SELECT release_year, avg_rating, num_of_votes,original_title FROM role,movies  WHERE movies.title_id=role.title_id and role.name_id ='%s';" %nameId
 
         self.cursor.execute(query)
         result = self.cursor.fetchall()
