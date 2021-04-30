@@ -1,0 +1,30 @@
+{
+    "castCrewMember":{
+        "nameId":2,
+        "birthYear":1985,
+        "isAlive":true,
+        "deathYear":null,
+        "profession":"Actor",
+        "knownFor":[
+            {
+                "titleId":3,
+                "primaryTitle":"Harry Potter and the Philosopher's Stone",
+                "orderInTitle":1,
+                "job":"Actor",
+                "movieCharacters":[
+                    {"name":"Harry Potter"}
+                ]
+            },
+            {
+                "titleId":2,
+                "primaryTitle":"Harry Potter and the Chamber of Secrets",
+                "orderInTitle":1,
+                "job":"Actor",
+                "movieCharacters":[
+                    {"name":"Harry Potter"}
+                ]
+            }
+        ]
+
+    }
+}

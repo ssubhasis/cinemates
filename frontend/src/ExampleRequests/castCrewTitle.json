@@ -1,0 +1,21 @@
+{"cast":[
+    {
+        "nameID":1,
+        "orderInTitle":1,
+        "job":"Lead Actor",
+        "movieCharacters":[
+            {"name":"Darth Vader"},
+            {"name":"Billy Bob"}
+        ],
+        "name":"John Smith"
+    },
+    {
+        "nameID":1,
+        "orderInTitle":1,
+        "job":"Supporting Actor",
+        "movieCharacters":[
+            {"name":"Luke Skywalker"}
+        ],
+        "name":"Ben Smith"
+    }
+]}
