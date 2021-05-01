@@ -29,6 +29,31 @@ export default function ReviewPage() {
       setValue(inputValue)
     }
 
+    let handleSubmit = async (id, cmnt) => {
+
+
+        let userID= localStorage.getItem('userID')
+
+    const request_option = {
+                method : 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body : JSON.stringify({"titleId": id, "userId": userID, "userComment": cmnt})
+    };
+
+        console.log(request_option)
+        
+    await fetch('http://18.206.168.148:5000/movie/post-comment',request_option)
+        .then(res => res.json())
+        .then((res) => {console.log(res)})
+        window.location.href = "/#/movie/"+id
+        window.location.reload();
+
+       
+    }
+
+   
+
+
     return (
         <div>
             
@@ -45,10 +70,10 @@ export default function ReviewPage() {
                        <Textarea  backgroundColor="white" height="30vw" width="80vw"  padding="20px" margin="30px"
                             value={value}
                             onChange={handleInputChange}
-                            placeholder="Here is a sample placeholder" ></Textarea>
+                            placeholder="Write your review here" ></Textarea>
                     {console.log(value)}
                        <Button  margin="20px" backgroundColor="orange.500" 
-                       onClick={() => { AddReview(id,value) } } >
+                       onClick={() => { handleSubmit(id,value) } } >
                            Add Review</Button>
                    </Flex>
                 

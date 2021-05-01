@@ -4,7 +4,7 @@ import {Link} from'react-router-dom';
 
 
 
-export default function  AddReview (id,cmnt){
+export default async function  AddReview (id,cmnt){
     console.log(cmnt)
 
     console.log(localStorage.getItem('userID'))
@@ -19,14 +19,17 @@ export default function  AddReview (id,cmnt){
 
         console.log(request_option)
         
-     fetch('http://18.206.168.148:5000/movie/post-comment',request_option)
+     await fetch('http://18.206.168.148:5000/movie/post-comment',request_option)
         .then(res => res.json())
         .then((resp) => {console.log(resp)})
         .then(window.location.href = "/#/movie/"+id)
-        .then(window.location.reload());
+        
+
+    return false;
+
+        //.then(window.location.reload());
         //force update needed
        
-        return false;
   
       
 

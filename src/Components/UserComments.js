@@ -21,6 +21,7 @@ export default class UserComments extends React.Component{
 
       getComments() {
         console.log(this.state.title_id)
+        
         let api = 'http://18.206.168.148:5000/movie/' + this.state.title_id
         fetch(api)
           .then(response =>  response.json())
@@ -32,6 +33,7 @@ export default class UserComments extends React.Component{
             })
             console.log(response)
           })
+          
       }
 
       
@@ -41,11 +43,23 @@ export default class UserComments extends React.Component{
 
       handleDelete(title_id,cmnt_id){
         //console.log(title_id,cmnt_id,this.state.userID)
-        let res = DeleteComment(title_id,cmnt_id)
-        //console.log(res)
-        this.setState({
-          comments:this.state.comments.filter(x => x.comment_seq !== cmnt_id)
-        })
+        //DeleteComment(title_id,cmnt_id)
+        const request_option = {
+          method : 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body : JSON.stringify({'titleId': title_id,'comment_seq': cmnt_id})
+};
+
+  console.log(request_option)
+/*          axios.post('http://18.206.168.148:5000/movie/delete-comment', body) 
+.then(res => res.json())
+.then((resp) => {console.log(resp)}) */
+fetch('http://18.206.168.148:5000/movie/delete-comment',request_option)
+  .then(res => res.json())
+  .then((res) => {this.setState({comments:res.user_comments})
+    console.log('delete')
+  console.log(this.state.comments)
+}).then(this.setState(this.state))
 
        // if (res === true)
        // location.reload();
@@ -86,7 +100,7 @@ export default class UserComments extends React.Component{
         <Text align="left" fontSize="lg" color="white" paddingTop="20px">
                         User Comments</Text>
         {this.state.comments.map((cmnt, index) => (
-        <div key={cmnt.titleId}>
+        <div key={cmnt.comment_seq}>
           <br />
            <Box bg="white" p="5px" borderRadius="md">
            <Text textAlign = "left" color = "blue">{cmnt.user_id} : </Text>

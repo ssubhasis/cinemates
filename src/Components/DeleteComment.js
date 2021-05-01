@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {GridItem,Box, Text, Heading,Button} from "@chakra-ui/react";
 import axios from 'axios';
 
-export default function DeleteComment (title_id,cmnt_id){
+export default async function DeleteComment (title_id,cmnt_id){
         console.log(title_id,cmnt_id)
         const request_option = {
                     method : 'POST',
