@@ -53,7 +53,7 @@ class getDbDetails():
         if movieGenre:
             query = query + " and mg.genere_name = '"+movieGenre+"'"
         if movieRating:
-            query = query + " and m.avg_rating >= "+str(movieRating)+""
+            query = query + " and m.avg_rating >= 2*"+str(movieRating)+""
         if not movieRegion:
             movieRegion = 'US'
         query = query + " and ml.region = '"+movieRegion+"'"
