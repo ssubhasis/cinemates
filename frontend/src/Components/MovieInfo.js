@@ -30,6 +30,16 @@ export default class MovieInfo extends React.Component{
         this.getMovieInfo(); 
       }
 
+      intersperse(arr, sep) {
+        if (arr === undefined || arr === null || arr.length === 0) {
+            return [];
+        }
+    
+        return arr.slice(1).reduce(function(xs, x, i) {
+            return xs.concat([sep, x]);
+        }, [arr[0]]);
+    }
+
       render(){
         console.log(this.state.movieinfo)
           return (
@@ -48,10 +58,10 @@ export default class MovieInfo extends React.Component{
         
           
             <Text  color="white" textAlign = "left"  paddingTop="20px">Rated {movie.avgRating} by {movie.numOfVotes} viewers.</Text>
-            <Text color="white"  textAlign = "left" >Directed by: {movie.Director} </Text>
-            <Text  color="white" textAlign = "left" >Actors: {movie.Actors} </Text>
-            <Text color="white"  textAlign = "left" >Writers: {movie.Writer} </Text>
-            <Text  color="white" textAlign = "left" >Producers: {movie.Producer} </Text>
+            <Text color="white"  textAlign = "left" >Directed by: {this.intersperse(movie.Director, ', ')} </Text>
+            <Text  color="white" textAlign = "left" >Actors: {this.intersperse(movie.Actors, ', ')} </Text>
+            <Text color="white"  textAlign = "left" >Writers: {this.intersperse(movie.Writer, ', ')} </Text>
+            <Text  color="white" textAlign = "left" >Producers: {this.intersperse(movie.Producer, ', ')} </Text>
             <Text  color="white" textAlign = "left" >Music: {movie.composer} </Text>
             
           {/* { <p>Rated {movie.avgRating} by {movie.numOfVotes} viewers.</p> } */}
@@ -68,4 +78,3 @@ export default class MovieInfo extends React.Component{
 
 
 }
-
