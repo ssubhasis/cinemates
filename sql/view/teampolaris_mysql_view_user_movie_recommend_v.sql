@@ -5,7 +5,7 @@
 DROP TABLE IF EXISTS `user_movie_recommend_v`;
 
 CREATE ALGORITHM = UNDEFINED DEFINER = `root` @`localhost` SQL SECURITY DEFINER VIEW `user_movie_recommend_v` AS
-select
+SELECT
     `m2`.`title_id` AS `title_id`,
     `m2`.`primary_title` AS `primary_title`,
     `m2`.`original_title` AS `original_title`,
@@ -16,31 +16,37 @@ select
     `m2`.`is_adult` AS `is_adult`,
     `tmp`.`user_id` AS `user_id`,
     `tmp`.`gen_nm` AS `gen_nm`
-from
+FROM
     (
         (
             `movies` `m2`
-            join `movie_compact_genere` `mg2` on(`m2`.`title_id` = `mg2`.`title_id`)
+        JOIN `movie_compact_genere` `mg2` ON
+            (`m2`.`title_id` = `mg2`.`title_id`)
         )
-        join (
-            select
-                distinct `mg`.`gen_nm` AS `gen_nm`,
-                `ul`.`user_id` AS `user_id`
-            from
-                (
-                    `movie_compact_genere` `mg`
-                    join `user_liking` `ul` on(`mg`.`title_id` = `ul`.`title_id`)
-                )
-        ) `tmp` on(`mg2`.`gen_nm` = `tmp`.`gen_nm`)
+    JOIN(
+        SELECT DISTINCT
+            `mg`.`gen_nm` AS `gen_nm`,
+            `ul`.`user_id` AS `user_id`
+        FROM
+            (
+                `movie_compact_genere` `mg`
+            JOIN `user_liking` `ul` ON
+                (`mg`.`title_id` = `ul`.`title_id`)
+            )
+        WHERE
+            `ul`.`user_rating` > 5
+    ) `tmp`
+ON
+    (`mg2`.`gen_nm` = `tmp`.`gen_nm`)
     )
-where
+WHERE
     !(
-        `mg2`.`title_id` in (
-            select
-                `ul2`.`title_id`
-            from
-                `user_liking` `ul2`
-            where
-                `ul2`.`user_id` = `tmp`.`user_id`
-        )
+        `mg2`.`title_id` IN(
+        SELECT
+            `ul2`.`title_id`
+        FROM
+            `user_liking` `ul2`
+        WHERE
+            `ul2`.`user_id` = `tmp`.`user_id`
+    )
     );
